@@ -13,6 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
+    <link href="css/onepage-scroll.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,8 +26,12 @@
 </head>
 
 <body>
+<div id="wrapper" class="wrapper">
 
-<div id="wrapper">
+    <a href="#menu-toggle" class="btn btn-default" style="position: absolute; right:0;z-index: 999" id="menu-toggle">тугл</a>
+
+
+
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -59,14 +64,89 @@
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Текстик</h1>
-                    <p>текстик</p>
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">тугл</a>
-                </div>
+    <div class="wrapper">
+        <div class="main">
+
+            <!-- One Page Sections -->
+
+
+                     <section class="page1">
+
+                         <div class="vlas-slider">
+                             <!-- Item -->
+                             <div class="item">
+                                 <div class="img-fill">
+                                     <img src="img/slider/slide-1.jpg" alt="">
+                                     <div class="info">
+                                         <div>
+                                             <h3>Газета Вести</h3>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- // Item -->
+                             <!-- Item -->
+                             <div class="item">
+                                 <div class="img-fill">
+                                     <img src="img/slider/slide-2.jpg" alt="">
+                                     <div class="info">
+                                         <div>
+                                             <h3>Радио Вести</h3>
+                                             <h5>радиостанция формата News&Talk</h5>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- // Item -->
+                             <!-- Item -->
+                             <div class="item">
+                                 <div class="img-fill">
+                                     <img src="img/slider/slide-3.jpg" alt="">
+                                     <div class="info">
+                                         <div>
+                                             <h3>UBR.ua</h3>
+                                             <h5>Ukrainian Business Resource</h5>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- // Item -->
+                             <!-- Item -->
+                             <div class="item">
+                                 <div class="img-fill">
+                                     <img src="img/slider/slide-4.jpg" alt="">
+                                     <div class="info">
+                                         <div>
+                                             <h3>vesti-ukr.com</h3>
+                                             <h5>Новостной мультимедийный ресурс</h5>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- // Item -->
+                         </div>
+                     </section>
+
+                     <section class="page2">
+                         <div class="page_container">
+                             <h1>О холдинге</h1>
+                         </div>
+                     </section>
+
+                     <section class="page3">
+                         <div class="page_container">
+                             <h1>Новости</h1>
+                         </div>
+                     </section>
+
+                     <section class="page3">
+                         <div class="page_container">
+                             <h1>Галерея</h1>
+                         </div>
+                     </section>
+
+
+
             </div>
         </div>
     </div>
@@ -105,7 +185,42 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.onepage-scroll.js"></script>
+<script src="js/slick.js"></script>
+<!-- Full Page Scroll -->
 
+<script>
+    $(document).ready(function(){
+        $(".main").onepage_scroll({
+            sectionContainer: "section",
+            responsiveFallback: 600,
+            loop: true
+        });
+    });
+</script>
+
+<!-- Slider -->
+<script>
+    $(document).ready(function(){
+
+        $(".vlas-slider").slick({
+            autoplay:true,
+            autoplaySpeed:10000,
+            speed:600,
+            slidesToShow:1,
+            slidesToScroll:1,
+            pauseOnHover:false,
+            dots:true,
+            pauseOnDotsHover:true,
+            cssEase:'linear',
+            // fade:true,
+            draggable:false,
+            prevArrow:'<button class="PrevArrow"></button>',
+            nextArrow:'<button class="NextArrow"></button>',
+        });
+
+    })
+</script>
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function(e) {
