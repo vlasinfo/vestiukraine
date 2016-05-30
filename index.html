@@ -28,11 +28,6 @@
 <body>
 <div id="wrapper" class="wrapper">
 
-    <a href="#menu-toggle" class="btn btn-default" style="position: absolute; right:0;z-index: 999" id="menu-toggle">тугл</a>
-
-
-
-
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <div class="sidebar-brand logo">
@@ -40,6 +35,7 @@
                 <img src="img/logo.svg" alt="logo">
             </a>
         </div>
+
         <ul class="sidebar-nav">
             <li>
                 <a href="#">О холдинге</a>
@@ -63,20 +59,25 @@
     </div>
     <!-- /#sidebar-wrapper -->
 
+    <!-- Hamburger -->
+    <div class="vlas-hamburger">
+        <button class="vlas-hamburger__icon" id="menu-toggle">
+            <span class="vlas-hamburger__layer vlas-hamburger__icon--to-arrow"></span>
+        </button>
+    </div>
+
     <!-- Page Content -->
     <div class="wrapper">
         <div class="main">
 
             <!-- One Page Sections -->
-
-
                      <section class="page1">
 
                          <div class="vlas-slider">
                              <!-- Item -->
                              <div class="item">
-                                 <div class="img-fill">
-                                     <img src="img/slider/slide-1.jpg" alt="">
+                                 <div class="img-fill" style="background: url('img/slider/slide-1.jpg') 50% 50% no-repeat; background-size: cover;">
+                                     
                                      <div class="info">
                                          <div>
                                              <h3>Газета Вести</h3>
@@ -87,8 +88,7 @@
                              <!-- // Item -->
                              <!-- Item -->
                              <div class="item">
-                                 <div class="img-fill">
-                                     <img src="img/slider/slide-2.jpg" alt="">
+                                 <div class="img-fill" style="background: url('img/slider/slide-2.jpg') 50% 50% no-repeat; background-size: cover;">
                                      <div class="info">
                                          <div>
                                              <h3>Радио Вести</h3>
@@ -100,8 +100,7 @@
                              <!-- // Item -->
                              <!-- Item -->
                              <div class="item">
-                                 <div class="img-fill">
-                                     <img src="img/slider/slide-3.jpg" alt="">
+                                 <div class="img-fill" style="background: url('img/slider/slide-3.jpg') 50% 50% no-repeat; background-size: cover;">
                                      <div class="info">
                                          <div>
                                              <h3>UBR.ua</h3>
@@ -113,8 +112,7 @@
                              <!-- // Item -->
                              <!-- Item -->
                              <div class="item">
-                                 <div class="img-fill">
-                                     <img src="img/slider/slide-4.jpg" alt="">
+                                 <div class="img-fill" style="background: url('img/slider/slide-4.jpg') 50% 50% no-repeat; background-size: cover;">
                                      <div class="info">
                                          <div>
                                              <h3>vesti-ukr.com</h3>
@@ -128,8 +126,26 @@
                      </section>
 
                      <section class="page2">
-                         <div class="page_container">
-                             <h1>О холдинге</h1>
+                         <div class="page_container row t-table">
+                             <div class="col-lg-6 t-row green-bg hidden-xs hidden-md hidden-sm" data-animate-scroll='{"x": "-500","y": "0", "alpha": "0", "duration": "1.5"}'>
+                                 <img src="img/v.jpg" alt="" class="img-responsive" style="height: 100%">
+                             </div>
+                             <div class="col-lg-6 t-row">
+                                 <h1 data-animate-scroll='{"x": "0","y": "0","alpha": "0","duration": "1.5"}'>О холдинге</h1>
+                                 <p>
+                                     Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг,
+                                     включающий в себя печатные, телевизионные, радио и Internet-ресурсы.
+                                     Благодаря качеству и актуальности контента, остроте тем и оперативности подачи информации,
+                                     медиапродукты Холдинга занимают лидирующие позиции в своих сегментах. Профессиональная,
+                                     креативная команда и постоянный мониторинг мировых инноваций и медиа-трендов - ключевой
+                                     принцип успеха Холдинга на рынке.
+                                 </p>
+                                 <p>
+                                     В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR,
+                                     Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua
+                                 </p>
+                             </div>
+
                          </div>
                      </section>
 
@@ -174,7 +190,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="pull-right">Copyright © VESTI</div>
+                <div class="pull-right copy">Copyright © VESTI</div>
             </div>
         </div>
     </div>
@@ -187,8 +203,16 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.onepage-scroll.js"></script>
 <script src="js/slick.js"></script>
-<!-- Full Page Scroll -->
+<script src="js/TweenMax.min.js"></script>
+<script src="js/animate-scroll.js"></script>
 
+<script>
+    $(document).animateScroll();
+    var doc = document.documentElement;
+    doc.setAttribute('data-useragent', navigator.userAgent);
+</script>
+
+<!-- Full Page Scroll -->
 <script>
     $(document).ready(function(){
         $(".main").onepage_scroll({
@@ -197,6 +221,36 @@
             loop: true
         });
     });
+</script>
+
+
+<!--  Hamburger -->
+<script>
+    (function() {
+
+        'use strict';
+
+        document.querySelector('.vlas-hamburger__icon').addEventListener(
+                'click',
+                function() {
+                    var child;
+
+                    document.body.classList.toggle('background--blur');
+                    this.parentNode.nextElementSibling.classList.toggle('menu--on');
+
+                    child = this.childNodes[1].classList;
+
+                    if (child.contains('vlas-hamburger__icon--to-arrow')) {
+                        child.remove('vlas-hamburger__icon--to-arrow');
+                        child.add('vlas-hamburger__icon--from-arrow');
+                    } else {
+                        child.remove('vlas-hamburger__icon--from-arrow');
+                        child.add('vlas-hamburger__icon--to-arrow');
+                    }
+
+                });
+
+    })();
 </script>
 
 <!-- Slider -->

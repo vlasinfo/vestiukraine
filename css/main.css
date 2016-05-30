@@ -3,10 +3,10 @@ body {
     background: #f3f3f3;
     overflow-x: hidden;
     position: relative;
-    -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
     height: 100%;
+    bottom: 60px;
 }
 
 a {
@@ -47,7 +47,6 @@ a {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    overflow: hidden;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -202,12 +201,6 @@ a {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.04);
 }
 
-.Grid1k {
-    padding: 0 15px;
-    max-width: 1200px;
-    margin: auto;
-}
-
 .blocks-box,
 .slick-slider {
     margin: 0;
@@ -225,15 +218,37 @@ a {
     background:#000;
 }
 
-.vlas-slider .item .img-fill .info{
+.vlas-slider .item .img-fill .info {
     position:absolute;
     width:100%;
     height:100%;
     top:0px;
     left:0px;
-    background:rgba(0,0,0,.50);
+    background:rgba(0,0,0,.30);
     line-height:100vh;
     text-align:center;
+    z-index: 2;
+}
+
+.vlas-slider .item .img-fill .info div {
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 0;
+    text-align: left;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 20px;
+}
+
+.vlas-slider .item .img-fill .info div h3 {
+    font-size: 70px;
+}
+
+.vlas-slider .item .img-fill .info div h5 {
+    font-size: 18px;
+    padding: 15px 0;
 }
 
 .vlas-slider .item .img-fill img{
@@ -245,36 +260,29 @@ a {
     vertical-align:middle;
 }
 
-.vlas-slider .NextArrow{
-    position:absolute;
-    top:50%;
+.vlas-slider .NextArrow {
     right:0px;
-    width:45px;
-    height:45px;
-    background:rgba(0,0,0,.50);
-    border:0 none;
-    margin-top:-22.5px;
-    text-align:center;
-    font:20px/45px FontAwesome;
-    color:#FFF;
-    z-index:5;
 }
 
 .vlas-slider .NextArrow:before{content:'\f105';}
 
-.vlas-slider .PrevArrow{
+.vlas-slider .NextArrow,
+.vlas-slider .PrevArrow {
     position:absolute;
-    top:50%;
-    left:0px;
-    width:45px;
-    height:45px;
+    top:60px;
+    width:53px;
+    height:53px;
     background:rgba(0,0,0,.50);
     border:0 none;
-    margin-top:-22.5px;
     text-align:center;
-    font:20px/45px FontAwesome;
+    font:38px/45px FontAwesome;
     color:#FFF;
+    outline: 0;
     z-index:5;
+}
+
+.vlas-slider .PrevArrow {
+    right:53px;
 }
 
 .vlas-slider .PrevArrow:before{content:'\f104';}
@@ -292,13 +300,13 @@ a {
 }
 .vlas-slider .slick-dots li button{display:none;}
 .vlas-slider .slick-dots li{
-    float:left;
-    width:0px;
-    height:5px;
-    background:#009090;
-    position:absolute;
-    left:0px;
-    bottom:60px;
+    float: left;
+    width: 0;
+    background: #009090;
+    position: absolute;
+    left: 0px;
+    height: 5px;
+    bottom: 0;
 }
 
 .vlas-slider .slick-dots li.slick-active{
@@ -319,8 +327,6 @@ a {
     padding:0;
     color:#FFF;
     max-width:600px;
-    overflow:hidden;
-    height:60px;
     animation:fadeOutLeft 1s both;
 }
 
@@ -428,7 +434,6 @@ h2 {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     font-weight: 100;
-    color: white;
     margin: 0;
 }
 
@@ -533,12 +538,15 @@ header {
 }
 .main section .page_container {
     position: relative;
-    max-width: 950px;
     height: 100%;
     z-index: 3;
 }
 .main section  {
     overflow: hidden;
+    padding-top: 110px;
+}
+.main section.page1 {
+    padding-top: 0;
 }
 
 .main section > img {
@@ -586,7 +594,23 @@ header {
     text-align: center;
 }
 .main section.page2 {
-    background: #555557;
+
+}
+.t-table {
+ display: table;
+}
+.t-table .t-row {
+    display: inline-block;
+    margin-top: -50px;
+    vertical-align: middle;
+    float: none;
+    height: 100%;
+}
+.t-table .t-row p {
+    padding-right: 40px;
+}
+.green-bg {
+    background: #F3F3F3;
 }
 .main section.page2 > img {
     position: absolute;
@@ -594,17 +618,13 @@ header {
     left: 50%;
     margin-left: -1095px;
 }
-.main section.page2 .page_container {
-    margin-top: 240px;
-    overflow: hidden;
-}
+
 .main section.page2 h1 {
-    text-align: center;
     padding: 0;
     margin-bottom: 15px;
     font-size: 50px;
     letter-spacing: -1px;
-    color: white;
+    color: #333366;
 }
 .main section.page2 h2 {
     color: rgba(255,255,255,0.85);
@@ -646,7 +666,7 @@ body.disabled-onepage-scroll .onepage-wrapper  section {
 
 body.disabled-onepage-scroll .main section .page_container, body.disabled-onepage-scroll .main section.page3 .page_container  {
     padding: 20px;
-    margin-top: 150px;
+    margin-top: 50px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -686,7 +706,186 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     right: 0;
 }
 
+/* Hamburger */
+
+.menu--off {
+    position: absolute;
+    left: -50%;
+    width: 50%;
+    display: block;
+    background: #eee;
+    min-height: 600px;
+    height: 125%;
+    margin-top: 1em;
+    transition: all 300ms;
+}
+
+.menu--on {
+    left: 0;
+    box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.2);
+    transition: all 300ms;
+}
+
+.vlas-hamburger {
+
+}
+
+.vlas-hamburger button {
+    background: rgba(0,0,0,.30);
+    display: block;
+    border: none;
+    outline: 0;
+    position: fixed;
+    z-index: 9;
+}
+
+.vlas-hamburger__icon {
+    padding: 25px 15px;
+    cursor: pointer;
+}
+
+.vlas-hamburger__layer {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #eee;
+    position: relative;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+}
+
+.vlas-hamburger__layer:before, .vlas-hamburger__layer:after {
+    display: block;
+    width: inherit;
+    height: 3px;
+    position: absolute;
+    background: inherit;
+    left: 0;
+    content: '';
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+}
+
+.vlas-hamburger__layer:before {
+    bottom: 200%;
+}
+
+.vlas-hamburger__layer:after {
+    top: 200%;
+}
+
+.vlas-hamburger__icon--to-arrow {
+    animation-name: material-design-hamburger__icon--slide;
+    animation-fill-mode: forwards;
+}
+
+.vlas-hamburger__icon--to-arrow:before {
+    animation-name: material-design-hamburger__icon--slide-before;
+    animation-fill-mode: forwards;
+}
+
+.vlas-hamburger__icon--to-arrow:after {
+    animation-name: material-design-hamburger__icon--slide-after;
+    animation-fill-mode: forwards;
+}
+
+.vlas-hamburger__icon--from-arrow {
+    animation-name: material-design-hamburger__icon--slide-from;
+}
+
+.vlas-hamburger__icon--from-arrow:before {
+    animation-name: material-design-hamburger__icon--slide-before-from;
+}
+
+.vlas-hamburger__icon--from-arrow:after {
+    animation-name: material-design-hamburger__icon--slide-after-from;
+}
+
+@keyframes material-design-hamburger__icon--slide {
+    0% {
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes material-design-hamburger__icon--slide-before {
+    0% {
+    }
+    100% {
+        transform: rotate(45deg);
+        margin: 3% 37%;
+        width: 75%;
+    }
+}
+
+@keyframes material-design-hamburger__icon--slide-after {
+    0% {
+    }
+    100% {
+        transform: rotate(-45deg);
+        margin: 3% 37%;
+        width: 75%;
+    }
+}
+
+@keyframes material-design-hamburger__icon--slide-from {
+    0% {
+        transform: rotate(-180deg);
+    }
+    100% {
+    }
+}
+
+@keyframes material-design-hamburger__icon--slide-before-from {
+    0% {
+        transform: rotate(45deg);
+        margin: 3% 37%;
+        width: 75%;
+    }
+    100% {
+    }
+}
+
+@keyframes material-design-hamburger__icon--slide-after-from {
+    0% {
+        transform: rotate(-45deg);
+        margin: 3% 37%;
+        width: 75%;
+    }
+    100% {
+    }
+}
+
+.copy {
+    padding: 20px 0;
+}
+
 /* Media queries */
+@media(max-width:1200px) {
+    .t-table .t-row {
+        padding: 90px;
+    }
+}
+@media(max-width:768px) {
+    .vlas-slider .item .img-fill .info div {
+        padding: 8px;
+    }
+    .vlas-slider .item .img-fill .info div h3 {
+        font-size: 40px;
+    }
+    .vlas-slider .item .img-fill .info div {
+        font-size: 14px;
+    }
+    .t-table .t-row {
+        padding: 10px;
+        margin: 50px 80px;
+    }
+    .main section {
+        padding: 0;
+    }
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 240px;
@@ -711,5 +910,16 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+}
+@media(max-width:600px) {
+    body.disabled-onepage-scroll .onepage-wrapper section {
+        min-height: auto;
+    }
+    .vlas-slider .NextArrow, .vlas-slider .PrevArrow {
+        top: 0;
+    }
+    .t-table .t-row {
+        margin: 0;
     }
 }
