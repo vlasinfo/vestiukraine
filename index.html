@@ -10,6 +10,10 @@
     <title>local | MEDIA HOLDING VESTI UKRAINE</title>
 
     <!-- Bootstrap Core CSS -->
+    <link href="css/animations.css" rel="stylesheet">
+    <link href="css/animations-ie-fix.css" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -31,7 +35,7 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <div class="sidebar-brand logo">
-            <a href="#">
+            <a href="index.html">
                 <img src="img/logo.svg" alt="logo">
             </a>
         </div>
@@ -77,7 +81,7 @@
                              <!-- Item -->
                              <div class="item">
                                  <div class="img-fill" style="background: url('img/slider/slide-1.jpg') 50% 50% no-repeat; background-size: cover;">
-                                     
+
                                      <div class="info">
                                          <div>
                                              <h3>Газета Вести</h3>
@@ -126,12 +130,13 @@
                      </section>
 
                      <section class="page2">
-                         <div class="page_container row t-table">
-                             <div class="col-lg-6 t-row green-bg hidden-xs hidden-md hidden-sm" data-animate-scroll='{"x": "-500","y": "0", "alpha": "0", "duration": "1.5"}'>
-                                 <img src="img/v.jpg" alt="" class="img-responsive" style="height: 100%">
+                         <div class="page_container row t-table animatedParent">
+                             <div class="col-lg-6 t-row green-bg hidden-xs hidden-md hidden-sm">
+                                 <img src="img/v.jpg" alt="" class="img-responsive repeat animated fadeInLeft slow go" style="height: 100%">
                              </div>
                              <div class="col-lg-6 t-row">
-                                 <h1 data-animate-scroll='{"x": "0","y": "0","alpha": "0","duration": "1.5"}'>О холдинге</h1>
+                                 <h3 class="animated fadeInDown go">О холдинге</h3>
+                                 <div class="animated fadeInUp slow go">
                                  <p>
                                      Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг,
                                      включающий в себя печатные, телевизионные, радио и Internet-ресурсы.
@@ -144,14 +149,89 @@
                                      В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR,
                                      Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua
                                  </p>
+                                 </div>
                              </div>
 
                          </div>
                      </section>
 
                      <section class="page3">
-                         <div class="page_container">
-                             <h1>Новости</h1>
+                         <div class="page_container row blog-main-page animatedParent">
+                             <div class="col-md-7 blog-left-part">
+                                <h2>Новости</h2>
+                                 <div class="row">
+                                     <div class="col-sm-6 post-holder animated bounceInUp slow go">
+                                         <a href="post.html">
+                                            <article class="post">
+                                                <div class="img-holder">
+                                                    <img src="img/articles/1.jpg" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="date">31-05-2016</div>
+                                                <h3>Журналист Газеты Вести представила  МХВУ в программе обмена коммуникаций в США</h3>
+                                                <p>Александра Харченко поделилась опытом зарубежных коллег</p>
+                                            </article>
+                                         </a>
+                                     </div>
+                                     <div class="col-sm-6 post-holder animated bounceInUp slow go">
+                                         <a href="post.html">
+                                            <article class="post">
+                                                <div class="img-holder">
+                                                    <img src="img/articles/2.jpg" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="date">30-05-2016</div>
+                                                <h3>Журналисты телеканала UBR приняли участие в благотворительном «Пробеге под каштанами»</h3>
+                                                <p>Марафон собрал более 6 тысяч участников</p>
+                                            </article>
+                                         </a>
+                                     </div>
+                                     <div class="col-sm-6 post-holder animated bounceInUp slow go">
+                                         <a href="post.html">
+                                            <article class="post">
+                                                <div class="img-holder">
+                                                    <img src="img/articles/3.jpg" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="date">26-05-2016</div>
+                                                <h3>Газета Вести запустила спецпроект «Тайна имени»</h3>
+                                                <p>В новом проекте Вести рассказывают о переименованиях топонимов Днепропетровска</p>
+                                            </article>
+                                          </a>
+                                     </div>
+                                     <div class="col-sm-6 post-holder animated bounceInUp slow go">
+                                         <a href="post.html">
+                                            <article class="post">
+                                                <div class="img-holder">
+                                                    <img src="img/articles/4.jpg" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="date">24-05-2016</div>
+                                                <h3>Газета Вести раскрывает студентам секреты журналистского мастерства</h3>
+                                                <p>Студенты познакомились с командой редакции Вести</p>
+                                            </article>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-5 blog-right-part">
+                                 <h2>СМИ о холдинге</h2>
+                                 <div class="row">
+                                     <div class="col-lg-12 post-holder  animated bounceInRight slow go">
+                                         <a href="post.html">
+                                             <article class="post">
+                                                <div class="img-holder">
+                                                    <img src="img/articles/5.jpg" class="img-responsive" alt="">
+                                                </div>
+                                                <div class="date">24-05-2016</div>
+                                                <h3>Газета Вести запустила спецпроект "Сильнее старости"</h3>
+                                                 <p>
+                                                     Каждую неделю на страницах газеты  рассказывается об
+                                                     одном из домов престарелых. Журналисты описывают, в
+                                                     каком состоянии находится дом, как там живут старики,
+                                                     о чем мечтают, в какой помощи нуждаются больше всего.
+                                                 </p>
+                                             </article>
+                                         </a>
+                                     </div>
+                                 </div>
+                             </div>
                          </div>
                      </section>
 
@@ -203,14 +283,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.onepage-scroll.js"></script>
 <script src="js/slick.js"></script>
-<script src="js/TweenMax.min.js"></script>
-<script src="js/animate-scroll.js"></script>
-
-<script>
-    $(document).animateScroll();
-    var doc = document.documentElement;
-    doc.setAttribute('data-useragent', navigator.userAgent);
-</script>
+<script src="js/css3-animate-it.js"></script>
 
 <!-- Full Page Scroll -->
 <script>

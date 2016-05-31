@@ -1,6 +1,5 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: #f3f3f3;
     overflow-x: hidden;
     position: relative;
     margin: 0;
@@ -36,6 +35,7 @@ a {
 
 #sidebar-wrapper {
     z-index: 1000;
+    border-right: 1px solid #ededed;
     position: fixed;
     left: 240px;
     width: 0;
@@ -381,10 +381,11 @@ a {
 }
 
 
-h1, h2 {
+h1, h2, h3 {
     width: 100%;
     float: left;
 }
+
 h1 {
     margin-top: 100px;
     color: #000;
@@ -405,12 +406,6 @@ h1 span {
     -moz-border-radius: 5px 5px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
     padding: 3px 10px;
-}
-h2 {
-    color: #6D461D;
-    font-weight: 100;
-    margin-top: 0;
-    margin-bottom: 10px;
 }
 
 .pointer {
@@ -435,10 +430,6 @@ h2 {
     -moz-box-sizing: border-box;
     font-weight: 100;
     margin: 0;
-}
-
-.main h1.demo1 {
-    background: #1ABC9C;
 }
 
 .reload.bell {
@@ -610,7 +601,7 @@ header {
     padding-right: 40px;
 }
 .green-bg {
-    background: #F3F3F3;
+    background: #00AF9E;
 }
 .main section.page2 > img {
     position: absolute;
@@ -636,28 +627,7 @@ header {
     background: rgba(0, 0, 0, 0.25);
     color: #FFF;
 }
-.main section.page3 {
-}
-.main section.page3 .page_container {
-    overflow: hidden;
-    width: 500px;
-    right: -285px;
-}
-.main section.page3 h1 {
-    text-align: left;
-    padding: 0;
-    margin-bottom: 0;
-    font-size: 70px;
-    letter-spacing: -1px;
-    color: black;
-}
-.main section.page3 h2 {
-    color: rgba(0,0,0,0.85);
-    text-align: left;
-    line-height: 160%;
-    font-weight: 100;
-    font-size: 21px;
-}
+
 
 body.disabled-onepage-scroll .onepage-wrapper  section {
     min-height: 100%;
@@ -861,6 +831,77 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     padding: 20px 0;
 }
 
+/* Blog Main Page */
+.blog-main-page  .post-holder {
+    color: #000000;
+    padding: 0;
+    min-height: 340px;
+}
+
+.blog-main-page a {
+    color: #000000;
+    padding: 10px;
+    display: block;
+}
+
+.blog-main-page a:hover,
+.blog-main-page a:focus {
+    text-decoration: none;
+}
+.blog-main-page a article {
+    border: 1px solid #EDEDED;
+    padding: 10px;
+}
+
+.blog-main-page .blog-left-part a article {
+    max-height: 311px;
+    overflow: hidden;
+}
+
+.blog-main-page a article .img-holder {
+    overflow: hidden;
+}
+
+.blog-main-page a article .img-holder img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.blog-main-page a:hover article .img-holder img {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+
+.blog-main-page a article h3 {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 10px 0;
+}
+
+.blog-main-page a:hover article h3 {
+    color: #333366;
+}
+
+.blog-main-page article .date {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #000000;
+}
+
+.blog-main-page article p {
+
+}
+
+.blog-main-page .blog-left-part {
+    padding-left: 40px;
+}
+
+.blog-main-page .blog-right-part {
+    padding-right: 50px;
+}
+
 /* Media queries */
 @media(max-width:1200px) {
     .t-table .t-row {
@@ -914,7 +955,7 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
 }
 @media(max-width:600px) {
     body.disabled-onepage-scroll .onepage-wrapper section {
-        min-height: auto;
+        min-height: 0;
     }
     .vlas-slider .NextArrow, .vlas-slider .PrevArrow {
         top: 0;
