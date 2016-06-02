@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10.10
+-- version 4.4.15.5
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 02 2016 г., 02:04
--- Версия сервера: 5.5.45
+-- Время создания: Июн 02 2016 г., 21:03
+-- Версия сервера: 5.5.48
 -- Версия PHP: 5.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `db_vestiukraine`
@@ -27,14 +27,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `sib_model_contact` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `id` int(20) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `info` text,
   `code` varchar(100) DEFAULT NULL,
   `is_activate` int(2) DEFAULT NULL,
-  `extra` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `extra` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43,14 +42,11 @@ CREATE TABLE IF NOT EXISTS `sib_model_contact` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `meta_id` bigint(20) unsigned NOT NULL,
   `comment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`meta_id`),
-  KEY `comment_id` (`comment_id`),
-  KEY `meta_key` (`meta_key`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -59,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_comments` (
-  `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `comment_ID` bigint(20) unsigned NOT NULL,
   `comment_post_ID` bigint(20) unsigned NOT NULL DEFAULT '0',
   `comment_author` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment_author_email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -73,14 +69,8 @@ CREATE TABLE IF NOT EXISTS `wp_comments` (
   `comment_agent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `comment_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `comment_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`comment_ID`),
-  KEY `comment_post_ID` (`comment_post_ID`),
-  KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),
-  KEY `comment_date_gmt` (`comment_date_gmt`),
-  KEY `comment_parent` (`comment_parent`),
-  KEY `comment_author_email` (`comment_author_email`(10))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_comments`
@@ -99,9 +89,7 @@ CREATE TABLE IF NOT EXISTS `wp_icl_content_status` (
   `rid` bigint(20) NOT NULL,
   `nid` bigint(20) NOT NULL,
   `timestamp` datetime NOT NULL,
-  `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`rid`),
-  KEY `nid` (`nid`)
+  `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -111,15 +99,13 @@ CREATE TABLE IF NOT EXISTS `wp_icl_content_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_core_status` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL,
   `rid` bigint(20) NOT NULL,
   `module` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
   `origin` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `target` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `rid` (`rid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `status` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -128,13 +114,11 @@ CREATE TABLE IF NOT EXISTS `wp_icl_core_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_flags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `lang_code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `flag` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `from_template` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `lang_code` (`lang_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=66 ;
+  `from_template` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_icl_flags`
@@ -214,18 +198,15 @@ INSERT INTO `wp_icl_flags` (`id`, `lang_code`, `flag`, `from_template`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_languages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `code` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `english_name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `major` tinyint(4) NOT NULL DEFAULT '0',
   `active` tinyint(4) NOT NULL,
   `default_locale` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tag` varchar(8) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `encode_url` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`),
-  UNIQUE KEY `english_name` (`english_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=66 ;
+  `encode_url` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_icl_languages`
@@ -305,13 +286,11 @@ INSERT INTO `wp_icl_languages` (`id`, `code`, `english_name`, `major`, `active`,
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_languages_translations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `language_code` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display_language_code` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `language_code` (`language_code`,`display_language_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=4165 ;
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4165 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_icl_languages_translations`
@@ -1989,8 +1968,7 @@ INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_lan
 (1669, 'it', 'ar', 'الإيطالية'),
 (1670, 'it', 'bs', 'Italian'),
 (1671, 'it', 'bg', 'Italian'),
-(1672, 'it', 'ca', 'Italian');
-INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_language_code`, `name`) VALUES
+(1672, 'it', 'ca', 'Italian'),
 (1673, 'it', 'cs', 'Italian'),
 (1674, 'it', 'sk', 'Taliančina'),
 (1675, 'it', 'cy', 'Italian'),
@@ -2065,7 +2043,8 @@ INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_lan
 (1744, 'ja', 'eu', 'Japanese'),
 (1745, 'ja', 'fa', 'Japanese'),
 (1746, 'ja', 'fi', 'japani'),
-(1747, 'ja', 'ga', 'Japanese'),
+(1747, 'ja', 'ga', 'Japanese');
+INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_language_code`, `name`) VALUES
 (1748, 'ja', 'he', 'יפנית'),
 (1749, 'ja', 'hi', 'Japanese'),
 (1750, 'ja', 'hr', 'Japanese'),
@@ -3530,8 +3509,7 @@ INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_lan
 (3209, 'sr', 'cs', 'Serbian'),
 (3210, 'sr', 'sk', 'Srbština'),
 (3211, 'sr', 'cy', 'Serbian'),
-(3212, 'sr', 'da', 'Serbian');
-INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_language_code`, `name`) VALUES
+(3212, 'sr', 'da', 'Serbian'),
 (3213, 'sr', 'el', 'Σερβικα'),
 (3214, 'sr', 'eo', 'Serbian'),
 (3215, 'sr', 'et', 'Serbian'),
@@ -3686,7 +3664,8 @@ INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_lan
 (3364, 'ta', 'mo', 'Tamil'),
 (3365, 'ta', 'mn', 'Tamil'),
 (3366, 'ta', 'ne', 'Tamil'),
-(3367, 'ta', 'nl', 'Tamil'),
+(3367, 'ta', 'nl', 'Tamil');
+INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_language_code`, `name`) VALUES
 (3368, 'ta', 'nb', 'Tamil'),
 (3369, 'ta', 'pa', 'Tamil'),
 (3370, 'ta', 'pl', 'tamilski'),
@@ -4493,8 +4472,7 @@ INSERT INTO `wp_icl_languages_translations` (`id`, `language_code`, `display_lan
 
 CREATE TABLE IF NOT EXISTS `wp_icl_locale_map` (
   `code` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `locale` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
-  UNIQUE KEY `code` (`code`,`locale`)
+  `locale` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -4514,7 +4492,7 @@ INSERT INTO `wp_icl_locale_map` (`code`, `locale`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_message_status` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `rid` bigint(20) unsigned NOT NULL,
   `object_id` bigint(20) unsigned NOT NULL,
   `from_language` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4522,11 +4500,8 @@ CREATE TABLE IF NOT EXISTS `wp_icl_message_status` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   `object_type` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `rid` (`rid`),
-  KEY `object_id` (`object_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `status` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4537,8 +4512,7 @@ CREATE TABLE IF NOT EXISTS `wp_icl_message_status` (
 CREATE TABLE IF NOT EXISTS `wp_icl_node` (
   `nid` bigint(20) NOT NULL,
   `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `links_fixed` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`nid`)
+  `links_fixed` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4552,8 +4526,7 @@ CREATE TABLE IF NOT EXISTS `wp_icl_reminders` (
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `url` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `can_delete` tinyint(4) NOT NULL,
-  `show` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`)
+  `show` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4563,16 +4536,13 @@ CREATE TABLE IF NOT EXISTS `wp_icl_reminders` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_strings` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `language` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `context` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `context_name` (`context`,`name`),
-  KEY `language_context` (`language`,`context`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4581,13 +4551,11 @@ CREATE TABLE IF NOT EXISTS `wp_icl_strings` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_string_positions` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `string_id` bigint(20) NOT NULL,
   `kind` tinyint(4) DEFAULT NULL,
-  `position_in_page` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `string_id` (`string_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `position_in_page` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4596,14 +4564,12 @@ CREATE TABLE IF NOT EXISTS `wp_icl_string_positions` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_string_status` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `rid` bigint(20) NOT NULL,
   `string_translation_id` bigint(20) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `string_translation_id` (`string_translation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `md5` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4612,16 +4578,14 @@ CREATE TABLE IF NOT EXISTS `wp_icl_string_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_string_translations` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `string_id` bigint(20) unsigned NOT NULL,
   `language` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL,
   `value` text COLLATE utf8mb4_unicode_ci,
   `translator_id` bigint(20) unsigned DEFAULT NULL,
-  `translation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `string_language` (`string_id`,`language`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `translation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4630,7 +4594,7 @@ CREATE TABLE IF NOT EXISTS `wp_icl_string_translations` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_translate` (
-  `tid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tid` bigint(20) unsigned NOT NULL,
   `job_id` bigint(20) unsigned NOT NULL,
   `content_id` bigint(20) unsigned NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -4639,10 +4603,8 @@ CREATE TABLE IF NOT EXISTS `wp_icl_translate` (
   `field_translate` tinyint(4) NOT NULL,
   `field_data` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `field_data_translated` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `field_finished` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tid`),
-  KEY `job_id` (`job_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=52 ;
+  `field_finished` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4651,15 +4613,13 @@ CREATE TABLE IF NOT EXISTS `wp_icl_translate` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_translate_job` (
-  `job_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `job_id` bigint(20) unsigned NOT NULL,
   `rid` bigint(20) unsigned NOT NULL,
   `translator_id` int(10) unsigned NOT NULL,
   `translated` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `manager_id` int(10) unsigned NOT NULL,
-  `revision` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`job_id`),
-  KEY `rid` (`rid`,`translator_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=18 ;
+  `revision` int(10) unsigned DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4668,18 +4628,13 @@ CREATE TABLE IF NOT EXISTS `wp_icl_translate_job` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_translations` (
-  `translation_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `translation_id` bigint(20) NOT NULL,
   `element_type` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'post_post',
   `element_id` bigint(20) DEFAULT NULL,
   `trid` bigint(20) NOT NULL,
   `language_code` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `source_language_code` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`translation_id`),
-  UNIQUE KEY `trid_lang` (`trid`,`language_code`),
-  UNIQUE KEY `el_type_id` (`element_type`,`element_id`),
-  KEY `trid` (`trid`),
-  KEY `id_type_language` (`element_id`,`element_type`,`language_code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=221 ;
+  `source_language_code` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=257 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_icl_translations`
@@ -4698,8 +4653,6 @@ INSERT INTO `wp_icl_translations` (`translation_id`, `element_type`, `element_id
 (195, 'post_page', 183, 12, 'ru', NULL),
 (201, 'tax_category', 38, 13, 'ru', NULL),
 (202, 'tax_category', 35, 14, 'ru', NULL),
-(203, 'post_nav_menu_item', 185, 15, 'ru', NULL),
-(205, 'post_nav_menu_item', 187, 17, 'ru', NULL),
 (206, 'post_nav_menu_item', 188, 18, 'ru', NULL),
 (208, 'post_post', 191, 19, 'ru', NULL),
 (210, 'post_post', 193, 20, 'ru', NULL),
@@ -4710,7 +4663,33 @@ INSERT INTO `wp_icl_translations` (`translation_id`, `element_type`, `element_id
 (217, 'post_nav_menu_item', 200, 25, 'ru', NULL),
 (218, 'post_nav_menu_item', 201, 26, 'ru', NULL),
 (219, 'post_nav_menu_item', 202, 27, 'ru', NULL),
-(220, 'post_nav_menu_item', 203, 28, 'ru', NULL);
+(220, 'post_nav_menu_item', 203, 28, 'ru', NULL),
+(222, 'post_post', 205, 29, 'ru', NULL),
+(223, 'post_post', 209, 30, 'ru', NULL),
+(225, 'post_post', 211, 31, 'ru', NULL),
+(227, 'post_post', 213, 32, 'ru', NULL),
+(229, 'post_post', 215, 33, 'ru', NULL),
+(231, 'post_post', 217, 34, 'ru', NULL),
+(232, 'post_nav_menu_item', 228, 35, 'ru', NULL),
+(233, 'tax_nav_menu', 40, 36, 'ru', NULL),
+(234, 'post_nav_menu_item', 229, 37, 'ru', NULL),
+(235, 'post_nav_menu_item', 230, 38, 'ru', NULL),
+(236, 'post_nav_menu_item', 231, 39, 'ru', NULL),
+(237, 'post_nav_menu_item', 232, 40, 'ru', NULL),
+(238, 'post_nav_menu_item', 233, 41, 'ru', NULL),
+(239, 'post_nav_menu_item', 234, 42, 'ru', NULL),
+(240, 'tax_nav_menu', 41, 43, 'ru', NULL),
+(242, 'post_post', 235, 44, 'ru', NULL),
+(243, 'tax_category', 42, 45, 'ru', NULL),
+(245, 'post_nav_menu_item', 247, 47, 'ru', NULL),
+(246, 'tax_category', 43, 48, 'ru', NULL),
+(247, 'post_nav_menu_item', 248, 49, 'ru', NULL),
+(248, 'tax_category', 44, 50, 'ru', NULL),
+(249, 'post_nav_menu_item', 251, 51, 'ru', NULL),
+(250, 'post_nav_menu_item', 252, 52, 'ru', NULL),
+(251, 'post_post', 253, 53, 'ru', NULL),
+(253, 'post_post', 254, 54, 'ru', NULL),
+(256, 'post_post', 264, 55, 'ru', NULL);
 
 -- --------------------------------------------------------
 
@@ -4719,7 +4698,7 @@ INSERT INTO `wp_icl_translations` (`translation_id`, `element_type`, `element_id
 --
 
 CREATE TABLE IF NOT EXISTS `wp_icl_translation_status` (
-  `rid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `rid` bigint(20) NOT NULL,
   `translation_id` bigint(20) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `translator_id` bigint(20) NOT NULL,
@@ -4729,10 +4708,8 @@ CREATE TABLE IF NOT EXISTS `wp_icl_translation_status` (
   `translation_package` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `links_fixed` tinyint(4) NOT NULL DEFAULT '0',
-  `_prevstate` longtext COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`rid`),
-  UNIQUE KEY `translation_id` (`translation_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=17 ;
+  `_prevstate` longtext COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4741,7 +4718,7 @@ CREATE TABLE IF NOT EXISTS `wp_icl_translation_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_links` (
-  `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `link_id` bigint(20) unsigned NOT NULL,
   `link_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `link_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `link_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -4753,10 +4730,8 @@ CREATE TABLE IF NOT EXISTS `wp_links` (
   `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `link_rel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `link_notes` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_rss` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`link_id`),
-  KEY `link_visible` (`link_visible`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `link_rss` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4765,13 +4740,11 @@ CREATE TABLE IF NOT EXISTS `wp_links` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_options` (
-  `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `option_id` bigint(20) unsigned NOT NULL,
   `option_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `option_value` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `autoload` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'yes',
-  PRIMARY KEY (`option_id`),
-  UNIQUE KEY `option_name` (`option_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=500 ;
+  `autoload` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'yes'
+) ENGINE=InnoDB AUTO_INCREMENT=565 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_options`
@@ -4809,7 +4782,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (30, 'hack_file', '0', 'yes'),
 (31, 'blog_charset', 'UTF-8', 'yes'),
 (32, 'moderation_keys', '', 'no'),
-(33, 'active_plugins', 'a:2:{i:1;s:29:"widget-logic/widget_logic.php";i:2;s:18:"wpml/sitepress.php";}', 'yes'),
+(33, 'active_plugins', 'a:3:{i:0;s:22:"cyr3lat/cyr-to-lat.php";i:1;s:29:"widget-logic/widget_logic.php";i:2;s:18:"wpml/sitepress.php";}', 'yes'),
 (34, 'category_base', '/.', 'yes'),
 (35, 'ping_sites', 'http://rpc.pingomatic.com/', 'yes'),
 (37, 'comment_max_links', '2', 'yes'),
@@ -4872,7 +4845,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (94, 'widget_archives', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (95, 'widget_meta', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (96, 'sidebars_widgets', 'a:3:{s:19:"wp_inactive_widgets";a:7:{i:0;s:14:"recent-posts-3";i:1;s:21:"icl_lang_sel_widget-2";i:2;s:21:"icl_lang_sel_widget-3";i:3;s:21:"icl_lang_sel_widget-4";i:4;s:21:"icl_lang_sel_widget-5";i:5;s:21:"icl_lang_sel_widget-6";i:6;s:21:"icl_lang_sel_widget-7";}s:18:"orphaned_widgets_1";a:2:{i:0;s:21:"icl_lang_sel_widget-7";i:1;s:14:"recent-posts-2";}s:13:"array_version";i:3;}', 'yes'),
-(98, 'cron', 'a:6:{i:1464824269;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1464825140;a:1:{s:12:"qs_cron_hook";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:6:"hourly";s:4:"args";a:0:{}s:8:"interval";i:3600;}}}i:1464854469;a:1:{s:24:"update_wpml_config_index";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1464867510;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1464884758;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
+(98, 'cron', 'a:6:{i:1464893540;a:1:{s:12:"qs_cron_hook";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:6:"hourly";s:4:"args";a:0:{}s:8:"interval";i:3600;}}}i:1464910669;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1464940869;a:1:{s:24:"update_wpml_config_index";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1464953910;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1464971158;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
 (108, '_transient_random_seed', '1f0e0e254a418cf3f67c612a87cd8cb2', 'yes'),
 (132, 'current_theme', 'Media Holding Vesti Ukraine', 'yes'),
 (133, 'theme_mods_devx', 'a:1:{s:16:"sidebars_widgets";a:2:{s:4:"time";i:1464780417;s:4:"data";a:8:{s:19:"wp_inactive_widgets";a:0:{}s:9:"sidebar-1";a:2:{i:0;s:14:"recent-posts-2";i:1;s:14:"recent-posts-3";}s:16:"sidebar-ourfocus";a:8:{i:0;s:17:"ctup-ads-widget-2";i:1;s:18:"ctup-ads-widget-13";i:2;s:18:"ctup-ads-widget-14";i:3;s:18:"ctup-ads-widget-15";i:4;s:18:"ctup-ads-widget-17";i:5;s:18:"ctup-ads-widget-18";i:6;s:18:"ctup-ads-widget-19";i:7;s:18:"ctup-ads-widget-20";}s:20:"sidebar-testimonials";a:0:{}s:15:"sidebar-aboutus";a:0:{}s:15:"sidebar-ourteam";a:8:{i:0;s:19:"zerif_team-widget-3";i:1;s:19:"zerif_team-widget-5";i:2;s:19:"zerif_team-widget-6";i:3;s:19:"zerif_team-widget-7";i:4;s:19:"zerif_team-widget-8";i:5;s:19:"zerif_team-widget-9";i:6;s:20:"zerif_team-widget-10";i:7;s:20:"zerif_team-widget-11";}s:16:"sidebar-packages";a:0:{}s:17:"sidebar-subscribe";a:0:{}}}}', 'yes'),
@@ -4922,10 +4895,10 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (205, 'wp_language_locale', 'en_GB', 'yes'),
 (208, 'acf_qtranslate', 'a:2:{s:30:"translate_standard_field_types";s:1:"1";s:18:"show_language_tabs";s:1:"1";}', 'yes'),
 (220, 'icl_sitepress_settings', 'a:70:{s:19:"hide_upgrade_notice";s:5:"3.1.9";s:25:"icl_capabilities_verified";b:1;s:21:"interview_translators";i:1;s:34:"existing_content_language_verified";i:1;s:25:"language_negotiation_type";s:1:"3";s:23:"theme_localization_type";i:2;s:14:"icl_lso_header";i:0;s:18:"icl_lso_link_empty";i:1;s:13:"icl_lso_flags";i:0;s:19:"icl_lso_native_lang";s:1:"1";s:20:"icl_lso_display_lang";i:0;s:18:"sync_page_ordering";i:1;s:16:"sync_page_parent";i:1;s:18:"sync_page_template";i:1;s:16:"sync_ping_status";i:1;s:19:"sync_comment_status";i:1;s:16:"sync_sticky_flag";i:1;s:17:"sync_private_flag";i:1;s:16:"sync_post_format";i:1;s:11:"sync_delete";i:0;s:15:"sync_delete_tax";i:0;s:20:"sync_post_taxonomies";i:1;s:14:"sync_post_date";i:0;s:21:"sync_taxonomy_parents";i:0;s:25:"translation_pickup_method";i:0;s:15:"notify_complete";i:1;s:26:"translated_document_status";i:1;s:17:"remote_management";i:0;s:15:"auto_adjust_ids";i:1;s:11:"alert_delay";i:0;s:12:"promote_wpml";i:0;s:23:"troubleshooting_options";a:1:{s:18:"http_communication";i:1;}s:18:"automatic_redirect";i:0;s:17:"remember_language";i:24;s:17:"icl_lang_sel_type";s:4:"list";s:18:"icl_lang_sel_stype";s:7:"classic";s:24:"icl_lang_sel_orientation";s:10:"horizontal";s:28:"icl_lang_sel_copy_parameters";s:0:"";s:21:"icl_widget_title_show";i:0;s:28:"translated_document_page_url";s:13:"auto-generate";s:28:"sync_comments_on_duplicates ";i:0;s:3:"seo";a:2:{s:10:"head_langs";i:1;s:27:"canonicalization_duplicates";i:1;}s:22:"posts_slug_translation";a:1:{s:2:"on";i:0;}s:15:"languages_order";a:3:{i:0;s:21:"ru ui-sortable-handle";i:1;s:21:"ua ui-sortable-handle";i:2;s:21:"en ui-sortable-handle";}s:4:"urls";a:5:{s:30:"directory_for_default_language";i:0;s:12:"show_on_root";s:4:"page";s:19:"root_html_file_path";s:0:"";s:9:"root_page";i:0;s:23:"hide_language_switchers";s:1:"1";}s:22:"admin_default_language";s:2:"ru";s:18:"ajx_health_checked";b:1;s:27:"dont_show_help_admin_notice";b:1;s:14:"setup_complete";i:1;s:17:"setup_wizard_step";i:4;s:18:"default_categories";a:4:{s:2:"en";s:1:"1";s:2:"ua";i:3;s:2:"ru";i:28;s:2:"uk";i:2;}s:16:"default_language";s:2:"ru";s:22:"taxonomy_names_checked";b:1;s:19:"icl_lang_sel_config";a:9:{s:19:"font-current-normal";s:7:"#444444";s:18:"font-current-hover";s:7:"#000000";s:25:"background-current-normal";s:7:"#ffffff";s:24:"background-current-hover";s:7:"#eeeeee";s:17:"font-other-normal";s:7:"#444444";s:16:"font-other-hover";s:7:"#000000";s:23:"background-other-normal";s:7:"#ffffff";s:22:"background-other-hover";s:7:"#eeeeee";s:6:"border";s:7:"#cdcdcd";}s:26:"icl_lang_sel_footer_config";a:10:{s:19:"font-current-normal";s:7:"#444444";s:18:"font-current-hover";s:7:"#000000";s:25:"background-current-normal";s:7:"#ffffff";s:24:"background-current-hover";s:7:"#eeeeee";s:17:"font-other-normal";s:7:"#444444";s:16:"font-other-hover";s:7:"#000000";s:23:"background-other-normal";s:7:"#ffffff";s:22:"background-other-hover";s:7:"#eeeeee";s:6:"border";s:7:"#cdcdcd";s:10:"background";s:7:"#ffffff";}s:29:"icl_language_switcher_sidebar";s:1:"0";s:19:"icl_lang_sel_footer";i:0;s:21:"icl_post_availability";i:0;s:30:"icl_post_availability_position";s:5:"below";s:26:"icl_post_availability_text";s:34:"This post is also available in: %s";s:29:"language_selector_initialized";i:1;s:18:"icl_additional_css";s:0:"";s:18:"display_ls_in_menu";i:0;s:11:"menu_for_ls";i:0;s:29:"edit_languages_flag_migration";i:1;s:34:"theme_localization_load_textdomain";i:0;s:25:"gettext_theme_domain_name";s:0:"";s:16:"just_reactivated";i:0;s:24:"custom_posts_sync_option";a:2:{s:9:"vacancies";s:1:"1";s:11:"testimonial";s:1:"0";}s:16:"hidden_languages";a:0:{}}', 'yes'),
-(223, 'wp_installer_settings', 'eJztXVtv5LiVfg+Q/yD4YfZhW2WJupdnEvT0XDZA96aRdjLIU0GuYtlCqyStpLK7OvB/38OLVJRE3cpltyfhAAnaKooSPx7ynO/jIRUu7eW/iqXpLS9WWY5X5spYrWMcJqt9dnF1szSv4Ee0vMhxlhZRmeYRLi6uwiUid9nLi4dsF5O/Tf73JixD+je9ADdGmwuowvJZUb28w/pDmm/gWUWh7/ZxGcVRcrsPYz2L97dRQkpDPUm4w/SfxvLit48f3mu6dn2Htd/g1o/kVu2DcKv2sb6VvGuWp5v9utTrOlgV9D2WF/s8pgXd5cVdWWbF8vKSvNkizW/JdQSloaF49RkfitUuTMJbvMNJueL3WWb3vstwvU73SXlJbiwuq/co9lmW5uWqDG8LjlG0NATwBl/QCiQP2qb5fldclmkWrXWol/4CD3x8LJYAcRauP8P7Vj0ULW3HNEwf/vIa3UEa38B+vStawJMiDYzfffhEr0P7N7hY51FWRinD3ICKSe+s010W4xJr/D3eaLdputHgpbUwOWjiEzUC1RstStbxfgOXtDAu0maJ39L0Xbrb4XyNNQ7lgjwOcIl2UHvVI66sRx4yfZ0mJXTc5T6L03BTXCLDtC8Nn5bR4/Q2NXXDXGQJ7XZneQGmhfOLK9JFUCkBM4fbqwt+bVdH+0dOF0YdWqvH0RbTHjdaPU3uaKNK8WF3SOGFEcDfMMujNeZWYgYOLe8RO7upb1iVhwyTd3Y9RMYuQpLfVyX+Uk57nXb1UbJN6Z3wwyfhB+0hKu+0JNXwlyzKD01TdmxJD/053Gz0MtXXYV7+YLrIsILvwl12Rf53sz+skvThB/OCIQ8dgR/AQgimACkz9n12m4cbLFwEy9ikDwntbnI1qAacabb7weTTiszEyQwAEwot57LZQDJd8SHT32HwNuu7MLnFYGvCZQDuHucFLwsdYC3QwuPPhemT4Q43g706uuHrlqmZDukJK2jCastmiD9XCPzgGr5PEeWP+6F+kAl1bHOM9TTRHzI68dVGfhMWuEZpvPVO3Rpq+NE65m20FuYi4I8z6SuLBRzZmB18dV7bYwQuifZssz8t3p+fypzMJtd5mBRxWPWI2KMW90QFLamXzZJP704EKLuj3QkGaKKZ3RmgBib1gyZ351DTAVgkHSkeR1aAVPtQu8U2ul7l54+l9V2j9DkQNhZOL8KBblia4RNHbflzEbZbCPMHTUZ4QvPlIwZGGrFw0+wbMMa8V68qg261JOPF9OrxEq0/H7T3UfK5aPWl6dXmQsqAU+NlntiDtKkwoK2BQWL6ZJA47tIwW65kFAejhUP1pKl92NNsANKWAYk4kMRz/m9438YQ8cpIZJCwn88Bn80tZQw+y5sLn9uCr3rSZPg6LQbkHBlyVWT/AW+isI2bwWvZVT8+HTUEPmSK0XkwRmeh5tlee94w5xpdq72AmSvDzOGYvY1j7S87EhK3gXN4RWEc61Fd4jyTrtEHnmkAfmTSNWDSdVvgDbt6DxkImZ1p15iFnqzRAKEnixQI2RKYhRgAtp0Z4bdpuuZFGwHQGUC1SJDUDvxIvF5BigIN7MLww53264frJqqegGod8y5qZk1BZoT6sq8JMDN6i69R1ou0KXFwg5AA5L4Mchh8v+bhfVQetF/SfFcMgg59ecsKb0nZc6PuMO8zaR5wjFnxg+/7qON8Zk0DI41/JDRfzt0lXHMGg5dQTLBDL6j8YQ/DNIOrMYbZ+xJ9xJJ0xD9xmMcHTfy9NadMI5TOJELJlCpbQuV5KVLIkUwjHeZcl2cgr2E6QuG6BbIE/gBA+vlLiZONdkj3eYeUalxf0m4OWpik5R3OtQNg9EbL8vQ+ovoJUTuiZJ/ui0osgaIbrSLJC0n/tvnkRFQ9GaqPXU7OmAQakEh0Xlzf5umusmOvLY6hAY2iap9GahANfDL2Jhmbn8J7rO3SBB8oaHdhUcSYoM2qJ/iWqRbSR5bRDlcdstD+me61hwi8cY7XOLqvX6igFVU9QV6X+m34B4bZodMbRNAx3ZHhRgWdud1lm/JBQJ5Tq28rqtrgDZv1H5WUoqQUJaUoKUVJKUpKUVKKklKUlKKkFCWlKCnl30tKeXzk+RFuNz/Ca7HWG45Dy+83KM+PvIwEVYcnSMALRmvGBHnDhBSJRvIDeWDxetIdzCpJSIKKTHqagY1ce0Kj2pN/Nao99b7FS4hP9gzxqZ1HQoAdVJ/aeRukZafLT96A/ERrfh79qRMbTAPWnag/sSwra7L+VFlzR4CyJgtQoplPV6AguLz4u1hNWU8V3a4oU/rzdg9hS+et3lf6FE/AIqUrYQr6kOTNER0Lbk23dBr6r0LbwSiPuV613Sf0hcOYOJghscp9HrHKmC9WwVNk2u2krrVkKu4ZepTk7p2nR8/RkbKxx/zxmLY/e2z6ZxEbbSU2/oeIjYq5DjNXpJjrU5mrTLNTzPUZmSv9rzup03AMRiD4up2YtAt4sHesr5FFbr/pmIrVDvONBZSJAJbUi3DFnefWB65jVk8i4tkmPBSrhzBPokTsAWop7CpUWxTgX+tf2RI73Bun4O6jr/UD2MsSLxgWd7QboFDom67tWChA7maLsOG5wSZ0XNtz7Ju1SXzsI2thmaZxgcsJOyVssy7Nd0SwePW4aWIDQVmcZsKSgRipXrN7NZ1viijY4mO9b6J1t2y/hFfX0jQ31JgBdRIrFAuwgsomBrdNOPJ7J22dqHuutcXBJZ1uOYHpGl0KX+04YZsSyLuELC9dnAeOu0vetYsNDuwmI7d72iZn5ejSsC9ZEMd4uYyUm+ZVi5Ujx3Ap6ZVS857WSkIoUpS2uQOMNJKFd7gmDdL+W3vLAk8yRdSMsF7ZXscR1FQIK+I3UOompqHrOscwtWnrfVGSYJjWRzcMsKqZndPAleCVp3EV5GbANOOQzCy3uBPGwusOR7GOa7pXo3sgjjbQReQZtj8I9tGIny3HdB2WsTJ7+wPtY0I6qpmjwX7khtGhuUY97N80OVC/tUxmRK4jzkylZK8QtaSP//NRp+bVO1+1eag9rBM5dmCf1BcIuX63L3p5jCHlMajiMZ0QTpio6RBoBR3QyrK6fJ6orb3ERYgUzEWubti6iTQTSEkmiTBEuEYiDAYlfdbcgOLY3D6aYB/xYrNQO+JFvAo9rH9+emSG+oJdBhvld44DwVmL3/l9NlYHvKbpe+53Qqw7K9LtNJYYXye0ogI38s3AdzreEZoah4d0X7a3/cEP748/yEYyvORPuIhuEw2GJNg/3clXaPuC7uIjE/g9Togv0DZ5eKvDpK5v8jTTInCE+TZcY7mq3RcfDPhQ3oIBJ2rNcqIiKBLHOQrNSVmUju3aoz6q9egzytd9MyCxG88a9UYs+HBq4IZEa5IKylvx5mStmhDJt8nRP9GtpUdFmshhTfmZjNyu+myT7MfFoP48hIxvtpHp05+Rf3TKDclZsLSOKukfZ7tKZ2655JYhfnM/jNBwJIY84xQ/jHzkeu48P8ySs9qB0ADcKOgLfF4VymQqGQl3Twt2KMgdg54d7ID3UtHOeaIdwXzeN7x0hVjTfT890DH70izrQMclwwQNJgFKAx1kuIFrfXdcxp+VZim2s08NVaHhcGjYo4CiI2wf6MIRz0TNW/CRgtVkylaYeBZmfp7hChbRl4EqGJ9hwsXWYO1Ro0RZ2QpMW7S9mSmoA03vyWFER+1M+yWHizB5fNb+khQl+I4OtqSd26qUHomlzgFssAgGgEVMq3eXjj8bWNO1bF8Alj9pspX2tbsnv1Hw0No7qiFFX3NAtcS3uSwxnUhcVUDKNKeoOAusdKrsH/hIRxYZ+LaztKzZU6XlBp7vCajOG/k9be5Jf7SEafP6AcKNg/ZLtC0xTgZwJW60ekZJb9qye14QWmtpnghtcCq0A83uyYyUoPsp+jIb3YLd86Lo2vZJ6AbW+dCtm92XBClMsr8CjyyiYmgyENjpLSt9LkDtUb8F0YnlzAfUMTxPNFd71kwgazBAGfQshFZQ/hTdR0M4omO1Gyh6LhDROIgQR5045kXvj+YGUs3WkmBdxm6QEK2/vQ834RCG1rHWkJR9waFtAy8+DcSTh7akuY90aUsyY5qCi0/zBB5YpgkewjIQHN7xjhf18sYJYxsQ9U52Rb2NJrjK6JFonWLGwz8i/CDdpSSs699XZc5Byt2Bge7oyNCMgLgCNLjLpi8YdRyBMLkzR7q81R1JnS/msPm1ogUQueYlF5u5L2v9pK/vonjD0iKI/mzaRnexGh4Uity1eje4/naItDrQxnd8xfThLiy1TbTdYiJ2a3uI/gptHSbVUmqasOxeItfLJfjnWMbuJJcPKvACDhIBfgwNkg7ztzSuMySrteRjNgKV3Y4YZWlR8tVoIhaX4Zc0gbhZnq08kpGOPMO5GtPxmy14moxvTVrI9IPAm6ji2xX4gyK+UzXhNWj4pt3R8KfBEhgGmirhkxSIalDLM8ePNtuR8r1RKb9p0t9eyR8RmbtK/mTEg9lCvteT0dAPOPL7xPxXhrM5smLSFfMn4zxzwUSi5TtKyleJCy+kTkujVqVOP1Wdlor+Sp1+ojot1fwVxXplFMsKgg7FAlTW1Oc1kx6BP/3t55/6CAXA932RhcmfftzDEzS6kZi6e5rQShOeIEDFm6istkBSkkHCDfi/pNTJnsqMpCsvvr+kFUmJF5pPvEhbBmgXuppDu2psJKRrGCEXbOfnsIiAqrAc3zcUDQrLBtMoaRAVCc8azZcKrKsxniW+9AuxLEnQJWVZiGE9yLEs9vqvgWFJsqQmx6GTk6TIcskww6rMs8OvnFF+JVrvZAAlqXwnZTlNxmpmsjHzOlJu1AcV2RQoZ0YnIfRqcpwmQyzJrZ9JizxFi85Ei4T4vrI+Mao3+CRJ3QV4C504lfRsK/hjyU4OiYmc1nFZU8hRECD31Fyn/karzCeV+fSquKXKfHqxzCfFLU/klvK0J2Q2HY9WIdrG0uKT8Vr4/Ryup+eoQXHutLqHbY7PnX7gBKLrmXfQYLe1z8jNvQ43J4dRCAYthBH/GLBhz653IpUYQk9CYRjxjAr461AzzyjRtjH+EpHNqA/hgW09Tfel9pAz4g5BqnxFtC+2lBNz8xK4OW3I2fb1HpGRUPMRfEzP5wW0/9tj8uG+JhcnMTvZhE4sQcSt0CKKGVlQJuf/EMzI0rG2vkvTAi/++Ic//uF7vPvTO17ZdQX+95dwtUY/1MiOsBhTpk/rJzfR92kWjKOiLAglfYIkML7NtwHWC2kC47t5mSZg8V4eFAVs3oDfuypgTFYFnDFVoB4aHVnAHZUFGiPnm68GPqOyIFn+H1EW3B5loRduIfZ7vSg/q7ZgK23h1WgLAl6yMJmelHG24HgiIbbdznlStjueK2j4p9LhRiv7BASRCYeZVD6oSCD/+SVCYJds4LQGz4vtyZp2Pcc6OQbutLbvvHclu4zJLlJ9QMkuT5VdpAKBkl2eKLtIZQIlu7yuJX1KkSWHmNTnqjW6r3mAmZQawzW2ps8PMXnAN+wck5oaH4PKcLOLEqlooF3fRYWW7XPoTiDRLNyDSmic9kbjfI2t5VZZs83J741W2dmPaVoWZR5m5EP3O8aY+e7vs52YUp9E0SdP2CSHeewwcKs6s5poL0ARKDurqi7ziBHY7sFjtsASeLEZi6+jRz253oTP0QnB4fEVeuUAkkxKSj35OBXLCxwkIQnS08AF/sV/ZPyrhlZ2skqN7LdXB7xuVvZ0kDp5FBJ5QP61d1NRKEWhFIX6PVAodcCJ/ICTvs9iqVyJGbkS0i9kKdI+RtqlPEiR9qeSdumHsxRpfyJplx4LoU6JecopMbLjIdQpMTPmgcFTYqRHR6hjYp4Cr3hMjPRMCXVOzEnnxMjPkRBMVR0UM3pQjDTxVB0UM/OgGBkdUgfFPP2gGJVpet5MU1Olmr6qVFOmiLdzx+SLEpJMseEOaGduBaPnwoyf7977Fuf5/sjkhEXJCR1TPj+i9Hilx9PySo9XerzS45Uer/R4pccrPV7p8UqPV3q80uOVHq/0eKXHKz1e6fFKj1d6vNLj/wP1eHGrhvzTqsMbNk7cEsA29I5+W1V89gsdDSA5763v06qtvQC/zw0A04AJDKPzzVlJ/j/73LnXXeJp7lcXLO6ET6y2DPKbHxFgOs9yRIDrwX9P//inWutRaz1qrUet9ai1HrXWo9Z61FoPvVet9ai1HrXWo9Z61FqPWutRaz1qrUet9ai1HrXWo9Z61FrPv+9az6NMHkb8476d54TkpZp9JwpUn6oHn4duWQuvqirLMbGh6jAt22TQA/LbdJ+XB920XcvQb0odLTZRsU6hLgCXdgetg1gRgImT4i4t6zO5vFlncjnimVwcyepULvIp5H15x8UkeNpfk+s7/Gv66VCUeFdUVymiq0w4F8zu+5rYXbrD7addjvp1AybQ9nA3x5W5IAgskSlV0M+IjzrW1wkZOyW4pt6xKXE+4DalvWMWe8bx/nx25fW5rOl2xUaoTu3ltdmYaUCN8520ZSPfPHUyHJjEOpRveGGbLQrVG6EeGdMX1+iK1Q6X4XFRF+yIrqjxiIlejpau5VdTJQlsN+GhWD2EeRIlovERu+dXodaigF6pf6VzLw2K03UYR1/F+uXfFxg/a665VB/CP/9FW/31ToehwWykZ/UZkZ4YKbAZXL+GAnjgEczZkHW7sLij9gM3BNh2N56Bt/7N2sTm1t3i0F9vbeze2J7h2hwmQqrisChXOc7SggjYES5WbFGbOjrbtT0f+YbFRwGM1l1UFHizSsLbQoTmIdvFzDc+Pv4/N0kYGw==', 'yes');
+(223, 'wp_installer_settings', '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', 'yes');
 INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
 (226, 'wpml_config_index', 'O:8:"stdClass":2:{s:7:"plugins";a:33:{i:0;O:8:"stdClass":5:{s:4:"name";s:38:"WooCommerce Catalog Visibility Options";s:14:"override_local";b:1;s:7:"updated";i:1408625614;s:4:"path";s:66:"wpml-config/woocommerce-catalog-visibility-options/wpml-config.xml";s:4:"hash";s:32:"d10bd6388a88521e488f7e4ba295c94c";}i:1;O:8:"stdClass":5:{s:4:"name";s:27:"WooCommerce Paymill Gateway";s:14:"override_local";b:1;s:7:"updated";i:1408626572;s:4:"path";s:55:"wpml-config/woocommerce-paymill-gateway/wpml-config.xml";s:4:"hash";s:32:"46409842584ff8df43a2aa922ad1d388";}i:2;O:8:"stdClass":5:{s:4:"name";s:26:"WooCommerce Stripe Gateway";s:14:"override_local";b:1;s:7:"updated";i:1409061503;s:4:"path";s:54:"wpml-config/woocommerce-stripe-gateway/wpml-config.xml";s:4:"hash";s:32:"4139e23bcdd0bb3e78cb079fa851ce85";}i:3;O:8:"stdClass":7:{s:4:"name";s:27:"WooCommerce Product Add-ons";s:14:"override_local";b:1;s:7:"updated";i:1453203149;s:4:"path";s:55:"wpml-config/woocommerce-product-add-ons/wpml-config.xml";s:4:"hash";s:32:"5f2300cd635823673569a3c72d129398";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:4;O:8:"stdClass":5:{s:4:"name";s:20:"WooCommerce PostePay";s:14:"override_local";b:1;s:7:"updated";i:1409063136;s:4:"path";s:48:"wpml-config/woocommerce-postepay/wpml-config.xml";s:4:"hash";s:32:"b08722979a25b15ba4a02a16fb555ccc";}i:5;O:8:"stdClass":7:{s:4:"name";s:6:"Sensei";s:14:"override_local";b:1;s:7:"updated";i:1452081041;s:4:"path";s:34:"wpml-config/sensei/wpml-config.xml";s:4:"hash";s:32:"e7418cf9fc79f7cdd57193d593774fed";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:6;O:8:"stdClass":5:{s:4:"name";s:25:"NW ADCart for WooCommerce";s:14:"override_local";b:1;s:7:"updated";i:1409734281;s:4:"path";s:53:"wpml-config/nw-adcart-for-woocommerce/wpml-config.xml";s:4:"hash";s:32:"91d62df0659fc7b561a3932a7a52de6a";}i:7;O:8:"stdClass":5:{s:4:"name";s:35:"Product Enquiry Pro for WooCommerce";s:14:"override_local";b:1;s:7:"updated";i:1409734531;s:4:"path";s:63:"wpml-config/product-enquiry-pro-for-woocommerce/wpml-config.xml";s:4:"hash";s:32:"305232f06370d52a29c346d6b711f50a";}i:8;O:8:"stdClass":5:{s:4:"name";s:17:"WooCommerce Plivo";s:14:"override_local";b:1;s:7:"updated";i:1409734705;s:4:"path";s:45:"wpml-config/woocommerce-plivo/wpml-config.xml";s:4:"hash";s:32:"539d172825c4714d69b8a42ad1826c5d";}i:9;O:8:"stdClass":5:{s:4:"name";s:24:"WooCommerce Embed Slides";s:14:"override_local";b:1;s:7:"updated";i:1409813892;s:4:"path";s:52:"wpml-config/woocommerce-embed-slides/wpml-config.xml";s:4:"hash";s:32:"f92b0578c4950e1d7ced60bbdba7ed5b";}i:10;O:8:"stdClass":5:{s:4:"name";s:22:"PayPal for WooCommerce";s:14:"override_local";b:1;s:7:"updated";i:1412841483;s:4:"path";s:54:"wpml-config/paypal-for-woocommerce/wpml-config (1).xml";s:4:"hash";s:32:"4ec8cff3c1bd61950873206196a29348";}i:11;O:8:"stdClass":7:{s:4:"name";s:27:"WooCommerce Product Bundles";s:14:"override_local";b:1;s:7:"updated";i:1454506297;s:4:"path";s:55:"wpml-config/woocommerce-product-bundles/wpml-config.xml";s:4:"hash";s:32:"23aec111affa20bb5c59a9402639becf";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:12;O:8:"stdClass":5:{s:4:"name";s:28:"WooCommerce Price by Country";s:14:"override_local";b:1;s:7:"updated";i:1415282919;s:4:"path";s:56:"wpml-config/woocommerce-price-by-country/wpml-config.xml";s:4:"hash";s:32:"9b296d64ba8afee80cb1ff4fac80144b";}i:13;O:8:"stdClass":5:{s:4:"name";s:21:"WooCommerce Video Tab";s:14:"override_local";b:1;s:7:"updated";i:1415284344;s:4:"path";s:49:"wpml-config/woocommerce-video-tab/wpml-config.xml";s:4:"hash";s:32:"7f9769bc2769e07ae730f3b4cd307741";}i:14;O:8:"stdClass":7:{s:4:"name";s:24:"WooCommerce Multilingual";s:14:"override_local";b:1;s:7:"updated";i:1460958642;s:4:"path";s:52:"wpml-config/woocommerce-multilingual/wpml-config.xml";s:4:"hash";s:32:"7d5d805dabdff09e6ae299b93bc1f0d8";s:4:"user";s:7:"SergeyR";s:7:"details";s:24:"added new emails strings";}i:15;O:8:"stdClass":7:{s:4:"name";s:16:"WPML Test Config";s:14:"override_local";b:1;s:7:"updated";i:1429773131;s:4:"path";s:44:"wpml-config/wpml-test-config/wpml-config.xml";s:4:"hash";s:32:"9c3bb313d5a4f028bebfa8fc8af990a3";s:4:"user";s:5:"admin";s:7:"details";s:3:"222";}i:16;O:8:"stdClass":5:{s:4:"name";s:29:"WooCommerce Product Gift Wrap";s:14:"override_local";b:1;s:7:"updated";i:1429640013;s:4:"path";s:57:"wpml-config/woocommerce-product-gift-wrap/wpml-config.xml";s:4:"hash";s:32:"dd3371d64d2ee01e6e42fd7e0bd134cf";}i:17;O:8:"stdClass":7:{s:4:"name";s:9:"Yoast SEO";s:14:"override_local";b:1;s:7:"updated";i:1458560026;s:4:"path";s:37:"wpml-config/yoast-seo/wpml-config.xml";s:4:"hash";s:32:"a4a501904fb15a86d6c72a28a232a1e9";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:18;O:8:"stdClass":7:{s:4:"name";s:23:"WooCommerce Tab Manager";s:14:"override_local";b:1;s:7:"updated";i:1463665309;s:4:"path";s:51:"wpml-config/woocommerce-tab-manager/wpml-config.xml";s:4:"hash";s:32:"027a39333f9c77adbb5189a8c941f05b";s:4:"user";s:7:"SergeyR";s:7:"details";s:0:"";}i:19;O:8:"stdClass":7:{s:4:"name";s:20:"WooCommerce Bookings";s:14:"override_local";b:1;s:7:"updated";i:1461767805;s:4:"path";s:48:"wpml-config/woocommerce-bookings/wpml-config.xml";s:4:"hash";s:32:"49eee5eb84c718c7bca44c59063fb58d";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:20;O:8:"stdClass":7:{s:4:"name";s:35:"YITH WooCommerce Quick View Premium";s:14:"override_local";b:0;s:7:"updated";i:1439206201;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:63:"wpml-config/yith-woocommerce-quick-view-premium/wpml-config.xml";s:4:"hash";s:32:"656f1dcbcad67f5a4cbc7747520ef4e2";}i:21;O:8:"stdClass":7:{s:4:"name";s:46:"Multibanco (IfthenPay gateway) for WooCommerce";s:14:"override_local";b:0;s:7:"updated";i:1441014802;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:72:"wpml-config/multibanco-ifthenpay-gateway-for-woocommerce/wpml-config.xml";s:4:"hash";s:32:"3cddef77fd163e090472f995aa2388d4";}i:22;O:8:"stdClass":7:{s:4:"name";s:35:"WooCommerce Advanced Product Labels";s:14:"override_local";b:0;s:7:"updated";i:1441177109;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:63:"wpml-config/woocommerce-advanced-product-labels/wpml-config.xml";s:4:"hash";s:32:"4b29c29516a1a33b328d90ffc5c4aad7";}i:23;O:8:"stdClass":7:{s:4:"name";s:30:"WooCommerce Composite Products";s:14:"override_local";b:0;s:7:"updated";i:1441892326;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:58:"wpml-config/woocommerce-composite-products/wpml-config.xml";s:4:"hash";s:32:"158e4ddfee28942b3f5dd5f9e453afd8";}i:24;O:8:"stdClass":7:{s:4:"name";s:29:"YITH WooCommerce Catalog Mode";s:14:"override_local";b:0;s:7:"updated";i:1441961342;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:57:"wpml-config/yith-woocommerce-catalog-mode/wpml-config.xml";s:4:"hash";s:32:"ca50a47d4254cbd04254c4448c511e22";}i:25;O:8:"stdClass":7:{s:4:"name";s:21:"Woocomerce Brands Pro";s:14:"override_local";b:0;s:7:"updated";i:1442243436;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:49:"wpml-config/woocomerce-brands-pro/wpml-config.xml";s:4:"hash";s:32:"dc7eeb10cd6e0eb80b7960eb8b6058a4";}i:26;O:8:"stdClass":7:{s:4:"name";s:29:"WooCommerce Local Pickup Plus";s:14:"override_local";b:1;s:7:"updated";i:1442582862;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:57:"wpml-config/woocommerce-local-pickup-plus/wpml-config.xml";s:4:"hash";s:32:"e1c06d85ae7b8b032bef47e42e4c08f9";}i:27;O:8:"stdClass":7:{s:4:"name";s:12:"ProductPrint";s:14:"override_local";b:1;s:7:"updated";i:1458133343;s:4:"user";s:5:"admin";s:7:"details";s:0:"";s:4:"path";s:40:"wpml-config/productprint/wpml-config.xml";s:4:"hash";s:32:"d2a16faace6f59c009a1dc045e086658";}i:28;O:8:"stdClass":7:{s:4:"name";s:30:"WooCommerce Currency Converter";s:14:"override_local";b:1;s:7:"updated";i:1458133529;s:4:"user";s:5:"admin";s:7:"details";s:0:"";s:4:"path";s:58:"wpml-config/woocommerce-currency-converter/wpml-config.xml";s:4:"hash";s:32:"b2191d7affaf1efe74e6a3ca4b0494c6";}i:29;O:8:"stdClass":7:{s:4:"name";s:27:"WooCommerce Name Your Price";s:14:"override_local";b:1;s:7:"updated";i:1458134968;s:4:"user";s:5:"admin";s:7:"details";s:0:"";s:4:"path";s:55:"wpml-config/woocommerce-name-your-price/wpml-config.xml";s:4:"hash";s:32:"ef484afbeeff24b6cad5b5d477528e83";}i:30;O:8:"stdClass":7:{s:4:"name";s:49:"YITH WooCommerce Minimum Maximum Quantity Premium";s:14:"override_local";b:1;s:7:"updated";i:1459278736;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:77:"wpml-config/yith-woocommerce-minimum-maximum-quantity-premium/wpml-config.xml";s:4:"hash";s:32:"8e8c7961e72461a498849880ad418163";}i:31;O:8:"stdClass":7:{s:4:"name";s:32:"WooCommerce DIBS FlexWin Gateway";s:14:"override_local";b:1;s:7:"updated";i:1460974763;s:4:"user";s:9:"test92818";s:7:"details";s:0:"";s:4:"path";s:60:"wpml-config/woocommerce-dibs-flexwin-gateway/wpml-config.xml";s:4:"hash";s:32:"d9237f895f0f133c8e11f4753d96eeca";}i:32;O:8:"stdClass":7:{s:4:"name";s:40:"WooCommerce PDF Invoices & Packing Slips";s:14:"override_local";b:1;s:7:"updated";i:1461579341;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:66:"wpml-config/woocommerce-pdf-invoices-packing-slips/wpml-config.xml";s:4:"hash";s:32:"34ecf8066c5c9042a0bd60b5d40c4c55";}}s:6:"themes";a:10:{i:0;O:8:"stdClass":7:{s:4:"name";s:6:"Canvas";s:14:"override_local";b:1;s:7:"updated";i:1440487063;s:4:"path";s:34:"wpml-config/canvas/wpml-config.xml";s:4:"hash";s:32:"fae38637bbf52477aed839bd52c8b3f9";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:1;O:8:"stdClass":5:{s:4:"name";s:4:"Kleo";s:14:"override_local";b:0;s:7:"updated";i:1425651882;s:4:"path";s:32:"wpml-config/kleo/wpml-config.xml";s:4:"hash";s:32:"442023138b716c2f410690eabeeab185";}i:2;O:8:"stdClass":5:{s:4:"name";s:4:"Port";s:14:"override_local";b:1;s:7:"updated";i:1426496203;s:4:"path";s:32:"wpml-config/port/wpml-config.xml";s:4:"hash";s:32:"788cce209545b94cfede660d543d7013";}i:3;O:8:"stdClass":7:{s:4:"name";s:36:"IDStore - Responsive WordPress Theme";s:14:"override_local";b:1;s:7:"updated";i:1439455467;s:4:"path";s:62:"wpml-config/idstore-responsive-wordpress-theme/wpml-config.xml";s:4:"hash";s:32:"c4ab5787cebb38c0358286626710ab37";s:4:"user";s:9:"test92818";s:7:"details";s:0:"";}i:4;O:8:"stdClass":7:{s:4:"name";s:4:"Divi";s:14:"override_local";b:1;s:7:"updated";i:1461785469;s:4:"path";s:32:"wpml-config/divi/wpml-config.xml";s:4:"hash";s:32:"2c42477e429f4e176d5424026cad7f61";s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";}i:5;O:8:"stdClass":7:{s:4:"name";s:5:"Avada";s:14:"override_local";b:1;s:7:"updated";i:1438069249;s:4:"path";s:33:"wpml-config/avada/wpml-config.xml";s:4:"hash";s:32:"a6e665ddc77c559642c5a6815930efd5";s:4:"user";s:7:"harshad";s:7:"details";s:0:"";}i:6;O:8:"stdClass":7:{s:4:"name";s:9:"Customizr";s:14:"override_local";b:0;s:7:"updated";i:1440909043;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:37:"wpml-config/customizr/wpml-config.xml";s:4:"hash";s:32:"d63f73a0df72ab558bdbfaadaeb9c737";}i:7;O:8:"stdClass":7:{s:4:"name";s:7:"Genesis";s:14:"override_local";b:1;s:7:"updated";i:1460974749;s:4:"user";s:9:"test92818";s:7:"details";s:0:"";s:4:"path";s:35:"wpml-config/genesis/wpml-config.xml";s:4:"hash";s:32:"795657d127a84e450ad21218284bdd28";}i:8;O:8:"stdClass":7:{s:4:"name";s:10:"Emerald CV";s:14:"override_local";b:1;s:7:"updated";i:1460976290;s:4:"user";s:5:"admin";s:7:"details";s:0:"";s:4:"path";s:38:"wpml-config/emerald-cv/wpml-config.xml";s:4:"hash";s:32:"3ab5fd101b71e7b306e48a07801c7557";}i:9;O:8:"stdClass":7:{s:4:"name";s:6:"Reveal";s:14:"override_local";b:1;s:7:"updated";i:1461596006;s:4:"user";s:6:"amit.k";s:7:"details";s:0:"";s:4:"path";s:34:"wpml-config/reveal/wpml-config.xml";s:4:"hash";s:32:"58db88b09a090c9fcff3d65bd031d14a";}}}', 'yes'),
-(227, 'wpml_config_index_updated', '1464787117', 'yes'),
+(227, 'wpml_config_index_updated', '1464865200', 'yes'),
 (228, 'wpml_config_files_arr', 'O:8:"stdClass":2:{s:6:"themes";a:0:{}s:7:"plugins";a:0:{}}', 'yes'),
 (229, 'icl_admin_messages', 'a:2:{s:8:"messages";a:0:{}s:16:"instant_messages";a:0:{}}', 'yes'),
 (231, 'widget_icl_lang_sel_widget', 'a:8:{i:1;a:1:{s:10:"title_show";i:0;}s:12:"_multiwidget";i:1;i:2;a:1:{s:10:"title_show";i:0;}i:3;a:1:{s:10:"title_show";i:0;}i:4;a:1:{s:10:"title_show";i:0;}i:5;a:1:{s:10:"title_show";i:0;}i:6;a:1:{s:10:"title_show";i:0;}i:7;a:1:{s:10:"title_show";i:0;}}', 'yes'),
@@ -4941,22 +4914,26 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (404, 'medium_large_size_h', '0', 'yes'),
 (405, 'db_upgraded', '', 'yes'),
 (408, 'can_compress_scripts', '1', 'yes'),
-(409, '_transient_timeout_plugin_slugs', '1464866864', 'no'),
-(410, '_transient_plugin_slugs', 'a:3:{i:0;s:39:"widget-customizer/widget-customizer.php";i:1;s:29:"widget-logic/widget_logic.php";i:2;s:18:"wpml/sitepress.php";}', 'no'),
+(409, '_transient_timeout_plugin_slugs', '1464951604', 'no'),
+(410, '_transient_plugin_slugs', 'a:4:{i:0;s:22:"cyr3lat/cyr-to-lat.php";i:1;s:39:"widget-customizer/widget-customizer.php";i:2;s:29:"widget-logic/widget_logic.php";i:3;s:18:"wpml/sitepress.php";}', 'no'),
 (416, 'theme_mods_twentyfifteen', 'a:1:{s:16:"sidebars_widgets";a:2:{s:4:"time";i:1464780435;s:4:"data";a:2:{s:19:"wp_inactive_widgets";a:7:{i:0;s:14:"recent-posts-3";i:1;s:21:"icl_lang_sel_widget-2";i:2;s:21:"icl_lang_sel_widget-3";i:3;s:21:"icl_lang_sel_widget-4";i:4;s:21:"icl_lang_sel_widget-5";i:5;s:21:"icl_lang_sel_widget-6";i:6;s:21:"icl_lang_sel_widget-7";}s:9:"sidebar-1";a:1:{i:0;s:14:"recent-posts-2";}}}}', 'yes'),
 (417, 'theme_mods_vestiukraine', 'a:2:{i:0;b:0;s:16:"sidebars_widgets";a:2:{s:4:"time";i:1464786672;s:4:"data";a:8:{s:19:"wp_inactive_widgets";a:7:{i:0;s:14:"recent-posts-3";i:1;s:21:"icl_lang_sel_widget-2";i:2;s:21:"icl_lang_sel_widget-3";i:3;s:21:"icl_lang_sel_widget-4";i:4;s:21:"icl_lang_sel_widget-5";i:5;s:21:"icl_lang_sel_widget-6";i:6;s:21:"icl_lang_sel_widget-7";}s:9:"sidebar-1";a:2:{i:0;s:21:"icl_lang_sel_widget-7";i:1;s:14:"recent-posts-2";}s:16:"sidebar-ourfocus";N;s:20:"sidebar-testimonials";N;s:15:"sidebar-aboutus";N;s:15:"sidebar-ourteam";N;s:16:"sidebar-packages";N;s:17:"sidebar-subscribe";N;}}}', 'yes'),
-(438, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:59:"https://downloads.wordpress.org/release/wordpress-4.5.2.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:59:"https://downloads.wordpress.org/release/wordpress-4.5.2.zip";s:10:"no_content";s:70:"https://downloads.wordpress.org/release/wordpress-4.5.2-no-content.zip";s:11:"new_bundled";s:71:"https://downloads.wordpress.org/release/wordpress-4.5.2-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:5:"4.5.2";s:7:"version";s:5:"4.5.2";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.4";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1464782801;s:15:"version_checked";s:5:"4.5.2";s:12:"translations";a:0:{}}', 'yes'),
-(439, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1464782801;s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:2:{s:39:"widget-customizer/widget-customizer.php";O:8:"stdClass":6:{s:2:"id";s:5:"43863";s:4:"slug";s:17:"widget-customizer";s:6:"plugin";s:39:"widget-customizer/widget-customizer.php";s:11:"new_version";s:6:"0.15.1";s:3:"url";s:48:"https://wordpress.org/plugins/widget-customizer/";s:7:"package";s:60:"https://downloads.wordpress.org/plugin/widget-customizer.zip";}s:29:"widget-logic/widget_logic.php";O:8:"stdClass":6:{s:2:"id";s:4:"2545";s:4:"slug";s:12:"widget-logic";s:6:"plugin";s:29:"widget-logic/widget_logic.php";s:11:"new_version";s:4:"0.57";s:3:"url";s:43:"https://wordpress.org/plugins/widget-logic/";s:7:"package";s:60:"https://downloads.wordpress.org/plugin/widget-logic.0.57.zip";}}}', 'yes'),
-(441, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1464816502;s:7:"checked";a:2:{s:5:"theme";s:5:"1.0.0";s:12:"vestiukraine";s:5:"1.0.0";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'yes'),
+(438, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:59:"https://downloads.wordpress.org/release/wordpress-4.5.2.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:59:"https://downloads.wordpress.org/release/wordpress-4.5.2.zip";s:10:"no_content";s:70:"https://downloads.wordpress.org/release/wordpress-4.5.2-no-content.zip";s:11:"new_bundled";s:71:"https://downloads.wordpress.org/release/wordpress-4.5.2-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:5:"4.5.2";s:7:"version";s:5:"4.5.2";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.4";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1464867477;s:15:"version_checked";s:5:"4.5.2";s:12:"translations";a:0:{}}', 'yes'),
+(441, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1464867483;s:7:"checked";a:2:{s:5:"theme";s:5:"1.0.0";s:12:"vestiukraine";s:5:"1.0.0";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'yes'),
 (450, 'theme_mods_theme/..', 'a:2:{i:0;b:0;s:16:"sidebars_widgets";a:2:{s:4:"time";i:1464787116;s:4:"data";a:2:{s:19:"wp_inactive_widgets";a:7:{i:0;s:14:"recent-posts-3";i:1;s:21:"icl_lang_sel_widget-2";i:2;s:21:"icl_lang_sel_widget-3";i:3;s:21:"icl_lang_sel_widget-4";i:4;s:21:"icl_lang_sel_widget-5";i:5;s:21:"icl_lang_sel_widget-6";i:6;s:21:"icl_lang_sel_widget-7";}s:18:"orphaned_widgets_1";a:2:{i:0;s:21:"icl_lang_sel_widget-7";i:1;s:14:"recent-posts-2";}}}}', 'yes'),
-(451, 'theme_mods_theme', 'a:2:{i:0;b:0;s:18:"nav_menu_locations";a:2:{s:7:"primary";s:2:"26";s:13:"about-holding";s:2:"39";}}', 'yes'),
+(451, 'theme_mods_theme', 'a:2:{i:0;b:0;s:18:"nav_menu_locations";a:4:{s:7:"primary";s:2:"26";s:13:"about-holding";s:2:"39";s:6:"assets";s:2:"40";s:12:"press-center";s:2:"41";}}', 'yes'),
 (452, '_site_transient_timeout_available_translations', '1464799215', 'yes'),
-(453, '_site_transient_available_translations', 'a:81:{s:2:"ar";a:8:{s:8:"language";s:2:"ar";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 15:55:55";s:12:"english_name";s:6:"Arabic";s:11:"native_name";s:14:"العربية";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ar.zip";s:3:"iso";a:2:{i:1;s:2:"ar";i:2;s:3:"ara";}s:7:"strings";a:1:{s:8:"continue";s:16:"المتابعة";}}s:3:"ary";a:8:{s:8:"language";s:3:"ary";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 14:44:00";s:12:"english_name";s:15:"Moroccan Arabic";s:11:"native_name";s:31:"العربية المغربية";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.5.2/ary.zip";s:3:"iso";a:2:{i:1;s:2:"ar";i:3;s:3:"ary";}s:7:"strings";a:1:{s:8:"continue";s:16:"المتابعة";}}s:2:"az";a:8:{s:8:"language";s:2:"az";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 22:48:01";s:12:"english_name";s:11:"Azerbaijani";s:11:"native_name";s:16:"Azərbaycan dili";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/az.zip";s:3:"iso";a:2:{i:1;s:2:"az";i:2;s:3:"aze";}s:7:"strings";a:1:{s:8:"continue";s:5:"Davam";}}s:3:"azb";a:8:{s:8:"language";s:3:"azb";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-11 22:42:10";s:12:"english_name";s:17:"South Azerbaijani";s:11:"native_name";s:29:"گؤنئی آذربایجان";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.2/azb.zip";s:3:"iso";a:2:{i:1;s:2:"az";i:3;s:3:"azb";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"bg_BG";a:8:{s:8:"language";s:5:"bg_BG";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-03 14:05:41";s:12:"english_name";s:9:"Bulgarian";s:11:"native_name";s:18:"Български";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bg_BG.zip";s:3:"iso";a:2:{i:1;s:2:"bg";i:2;s:3:"bul";}s:7:"strings";a:1:{s:8:"continue";s:12:"Напред";}}s:5:"bn_BD";a:8:{s:8:"language";s:5:"bn_BD";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 06:39:12";s:12:"english_name";s:7:"Bengali";s:11:"native_name";s:15:"বাংলা";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bn_BD.zip";s:3:"iso";a:1:{i:1;s:2:"bn";}s:7:"strings";a:1:{s:8:"continue";s:23:"এগিয়ে চল.";}}s:5:"bs_BA";a:8:{s:8:"language";s:5:"bs_BA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-19 23:16:37";s:12:"english_name";s:7:"Bosnian";s:11:"native_name";s:8:"Bosanski";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bs_BA.zip";s:3:"iso";a:2:{i:1;s:2:"bs";i:2;s:3:"bos";}s:7:"strings";a:1:{s:8:"continue";s:7:"Nastavi";}}s:2:"ca";a:8:{s:8:"language";s:2:"ca";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 06:38:51";s:12:"english_name";s:7:"Catalan";s:11:"native_name";s:7:"Català";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ca.zip";s:3:"iso";a:2:{i:1;s:2:"ca";i:2;s:3:"cat";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continua";}}s:3:"ceb";a:8:{s:8:"language";s:3:"ceb";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-02-16 15:34:57";s:12:"english_name";s:7:"Cebuano";s:11:"native_name";s:7:"Cebuano";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.3/ceb.zip";s:3:"iso";a:2:{i:2;s:3:"ceb";i:3;s:3:"ceb";}s:7:"strings";a:1:{s:8:"continue";s:7:"Padayun";}}s:5:"cs_CZ";a:8:{s:8:"language";s:5:"cs_CZ";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2016-02-11 18:32:36";s:12:"english_name";s:5:"Czech";s:11:"native_name";s:12:"Čeština‎";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.2/cs_CZ.zip";s:3:"iso";a:2:{i:1;s:2:"cs";i:2;s:3:"ces";}s:7:"strings";a:1:{s:8:"continue";s:11:"Pokračovat";}}s:2:"cy";a:8:{s:8:"language";s:2:"cy";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 14:21:06";s:12:"english_name";s:5:"Welsh";s:11:"native_name";s:7:"Cymraeg";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/cy.zip";s:3:"iso";a:2:{i:1;s:2:"cy";i:2;s:3:"cym";}s:7:"strings";a:1:{s:8:"continue";s:6:"Parhau";}}s:5:"da_DK";a:8:{s:8:"language";s:5:"da_DK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 15:42:12";s:12:"english_name";s:6:"Danish";s:11:"native_name";s:5:"Dansk";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/da_DK.zip";s:3:"iso";a:2:{i:1;s:2:"da";i:2;s:3:"dan";}s:7:"strings";a:1:{s:8:"continue";s:12:"Forts&#230;t";}}s:14:"de_CH_informal";a:8:{s:8:"language";s:14:"de_CH_informal";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 20:03:25";s:12:"english_name";s:23:"(Switzerland, Informal)";s:11:"native_name";s:21:"Deutsch (Schweiz, Du)";s:7:"package";s:72:"http://downloads.wordpress.org/translation/core/4.5.2/de_CH_informal.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:6:"Weiter";}}s:5:"de_DE";a:8:{s:8:"language";s:5:"de_DE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:24:14";s:12:"english_name";s:6:"German";s:11:"native_name";s:7:"Deutsch";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/de_DE.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:6:"Weiter";}}s:12:"de_DE_formal";a:8:{s:8:"language";s:12:"de_DE_formal";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:24:44";s:12:"english_name";s:15:"German (Formal)";s:11:"native_name";s:13:"Deutsch (Sie)";s:7:"package";s:70:"http://downloads.wordpress.org/translation/core/4.5.2/de_DE_formal.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:10:"Fortfahren";}}s:5:"de_CH";a:8:{s:8:"language";s:5:"de_CH";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 19:26:41";s:12:"english_name";s:20:"German (Switzerland)";s:11:"native_name";s:17:"Deutsch (Schweiz)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/de_CH.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:10:"Fortfahren";}}s:2:"el";a:8:{s:8:"language";s:2:"el";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-25 18:37:03";s:12:"english_name";s:5:"Greek";s:11:"native_name";s:16:"Ελληνικά";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/el.zip";s:3:"iso";a:2:{i:1;s:2:"el";i:2;s:3:"ell";}s:7:"strings";a:1:{s:8:"continue";s:16:"Συνέχεια";}}s:5:"en_AU";a:8:{s:8:"language";s:5:"en_AU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 06:26:11";s:12:"english_name";s:19:"English (Australia)";s:11:"native_name";s:19:"English (Australia)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_AU.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_ZA";a:8:{s:8:"language";s:5:"en_ZA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 11:29:02";s:12:"english_name";s:22:"English (South Africa)";s:11:"native_name";s:22:"English (South Africa)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_ZA.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_CA";a:8:{s:8:"language";s:5:"en_CA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 05:23:57";s:12:"english_name";s:16:"English (Canada)";s:11:"native_name";s:16:"English (Canada)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_CA.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_NZ";a:8:{s:8:"language";s:5:"en_NZ";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-26 02:00:05";s:12:"english_name";s:21:"English (New Zealand)";s:11:"native_name";s:21:"English (New Zealand)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_NZ.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_GB";a:8:{s:8:"language";s:5:"en_GB";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:51:07";s:12:"english_name";s:12:"English (UK)";s:11:"native_name";s:12:"English (UK)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_GB.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:2:"eo";a:8:{s:8:"language";s:2:"eo";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 10:58:49";s:12:"english_name";s:9:"Esperanto";s:11:"native_name";s:9:"Esperanto";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/eo.zip";s:3:"iso";a:2:{i:1;s:2:"eo";i:2;s:3:"epo";}s:7:"strings";a:1:{s:8:"continue";s:8:"Daŭrigi";}}s:5:"es_VE";a:8:{s:8:"language";s:5:"es_VE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 13:08:25";s:12:"english_name";s:19:"Spanish (Venezuela)";s:11:"native_name";s:21:"Español de Venezuela";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_VE.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_PE";a:8:{s:8:"language";s:5:"es_PE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-16 17:35:43";s:12:"english_name";s:14:"Spanish (Peru)";s:11:"native_name";s:17:"Español de Perú";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_PE.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_MX";a:8:{s:8:"language";s:5:"es_MX";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 21:06:55";s:12:"english_name";s:16:"Spanish (Mexico)";s:11:"native_name";s:19:"Español de México";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_MX.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_GT";a:8:{s:8:"language";s:5:"es_GT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:43:00";s:12:"english_name";s:19:"Spanish (Guatemala)";s:11:"native_name";s:21:"Español de Guatemala";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_GT.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_CL";a:8:{s:8:"language";s:5:"es_CL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-19 16:39:25";s:12:"english_name";s:15:"Spanish (Chile)";s:11:"native_name";s:17:"Español de Chile";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_CL.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_CO";a:8:{s:8:"language";s:5:"es_CO";s:7:"version";s:6:"4.3-RC";s:7:"updated";s:19:"2015-08-04 06:10:33";s:12:"english_name";s:18:"Spanish (Colombia)";s:11:"native_name";s:20:"Español de Colombia";s:7:"package";s:64:"http://downloads.wordpress.org/translation/core/4.3-RC/es_CO.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_ES";a:8:{s:8:"language";s:5:"es_ES";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 13:34:35";s:12:"english_name";s:15:"Spanish (Spain)";s:11:"native_name";s:8:"Español";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_ES.zip";s:3:"iso";a:1:{i:1;s:2:"es";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_AR";a:8:{s:8:"language";s:5:"es_AR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-19 21:32:12";s:12:"english_name";s:19:"Spanish (Argentina)";s:11:"native_name";s:21:"Español de Argentina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_AR.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:2:"et";a:8:{s:8:"language";s:2:"et";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 11:11:25";s:12:"english_name";s:8:"Estonian";s:11:"native_name";s:5:"Eesti";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/et.zip";s:3:"iso";a:2:{i:1;s:2:"et";i:2;s:3:"est";}s:7:"strings";a:1:{s:8:"continue";s:6:"Jätka";}}s:2:"eu";a:8:{s:8:"language";s:2:"eu";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-23 22:05:23";s:12:"english_name";s:6:"Basque";s:11:"native_name";s:7:"Euskara";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/eu.zip";s:3:"iso";a:2:{i:1;s:2:"eu";i:2;s:3:"eus";}s:7:"strings";a:1:{s:8:"continue";s:8:"Jarraitu";}}s:5:"fa_IR";a:8:{s:8:"language";s:5:"fa_IR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-27 18:29:46";s:12:"english_name";s:7:"Persian";s:11:"native_name";s:10:"فارسی";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fa_IR.zip";s:3:"iso";a:2:{i:1;s:2:"fa";i:2;s:3:"fas";}s:7:"strings";a:1:{s:8:"continue";s:10:"ادامه";}}s:2:"fi";a:8:{s:8:"language";s:2:"fi";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 18:44:50";s:12:"english_name";s:7:"Finnish";s:11:"native_name";s:5:"Suomi";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/fi.zip";s:3:"iso";a:2:{i:1;s:2:"fi";i:2;s:3:"fin";}s:7:"strings";a:1:{s:8:"continue";s:5:"Jatka";}}s:5:"fr_BE";a:8:{s:8:"language";s:5:"fr_BE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 07:33:47";s:12:"english_name";s:16:"French (Belgium)";s:11:"native_name";s:21:"Français de Belgique";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_BE.zip";s:3:"iso";a:2:{i:1;s:2:"fr";i:2;s:3:"fra";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:5:"fr_CA";a:8:{s:8:"language";s:5:"fr_CA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-29 19:30:46";s:12:"english_name";s:15:"French (Canada)";s:11:"native_name";s:19:"Français du Canada";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_CA.zip";s:3:"iso";a:2:{i:1;s:2:"fr";i:2;s:3:"fra";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:5:"fr_FR";a:8:{s:8:"language";s:5:"fr_FR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:16:29";s:12:"english_name";s:15:"French (France)";s:11:"native_name";s:9:"Français";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_FR.zip";s:3:"iso";a:1:{i:1;s:2:"fr";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:2:"gd";a:8:{s:8:"language";s:2:"gd";s:7:"version";s:5:"4.3.4";s:7:"updated";s:19:"2015-09-24 15:25:30";s:12:"english_name";s:15:"Scottish Gaelic";s:11:"native_name";s:9:"Gàidhlig";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.3.4/gd.zip";s:3:"iso";a:3:{i:1;s:2:"gd";i:2;s:3:"gla";i:3;s:3:"gla";}s:7:"strings";a:1:{s:8:"continue";s:15:"Lean air adhart";}}s:5:"gl_ES";a:8:{s:8:"language";s:5:"gl_ES";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-22 23:06:30";s:12:"english_name";s:8:"Galician";s:11:"native_name";s:6:"Galego";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/gl_ES.zip";s:3:"iso";a:2:{i:1;s:2:"gl";i:2;s:3:"glg";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:3:"haz";a:8:{s:8:"language";s:3:"haz";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-05 00:59:09";s:12:"english_name";s:8:"Hazaragi";s:11:"native_name";s:15:"هزاره گی";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.2/haz.zip";s:3:"iso";a:1:{i:3;s:3:"haz";}s:7:"strings";a:1:{s:8:"continue";s:10:"ادامه";}}s:5:"he_IL";a:8:{s:8:"language";s:5:"he_IL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-16 13:14:11";s:12:"english_name";s:6:"Hebrew";s:11:"native_name";s:16:"עִבְרִית";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/he_IL.zip";s:3:"iso";a:1:{i:1;s:2:"he";}s:7:"strings";a:1:{s:8:"continue";s:8:"המשך";}}s:5:"hi_IN";a:8:{s:8:"language";s:5:"hi_IN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-13 11:24:52";s:12:"english_name";s:5:"Hindi";s:11:"native_name";s:18:"हिन्दी";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/hi_IN.zip";s:3:"iso";a:2:{i:1;s:2:"hi";i:2;s:3:"hin";}s:7:"strings";a:1:{s:8:"continue";s:12:"जारी";}}s:2:"hr";a:8:{s:8:"language";s:2:"hr";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-07 12:13:44";s:12:"english_name";s:8:"Croatian";s:11:"native_name";s:8:"Hrvatski";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/hr.zip";s:3:"iso";a:2:{i:1;s:2:"hr";i:2;s:3:"hrv";}s:7:"strings";a:1:{s:8:"continue";s:7:"Nastavi";}}s:5:"hu_HU";a:8:{s:8:"language";s:5:"hu_HU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-03 06:34:38";s:12:"english_name";s:9:"Hungarian";s:11:"native_name";s:6:"Magyar";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/hu_HU.zip";s:3:"iso";a:2:{i:1;s:2:"hu";i:2;s:3:"hun";}s:7:"strings";a:1:{s:8:"continue";s:10:"Folytatás";}}s:2:"hy";a:8:{s:8:"language";s:2:"hy";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2016-02-04 07:13:54";s:12:"english_name";s:8:"Armenian";s:11:"native_name";s:14:"Հայերեն";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/hy.zip";s:3:"iso";a:2:{i:1;s:2:"hy";i:2;s:3:"hye";}s:7:"strings";a:1:{s:8:"continue";s:20:"Շարունակել";}}s:5:"id_ID";a:8:{s:8:"language";s:5:"id_ID";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-06 12:11:53";s:12:"english_name";s:10:"Indonesian";s:11:"native_name";s:16:"Bahasa Indonesia";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/id_ID.zip";s:3:"iso";a:2:{i:1;s:2:"id";i:2;s:3:"ind";}s:7:"strings";a:1:{s:8:"continue";s:9:"Lanjutkan";}}s:5:"is_IS";a:8:{s:8:"language";s:5:"is_IS";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-30 15:18:26";s:12:"english_name";s:9:"Icelandic";s:11:"native_name";s:9:"Íslenska";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/is_IS.zip";s:3:"iso";a:2:{i:1;s:2:"is";i:2;s:3:"isl";}s:7:"strings";a:1:{s:8:"continue";s:6:"Áfram";}}s:5:"it_IT";a:8:{s:8:"language";s:5:"it_IT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-31 08:01:17";s:12:"english_name";s:7:"Italian";s:11:"native_name";s:8:"Italiano";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/it_IT.zip";s:3:"iso";a:2:{i:1;s:2:"it";i:2;s:3:"ita";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continua";}}s:2:"ja";a:8:{s:8:"language";s:2:"ja";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-27 00:36:15";s:12:"english_name";s:8:"Japanese";s:11:"native_name";s:9:"日本語";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ja.zip";s:3:"iso";a:1:{i:1;s:2:"ja";}s:7:"strings";a:1:{s:8:"continue";s:9:"続ける";}}s:5:"ka_GE";a:8:{s:8:"language";s:5:"ka_GE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 09:29:35";s:12:"english_name";s:8:"Georgian";s:11:"native_name";s:21:"ქართული";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ka_GE.zip";s:3:"iso";a:2:{i:1;s:2:"ka";i:2;s:3:"kat";}s:7:"strings";a:1:{s:8:"continue";s:30:"გაგრძელება";}}s:5:"ko_KR";a:8:{s:8:"language";s:5:"ko_KR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-08 02:07:38";s:12:"english_name";s:6:"Korean";s:11:"native_name";s:9:"한국어";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ko_KR.zip";s:3:"iso";a:2:{i:1;s:2:"ko";i:2;s:3:"kor";}s:7:"strings";a:1:{s:8:"continue";s:6:"계속";}}s:5:"lt_LT";a:8:{s:8:"language";s:5:"lt_LT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 06:34:16";s:12:"english_name";s:10:"Lithuanian";s:11:"native_name";s:15:"Lietuvių kalba";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/lt_LT.zip";s:3:"iso";a:2:{i:1;s:2:"lt";i:2;s:3:"lit";}s:7:"strings";a:1:{s:8:"continue";s:6:"Tęsti";}}s:5:"mk_MK";a:8:{s:8:"language";s:5:"mk_MK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-12 13:55:28";s:12:"english_name";s:10:"Macedonian";s:11:"native_name";s:31:"Македонски јазик";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/mk_MK.zip";s:3:"iso";a:2:{i:1;s:2:"mk";i:2;s:3:"mkd";}s:7:"strings";a:1:{s:8:"continue";s:16:"Продолжи";}}s:2:"mr";a:8:{s:8:"language";s:2:"mr";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-16 06:42:31";s:12:"english_name";s:7:"Marathi";s:11:"native_name";s:15:"मराठी";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/mr.zip";s:3:"iso";a:2:{i:1;s:2:"mr";i:2;s:3:"mar";}s:7:"strings";a:1:{s:8:"continue";s:25:"सुरु ठेवा";}}s:5:"ms_MY";a:8:{s:8:"language";s:5:"ms_MY";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-01-28 05:41:39";s:12:"english_name";s:5:"Malay";s:11:"native_name";s:13:"Bahasa Melayu";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.3/ms_MY.zip";s:3:"iso";a:2:{i:1;s:2:"ms";i:2;s:3:"msa";}s:7:"strings";a:1:{s:8:"continue";s:8:"Teruskan";}}s:5:"my_MM";a:8:{s:8:"language";s:5:"my_MM";s:7:"version";s:6:"4.1.11";s:7:"updated";s:19:"2015-03-26 15:57:42";s:12:"english_name";s:17:"Myanmar (Burmese)";s:11:"native_name";s:15:"ဗမာစာ";s:7:"package";s:64:"http://downloads.wordpress.org/translation/core/4.1.11/my_MM.zip";s:3:"iso";a:2:{i:1;s:2:"my";i:2;s:3:"mya";}s:7:"strings";a:1:{s:8:"continue";s:54:"ဆက်လက်လုပ်ဆောင်ပါ။";}}s:5:"nb_NO";a:8:{s:8:"language";s:5:"nb_NO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:35:50";s:12:"english_name";s:19:"Norwegian (Bokmål)";s:11:"native_name";s:13:"Norsk bokmål";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nb_NO.zip";s:3:"iso";a:2:{i:1;s:2:"nb";i:2;s:3:"nob";}s:7:"strings";a:1:{s:8:"continue";s:8:"Fortsett";}}s:5:"nl_NL";a:8:{s:8:"language";s:5:"nl_NL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-13 08:12:50";s:12:"english_name";s:5:"Dutch";s:11:"native_name";s:10:"Nederlands";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nl_NL.zip";s:3:"iso";a:2:{i:1;s:2:"nl";i:2;s:3:"nld";}s:7:"strings";a:1:{s:8:"continue";s:8:"Doorgaan";}}s:12:"nl_NL_formal";a:8:{s:8:"language";s:12:"nl_NL_formal";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-01-20 13:35:50";s:12:"english_name";s:14:"Dutch (Formal)";s:11:"native_name";s:20:"Nederlands (Formeel)";s:7:"package";s:70:"http://downloads.wordpress.org/translation/core/4.4.3/nl_NL_formal.zip";s:3:"iso";a:2:{i:1;s:2:"nl";i:2;s:3:"nld";}s:7:"strings";a:1:{s:8:"continue";s:8:"Doorgaan";}}s:5:"nn_NO";a:8:{s:8:"language";s:5:"nn_NO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 07:36:04";s:12:"english_name";s:19:"Norwegian (Nynorsk)";s:11:"native_name";s:13:"Norsk nynorsk";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nn_NO.zip";s:3:"iso";a:2:{i:1;s:2:"nn";i:2;s:3:"nno";}s:7:"strings";a:1:{s:8:"continue";s:9:"Hald fram";}}s:3:"oci";a:8:{s:8:"language";s:3:"oci";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-25 06:38:00";s:12:"english_name";s:7:"Occitan";s:11:"native_name";s:7:"Occitan";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.5.2/oci.zip";s:3:"iso";a:2:{i:1;s:2:"oc";i:2;s:3:"oci";}s:7:"strings";a:1:{s:8:"continue";s:9:"Contunhar";}}s:5:"pl_PL";a:8:{s:8:"language";s:5:"pl_PL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-18 16:39:27";s:12:"english_name";s:6:"Polish";s:11:"native_name";s:6:"Polski";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pl_PL.zip";s:3:"iso";a:2:{i:1;s:2:"pl";i:2;s:3:"pol";}s:7:"strings";a:1:{s:8:"continue";s:9:"Kontynuuj";}}s:2:"ps";a:8:{s:8:"language";s:2:"ps";s:7:"version";s:6:"4.1.11";s:7:"updated";s:19:"2015-03-29 22:19:48";s:12:"english_name";s:6:"Pashto";s:11:"native_name";s:8:"پښتو";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.1.11/ps.zip";s:3:"iso";a:2:{i:1;s:2:"ps";i:2;s:3:"pus";}s:7:"strings";a:1:{s:8:"continue";s:19:"دوام ورکړه";}}s:5:"pt_PT";a:8:{s:8:"language";s:5:"pt_PT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-17 23:58:57";s:12:"english_name";s:21:"Portuguese (Portugal)";s:11:"native_name";s:10:"Português";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pt_PT.zip";s:3:"iso";a:1:{i:1;s:2:"pt";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"pt_BR";a:8:{s:8:"language";s:5:"pt_BR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-27 18:35:51";s:12:"english_name";s:19:"Portuguese (Brazil)";s:11:"native_name";s:20:"Português do Brasil";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pt_BR.zip";s:3:"iso";a:2:{i:1;s:2:"pt";i:2;s:3:"por";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"ro_RO";a:8:{s:8:"language";s:5:"ro_RO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 05:36:12";s:12:"english_name";s:8:"Romanian";s:11:"native_name";s:8:"Română";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ro_RO.zip";s:3:"iso";a:2:{i:1;s:2:"ro";i:2;s:3:"ron";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuă";}}s:5:"ru_RU";a:8:{s:8:"language";s:5:"ru_RU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 18:04:14";s:12:"english_name";s:7:"Russian";s:11:"native_name";s:14:"Русский";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ru_RU.zip";s:3:"iso";a:2:{i:1;s:2:"ru";i:2;s:3:"rus";}s:7:"strings";a:1:{s:8:"continue";s:20:"Продолжить";}}s:5:"sk_SK";a:8:{s:8:"language";s:5:"sk_SK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-29 09:53:12";s:12:"english_name";s:6:"Slovak";s:11:"native_name";s:11:"Slovenčina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sk_SK.zip";s:3:"iso";a:2:{i:1;s:2:"sk";i:2;s:3:"slk";}s:7:"strings";a:1:{s:8:"continue";s:12:"Pokračovať";}}s:5:"sl_SI";a:8:{s:8:"language";s:5:"sl_SI";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-11-26 00:00:18";s:12:"english_name";s:9:"Slovenian";s:11:"native_name";s:13:"Slovenščina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.2/sl_SI.zip";s:3:"iso";a:2:{i:1;s:2:"sl";i:2;s:3:"slv";}s:7:"strings";a:1:{s:8:"continue";s:8:"Nadaljuj";}}s:2:"sq";a:8:{s:8:"language";s:2:"sq";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-09 09:01:28";s:12:"english_name";s:8:"Albanian";s:11:"native_name";s:5:"Shqip";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/sq.zip";s:3:"iso";a:2:{i:1;s:2:"sq";i:2;s:3:"sqi";}s:7:"strings";a:1:{s:8:"continue";s:6:"Vazhdo";}}s:5:"sr_RS";a:8:{s:8:"language";s:5:"sr_RS";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 08:00:57";s:12:"english_name";s:7:"Serbian";s:11:"native_name";s:23:"Српски језик";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sr_RS.zip";s:3:"iso";a:2:{i:1;s:2:"sr";i:2;s:3:"srp";}s:7:"strings";a:1:{s:8:"continue";s:14:"Настави";}}s:5:"sv_SE";a:8:{s:8:"language";s:5:"sv_SE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-14 14:47:49";s:12:"english_name";s:7:"Swedish";s:11:"native_name";s:7:"Svenska";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sv_SE.zip";s:3:"iso";a:2:{i:1;s:2:"sv";i:2;s:3:"swe";}s:7:"strings";a:1:{s:8:"continue";s:9:"Fortsätt";}}s:2:"th";a:8:{s:8:"language";s:2:"th";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-22 14:05:41";s:12:"english_name";s:4:"Thai";s:11:"native_name";s:9:"ไทย";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/th.zip";s:3:"iso";a:2:{i:1;s:2:"th";i:2;s:3:"tha";}s:7:"strings";a:1:{s:8:"continue";s:15:"ต่อไป";}}s:2:"tl";a:8:{s:8:"language";s:2:"tl";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-11-27 15:51:36";s:12:"english_name";s:7:"Tagalog";s:11:"native_name";s:7:"Tagalog";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/tl.zip";s:3:"iso";a:2:{i:1;s:2:"tl";i:2;s:3:"tgl";}s:7:"strings";a:1:{s:8:"continue";s:10:"Magpatuloy";}}s:5:"tr_TR";a:8:{s:8:"language";s:5:"tr_TR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-21 01:31:12";s:12:"english_name";s:7:"Turkish";s:11:"native_name";s:8:"Türkçe";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/tr_TR.zip";s:3:"iso";a:2:{i:1;s:2:"tr";i:2;s:3:"tur";}s:7:"strings";a:1:{s:8:"continue";s:5:"Devam";}}s:5:"ug_CN";a:8:{s:8:"language";s:5:"ug_CN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-31 09:50:18";s:12:"english_name";s:6:"Uighur";s:11:"native_name";s:9:"Uyƣurqə";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ug_CN.zip";s:3:"iso";a:2:{i:1;s:2:"ug";i:2;s:3:"uig";}s:7:"strings";a:1:{s:8:"continue";s:26:"داۋاملاشتۇرۇش";}}s:2:"uk";a:8:{s:8:"language";s:2:"uk";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-23 09:33:59";s:12:"english_name";s:9:"Ukrainian";s:11:"native_name";s:20:"Українська";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/uk.zip";s:3:"iso";a:2:{i:1;s:2:"uk";i:2;s:3:"ukr";}s:7:"strings";a:1:{s:8:"continue";s:20:"Продовжити";}}s:2:"vi";a:8:{s:8:"language";s:2:"vi";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-09 01:01:25";s:12:"english_name";s:10:"Vietnamese";s:11:"native_name";s:14:"Tiếng Việt";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/vi.zip";s:3:"iso";a:2:{i:1;s:2:"vi";i:2;s:3:"vie";}s:7:"strings";a:1:{s:8:"continue";s:12:"Tiếp tục";}}s:5:"zh_CN";a:8:{s:8:"language";s:5:"zh_CN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-17 03:29:01";s:12:"english_name";s:15:"Chinese (China)";s:11:"native_name";s:12:"简体中文";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/zh_CN.zip";s:3:"iso";a:2:{i:1;s:2:"zh";i:2;s:3:"zho";}s:7:"strings";a:1:{s:8:"continue";s:6:"继续";}}s:5:"zh_TW";a:8:{s:8:"language";s:5:"zh_TW";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 09:08:07";s:12:"english_name";s:16:"Chinese (Taiwan)";s:11:"native_name";s:12:"繁體中文";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/zh_TW.zip";s:3:"iso";a:2:{i:1;s:2:"zh";i:2;s:3:"zho";}s:7:"strings";a:1:{s:8:"continue";s:6:"繼續";}}}', 'yes');
+(453, '_site_transient_available_translations', 'a:81:{s:2:"ar";a:8:{s:8:"language";s:2:"ar";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 15:55:55";s:12:"english_name";s:6:"Arabic";s:11:"native_name";s:14:"العربية";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ar.zip";s:3:"iso";a:2:{i:1;s:2:"ar";i:2;s:3:"ara";}s:7:"strings";a:1:{s:8:"continue";s:16:"المتابعة";}}s:3:"ary";a:8:{s:8:"language";s:3:"ary";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 14:44:00";s:12:"english_name";s:15:"Moroccan Arabic";s:11:"native_name";s:31:"العربية المغربية";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.5.2/ary.zip";s:3:"iso";a:2:{i:1;s:2:"ar";i:3;s:3:"ary";}s:7:"strings";a:1:{s:8:"continue";s:16:"المتابعة";}}s:2:"az";a:8:{s:8:"language";s:2:"az";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 22:48:01";s:12:"english_name";s:11:"Azerbaijani";s:11:"native_name";s:16:"Azərbaycan dili";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/az.zip";s:3:"iso";a:2:{i:1;s:2:"az";i:2;s:3:"aze";}s:7:"strings";a:1:{s:8:"continue";s:5:"Davam";}}s:3:"azb";a:8:{s:8:"language";s:3:"azb";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-11 22:42:10";s:12:"english_name";s:17:"South Azerbaijani";s:11:"native_name";s:29:"گؤنئی آذربایجان";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.2/azb.zip";s:3:"iso";a:2:{i:1;s:2:"az";i:3;s:3:"azb";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"bg_BG";a:8:{s:8:"language";s:5:"bg_BG";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-03 14:05:41";s:12:"english_name";s:9:"Bulgarian";s:11:"native_name";s:18:"Български";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bg_BG.zip";s:3:"iso";a:2:{i:1;s:2:"bg";i:2;s:3:"bul";}s:7:"strings";a:1:{s:8:"continue";s:12:"Напред";}}s:5:"bn_BD";a:8:{s:8:"language";s:5:"bn_BD";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 06:39:12";s:12:"english_name";s:7:"Bengali";s:11:"native_name";s:15:"বাংলা";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bn_BD.zip";s:3:"iso";a:1:{i:1;s:2:"bn";}s:7:"strings";a:1:{s:8:"continue";s:23:"এগিয়ে চল.";}}s:5:"bs_BA";a:8:{s:8:"language";s:5:"bs_BA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-19 23:16:37";s:12:"english_name";s:7:"Bosnian";s:11:"native_name";s:8:"Bosanski";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/bs_BA.zip";s:3:"iso";a:2:{i:1;s:2:"bs";i:2;s:3:"bos";}s:7:"strings";a:1:{s:8:"continue";s:7:"Nastavi";}}s:2:"ca";a:8:{s:8:"language";s:2:"ca";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 06:38:51";s:12:"english_name";s:7:"Catalan";s:11:"native_name";s:7:"Català";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ca.zip";s:3:"iso";a:2:{i:1;s:2:"ca";i:2;s:3:"cat";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continua";}}s:3:"ceb";a:8:{s:8:"language";s:3:"ceb";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-02-16 15:34:57";s:12:"english_name";s:7:"Cebuano";s:11:"native_name";s:7:"Cebuano";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.3/ceb.zip";s:3:"iso";a:2:{i:2;s:3:"ceb";i:3;s:3:"ceb";}s:7:"strings";a:1:{s:8:"continue";s:7:"Padayun";}}s:5:"cs_CZ";a:8:{s:8:"language";s:5:"cs_CZ";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2016-02-11 18:32:36";s:12:"english_name";s:5:"Czech";s:11:"native_name";s:12:"Čeština‎";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.2/cs_CZ.zip";s:3:"iso";a:2:{i:1;s:2:"cs";i:2;s:3:"ces";}s:7:"strings";a:1:{s:8:"continue";s:11:"Pokračovat";}}s:2:"cy";a:8:{s:8:"language";s:2:"cy";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 14:21:06";s:12:"english_name";s:5:"Welsh";s:11:"native_name";s:7:"Cymraeg";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/cy.zip";s:3:"iso";a:2:{i:1;s:2:"cy";i:2;s:3:"cym";}s:7:"strings";a:1:{s:8:"continue";s:6:"Parhau";}}s:5:"da_DK";a:8:{s:8:"language";s:5:"da_DK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 15:42:12";s:12:"english_name";s:6:"Danish";s:11:"native_name";s:5:"Dansk";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/da_DK.zip";s:3:"iso";a:2:{i:1;s:2:"da";i:2;s:3:"dan";}s:7:"strings";a:1:{s:8:"continue";s:12:"Forts&#230;t";}}s:14:"de_CH_informal";a:8:{s:8:"language";s:14:"de_CH_informal";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 20:03:25";s:12:"english_name";s:23:"(Switzerland, Informal)";s:11:"native_name";s:21:"Deutsch (Schweiz, Du)";s:7:"package";s:72:"http://downloads.wordpress.org/translation/core/4.5.2/de_CH_informal.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:6:"Weiter";}}s:5:"de_DE";a:8:{s:8:"language";s:5:"de_DE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:24:14";s:12:"english_name";s:6:"German";s:11:"native_name";s:7:"Deutsch";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/de_DE.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:6:"Weiter";}}s:12:"de_DE_formal";a:8:{s:8:"language";s:12:"de_DE_formal";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:24:44";s:12:"english_name";s:15:"German (Formal)";s:11:"native_name";s:13:"Deutsch (Sie)";s:7:"package";s:70:"http://downloads.wordpress.org/translation/core/4.5.2/de_DE_formal.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:10:"Fortfahren";}}s:5:"de_CH";a:8:{s:8:"language";s:5:"de_CH";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 19:26:41";s:12:"english_name";s:20:"German (Switzerland)";s:11:"native_name";s:17:"Deutsch (Schweiz)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/de_CH.zip";s:3:"iso";a:1:{i:1;s:2:"de";}s:7:"strings";a:1:{s:8:"continue";s:10:"Fortfahren";}}s:2:"el";a:8:{s:8:"language";s:2:"el";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-25 18:37:03";s:12:"english_name";s:5:"Greek";s:11:"native_name";s:16:"Ελληνικά";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/el.zip";s:3:"iso";a:2:{i:1;s:2:"el";i:2;s:3:"ell";}s:7:"strings";a:1:{s:8:"continue";s:16:"Συνέχεια";}}s:5:"en_AU";a:8:{s:8:"language";s:5:"en_AU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 06:26:11";s:12:"english_name";s:19:"English (Australia)";s:11:"native_name";s:19:"English (Australia)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_AU.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_ZA";a:8:{s:8:"language";s:5:"en_ZA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 11:29:02";s:12:"english_name";s:22:"English (South Africa)";s:11:"native_name";s:22:"English (South Africa)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_ZA.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_CA";a:8:{s:8:"language";s:5:"en_CA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 05:23:57";s:12:"english_name";s:16:"English (Canada)";s:11:"native_name";s:16:"English (Canada)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_CA.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_NZ";a:8:{s:8:"language";s:5:"en_NZ";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-26 02:00:05";s:12:"english_name";s:21:"English (New Zealand)";s:11:"native_name";s:21:"English (New Zealand)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_NZ.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:5:"en_GB";a:8:{s:8:"language";s:5:"en_GB";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:51:07";s:12:"english_name";s:12:"English (UK)";s:11:"native_name";s:12:"English (UK)";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/en_GB.zip";s:3:"iso";a:3:{i:1;s:2:"en";i:2;s:3:"eng";i:3;s:3:"eng";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continue";}}s:2:"eo";a:8:{s:8:"language";s:2:"eo";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 10:58:49";s:12:"english_name";s:9:"Esperanto";s:11:"native_name";s:9:"Esperanto";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/eo.zip";s:3:"iso";a:2:{i:1;s:2:"eo";i:2;s:3:"epo";}s:7:"strings";a:1:{s:8:"continue";s:8:"Daŭrigi";}}s:5:"es_VE";a:8:{s:8:"language";s:5:"es_VE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 13:08:25";s:12:"english_name";s:19:"Spanish (Venezuela)";s:11:"native_name";s:21:"Español de Venezuela";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_VE.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_PE";a:8:{s:8:"language";s:5:"es_PE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-16 17:35:43";s:12:"english_name";s:14:"Spanish (Peru)";s:11:"native_name";s:17:"Español de Perú";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_PE.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_MX";a:8:{s:8:"language";s:5:"es_MX";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 21:06:55";s:12:"english_name";s:16:"Spanish (Mexico)";s:11:"native_name";s:19:"Español de México";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_MX.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_GT";a:8:{s:8:"language";s:5:"es_GT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:43:00";s:12:"english_name";s:19:"Spanish (Guatemala)";s:11:"native_name";s:21:"Español de Guatemala";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_GT.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_CL";a:8:{s:8:"language";s:5:"es_CL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-19 16:39:25";s:12:"english_name";s:15:"Spanish (Chile)";s:11:"native_name";s:17:"Español de Chile";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_CL.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_CO";a:8:{s:8:"language";s:5:"es_CO";s:7:"version";s:6:"4.3-RC";s:7:"updated";s:19:"2015-08-04 06:10:33";s:12:"english_name";s:18:"Spanish (Colombia)";s:11:"native_name";s:20:"Español de Colombia";s:7:"package";s:64:"http://downloads.wordpress.org/translation/core/4.3-RC/es_CO.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_ES";a:8:{s:8:"language";s:5:"es_ES";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-28 13:34:35";s:12:"english_name";s:15:"Spanish (Spain)";s:11:"native_name";s:8:"Español";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_ES.zip";s:3:"iso";a:1:{i:1;s:2:"es";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"es_AR";a:8:{s:8:"language";s:5:"es_AR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-19 21:32:12";s:12:"english_name";s:19:"Spanish (Argentina)";s:11:"native_name";s:21:"Español de Argentina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/es_AR.zip";s:3:"iso";a:2:{i:1;s:2:"es";i:2;s:3:"spa";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:2:"et";a:8:{s:8:"language";s:2:"et";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 11:11:25";s:12:"english_name";s:8:"Estonian";s:11:"native_name";s:5:"Eesti";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/et.zip";s:3:"iso";a:2:{i:1;s:2:"et";i:2;s:3:"est";}s:7:"strings";a:1:{s:8:"continue";s:6:"Jätka";}}s:2:"eu";a:8:{s:8:"language";s:2:"eu";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-23 22:05:23";s:12:"english_name";s:6:"Basque";s:11:"native_name";s:7:"Euskara";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/eu.zip";s:3:"iso";a:2:{i:1;s:2:"eu";i:2;s:3:"eus";}s:7:"strings";a:1:{s:8:"continue";s:8:"Jarraitu";}}s:5:"fa_IR";a:8:{s:8:"language";s:5:"fa_IR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-27 18:29:46";s:12:"english_name";s:7:"Persian";s:11:"native_name";s:10:"فارسی";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fa_IR.zip";s:3:"iso";a:2:{i:1;s:2:"fa";i:2;s:3:"fas";}s:7:"strings";a:1:{s:8:"continue";s:10:"ادامه";}}s:2:"fi";a:8:{s:8:"language";s:2:"fi";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 18:44:50";s:12:"english_name";s:7:"Finnish";s:11:"native_name";s:5:"Suomi";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/fi.zip";s:3:"iso";a:2:{i:1;s:2:"fi";i:2;s:3:"fin";}s:7:"strings";a:1:{s:8:"continue";s:5:"Jatka";}}s:5:"fr_BE";a:8:{s:8:"language";s:5:"fr_BE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 07:33:47";s:12:"english_name";s:16:"French (Belgium)";s:11:"native_name";s:21:"Français de Belgique";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_BE.zip";s:3:"iso";a:2:{i:1;s:2:"fr";i:2;s:3:"fra";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:5:"fr_CA";a:8:{s:8:"language";s:5:"fr_CA";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-29 19:30:46";s:12:"english_name";s:15:"French (Canada)";s:11:"native_name";s:19:"Français du Canada";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_CA.zip";s:3:"iso";a:2:{i:1;s:2:"fr";i:2;s:3:"fra";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:5:"fr_FR";a:8:{s:8:"language";s:5:"fr_FR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 09:16:29";s:12:"english_name";s:15:"French (France)";s:11:"native_name";s:9:"Français";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/fr_FR.zip";s:3:"iso";a:1:{i:1;s:2:"fr";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuer";}}s:2:"gd";a:8:{s:8:"language";s:2:"gd";s:7:"version";s:5:"4.3.4";s:7:"updated";s:19:"2015-09-24 15:25:30";s:12:"english_name";s:15:"Scottish Gaelic";s:11:"native_name";s:9:"Gàidhlig";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.3.4/gd.zip";s:3:"iso";a:3:{i:1;s:2:"gd";i:2;s:3:"gla";i:3;s:3:"gla";}s:7:"strings";a:1:{s:8:"continue";s:15:"Lean air adhart";}}s:5:"gl_ES";a:8:{s:8:"language";s:5:"gl_ES";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-22 23:06:30";s:12:"english_name";s:8:"Galician";s:11:"native_name";s:6:"Galego";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/gl_ES.zip";s:3:"iso";a:2:{i:1;s:2:"gl";i:2;s:3:"glg";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:3:"haz";a:8:{s:8:"language";s:3:"haz";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-05 00:59:09";s:12:"english_name";s:8:"Hazaragi";s:11:"native_name";s:15:"هزاره گی";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.4.2/haz.zip";s:3:"iso";a:1:{i:3;s:3:"haz";}s:7:"strings";a:1:{s:8:"continue";s:10:"ادامه";}}s:5:"he_IL";a:8:{s:8:"language";s:5:"he_IL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-16 13:14:11";s:12:"english_name";s:6:"Hebrew";s:11:"native_name";s:16:"עִבְרִית";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/he_IL.zip";s:3:"iso";a:1:{i:1;s:2:"he";}s:7:"strings";a:1:{s:8:"continue";s:8:"המשך";}}s:5:"hi_IN";a:8:{s:8:"language";s:5:"hi_IN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-13 11:24:52";s:12:"english_name";s:5:"Hindi";s:11:"native_name";s:18:"हिन्दी";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/hi_IN.zip";s:3:"iso";a:2:{i:1;s:2:"hi";i:2;s:3:"hin";}s:7:"strings";a:1:{s:8:"continue";s:12:"जारी";}}s:2:"hr";a:8:{s:8:"language";s:2:"hr";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-07 12:13:44";s:12:"english_name";s:8:"Croatian";s:11:"native_name";s:8:"Hrvatski";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/hr.zip";s:3:"iso";a:2:{i:1;s:2:"hr";i:2;s:3:"hrv";}s:7:"strings";a:1:{s:8:"continue";s:7:"Nastavi";}}s:5:"hu_HU";a:8:{s:8:"language";s:5:"hu_HU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-03 06:34:38";s:12:"english_name";s:9:"Hungarian";s:11:"native_name";s:6:"Magyar";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/hu_HU.zip";s:3:"iso";a:2:{i:1;s:2:"hu";i:2;s:3:"hun";}s:7:"strings";a:1:{s:8:"continue";s:10:"Folytatás";}}s:2:"hy";a:8:{s:8:"language";s:2:"hy";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2016-02-04 07:13:54";s:12:"english_name";s:8:"Armenian";s:11:"native_name";s:14:"Հայերեն";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/hy.zip";s:3:"iso";a:2:{i:1;s:2:"hy";i:2;s:3:"hye";}s:7:"strings";a:1:{s:8:"continue";s:20:"Շարունակել";}}s:5:"id_ID";a:8:{s:8:"language";s:5:"id_ID";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-06 12:11:53";s:12:"english_name";s:10:"Indonesian";s:11:"native_name";s:16:"Bahasa Indonesia";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/id_ID.zip";s:3:"iso";a:2:{i:1;s:2:"id";i:2;s:3:"ind";}s:7:"strings";a:1:{s:8:"continue";s:9:"Lanjutkan";}}s:5:"is_IS";a:8:{s:8:"language";s:5:"is_IS";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-30 15:18:26";s:12:"english_name";s:9:"Icelandic";s:11:"native_name";s:9:"Íslenska";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/is_IS.zip";s:3:"iso";a:2:{i:1;s:2:"is";i:2;s:3:"isl";}s:7:"strings";a:1:{s:8:"continue";s:6:"Áfram";}}s:5:"it_IT";a:8:{s:8:"language";s:5:"it_IT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-31 08:01:17";s:12:"english_name";s:7:"Italian";s:11:"native_name";s:8:"Italiano";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/it_IT.zip";s:3:"iso";a:2:{i:1;s:2:"it";i:2;s:3:"ita";}s:7:"strings";a:1:{s:8:"continue";s:8:"Continua";}}s:2:"ja";a:8:{s:8:"language";s:2:"ja";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-27 00:36:15";s:12:"english_name";s:8:"Japanese";s:11:"native_name";s:9:"日本語";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/ja.zip";s:3:"iso";a:1:{i:1;s:2:"ja";}s:7:"strings";a:1:{s:8:"continue";s:9:"続ける";}}s:5:"ka_GE";a:8:{s:8:"language";s:5:"ka_GE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 09:29:35";s:12:"english_name";s:8:"Georgian";s:11:"native_name";s:21:"ქართული";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ka_GE.zip";s:3:"iso";a:2:{i:1;s:2:"ka";i:2;s:3:"kat";}s:7:"strings";a:1:{s:8:"continue";s:30:"გაგრძელება";}}s:5:"ko_KR";a:8:{s:8:"language";s:5:"ko_KR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-08 02:07:38";s:12:"english_name";s:6:"Korean";s:11:"native_name";s:9:"한국어";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ko_KR.zip";s:3:"iso";a:2:{i:1;s:2:"ko";i:2;s:3:"kor";}s:7:"strings";a:1:{s:8:"continue";s:6:"계속";}}s:5:"lt_LT";a:8:{s:8:"language";s:5:"lt_LT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 06:34:16";s:12:"english_name";s:10:"Lithuanian";s:11:"native_name";s:15:"Lietuvių kalba";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/lt_LT.zip";s:3:"iso";a:2:{i:1;s:2:"lt";i:2;s:3:"lit";}s:7:"strings";a:1:{s:8:"continue";s:6:"Tęsti";}}s:5:"mk_MK";a:8:{s:8:"language";s:5:"mk_MK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-12 13:55:28";s:12:"english_name";s:10:"Macedonian";s:11:"native_name";s:31:"Македонски јазик";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/mk_MK.zip";s:3:"iso";a:2:{i:1;s:2:"mk";i:2;s:3:"mkd";}s:7:"strings";a:1:{s:8:"continue";s:16:"Продолжи";}}s:2:"mr";a:8:{s:8:"language";s:2:"mr";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-16 06:42:31";s:12:"english_name";s:7:"Marathi";s:11:"native_name";s:15:"मराठी";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/mr.zip";s:3:"iso";a:2:{i:1;s:2:"mr";i:2;s:3:"mar";}s:7:"strings";a:1:{s:8:"continue";s:25:"सुरु ठेवा";}}s:5:"ms_MY";a:8:{s:8:"language";s:5:"ms_MY";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-01-28 05:41:39";s:12:"english_name";s:5:"Malay";s:11:"native_name";s:13:"Bahasa Melayu";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.3/ms_MY.zip";s:3:"iso";a:2:{i:1;s:2:"ms";i:2;s:3:"msa";}s:7:"strings";a:1:{s:8:"continue";s:8:"Teruskan";}}s:5:"my_MM";a:8:{s:8:"language";s:5:"my_MM";s:7:"version";s:6:"4.1.11";s:7:"updated";s:19:"2015-03-26 15:57:42";s:12:"english_name";s:17:"Myanmar (Burmese)";s:11:"native_name";s:15:"ဗမာစာ";s:7:"package";s:64:"http://downloads.wordpress.org/translation/core/4.1.11/my_MM.zip";s:3:"iso";a:2:{i:1;s:2:"my";i:2;s:3:"mya";}s:7:"strings";a:1:{s:8:"continue";s:54:"ဆက်လက်လုပ်ဆောင်ပါ။";}}s:5:"nb_NO";a:8:{s:8:"language";s:5:"nb_NO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 12:35:50";s:12:"english_name";s:19:"Norwegian (Bokmål)";s:11:"native_name";s:13:"Norsk bokmål";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nb_NO.zip";s:3:"iso";a:2:{i:1;s:2:"nb";i:2;s:3:"nob";}s:7:"strings";a:1:{s:8:"continue";s:8:"Fortsett";}}s:5:"nl_NL";a:8:{s:8:"language";s:5:"nl_NL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-13 08:12:50";s:12:"english_name";s:5:"Dutch";s:11:"native_name";s:10:"Nederlands";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nl_NL.zip";s:3:"iso";a:2:{i:1;s:2:"nl";i:2;s:3:"nld";}s:7:"strings";a:1:{s:8:"continue";s:8:"Doorgaan";}}s:12:"nl_NL_formal";a:8:{s:8:"language";s:12:"nl_NL_formal";s:7:"version";s:5:"4.4.3";s:7:"updated";s:19:"2016-01-20 13:35:50";s:12:"english_name";s:14:"Dutch (Formal)";s:11:"native_name";s:20:"Nederlands (Formeel)";s:7:"package";s:70:"http://downloads.wordpress.org/translation/core/4.4.3/nl_NL_formal.zip";s:3:"iso";a:2:{i:1;s:2:"nl";i:2;s:3:"nld";}s:7:"strings";a:1:{s:8:"continue";s:8:"Doorgaan";}}s:5:"nn_NO";a:8:{s:8:"language";s:5:"nn_NO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-11 07:36:04";s:12:"english_name";s:19:"Norwegian (Nynorsk)";s:11:"native_name";s:13:"Norsk nynorsk";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/nn_NO.zip";s:3:"iso";a:2:{i:1;s:2:"nn";i:2;s:3:"nno";}s:7:"strings";a:1:{s:8:"continue";s:9:"Hald fram";}}s:3:"oci";a:8:{s:8:"language";s:3:"oci";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-25 06:38:00";s:12:"english_name";s:7:"Occitan";s:11:"native_name";s:7:"Occitan";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.5.2/oci.zip";s:3:"iso";a:2:{i:1;s:2:"oc";i:2;s:3:"oci";}s:7:"strings";a:1:{s:8:"continue";s:9:"Contunhar";}}s:5:"pl_PL";a:8:{s:8:"language";s:5:"pl_PL";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-18 16:39:27";s:12:"english_name";s:6:"Polish";s:11:"native_name";s:6:"Polski";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pl_PL.zip";s:3:"iso";a:2:{i:1;s:2:"pl";i:2;s:3:"pol";}s:7:"strings";a:1:{s:8:"continue";s:9:"Kontynuuj";}}s:2:"ps";a:8:{s:8:"language";s:2:"ps";s:7:"version";s:6:"4.1.11";s:7:"updated";s:19:"2015-03-29 22:19:48";s:12:"english_name";s:6:"Pashto";s:11:"native_name";s:8:"پښتو";s:7:"package";s:61:"http://downloads.wordpress.org/translation/core/4.1.11/ps.zip";s:3:"iso";a:2:{i:1;s:2:"ps";i:2;s:3:"pus";}s:7:"strings";a:1:{s:8:"continue";s:19:"دوام ورکړه";}}s:5:"pt_PT";a:8:{s:8:"language";s:5:"pt_PT";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-17 23:58:57";s:12:"english_name";s:21:"Portuguese (Portugal)";s:11:"native_name";s:10:"Português";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pt_PT.zip";s:3:"iso";a:1:{i:1;s:2:"pt";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"pt_BR";a:8:{s:8:"language";s:5:"pt_BR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-27 18:35:51";s:12:"english_name";s:19:"Portuguese (Brazil)";s:11:"native_name";s:20:"Português do Brasil";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/pt_BR.zip";s:3:"iso";a:2:{i:1;s:2:"pt";i:2;s:3:"por";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuar";}}s:5:"ro_RO";a:8:{s:8:"language";s:5:"ro_RO";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-06-01 05:36:12";s:12:"english_name";s:8:"Romanian";s:11:"native_name";s:8:"Română";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ro_RO.zip";s:3:"iso";a:2:{i:1;s:2:"ro";i:2;s:3:"ron";}s:7:"strings";a:1:{s:8:"continue";s:9:"Continuă";}}s:5:"ru_RU";a:8:{s:8:"language";s:5:"ru_RU";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-13 18:04:14";s:12:"english_name";s:7:"Russian";s:11:"native_name";s:14:"Русский";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ru_RU.zip";s:3:"iso";a:2:{i:1;s:2:"ru";i:2;s:3:"rus";}s:7:"strings";a:1:{s:8:"continue";s:20:"Продолжить";}}s:5:"sk_SK";a:8:{s:8:"language";s:5:"sk_SK";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-29 09:53:12";s:12:"english_name";s:6:"Slovak";s:11:"native_name";s:11:"Slovenčina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sk_SK.zip";s:3:"iso";a:2:{i:1;s:2:"sk";i:2;s:3:"slk";}s:7:"strings";a:1:{s:8:"continue";s:12:"Pokračovať";}}s:5:"sl_SI";a:8:{s:8:"language";s:5:"sl_SI";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-11-26 00:00:18";s:12:"english_name";s:9:"Slovenian";s:11:"native_name";s:13:"Slovenščina";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.4.2/sl_SI.zip";s:3:"iso";a:2:{i:1;s:2:"sl";i:2;s:3:"slv";}s:7:"strings";a:1:{s:8:"continue";s:8:"Nadaljuj";}}s:2:"sq";a:8:{s:8:"language";s:2:"sq";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-09 09:01:28";s:12:"english_name";s:8:"Albanian";s:11:"native_name";s:5:"Shqip";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/sq.zip";s:3:"iso";a:2:{i:1;s:2:"sq";i:2;s:3:"sqi";}s:7:"strings";a:1:{s:8:"continue";s:6:"Vazhdo";}}s:5:"sr_RS";a:8:{s:8:"language";s:5:"sr_RS";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-10 08:00:57";s:12:"english_name";s:7:"Serbian";s:11:"native_name";s:23:"Српски језик";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sr_RS.zip";s:3:"iso";a:2:{i:1;s:2:"sr";i:2;s:3:"srp";}s:7:"strings";a:1:{s:8:"continue";s:14:"Настави";}}s:5:"sv_SE";a:8:{s:8:"language";s:5:"sv_SE";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-14 14:47:49";s:12:"english_name";s:7:"Swedish";s:11:"native_name";s:7:"Svenska";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/sv_SE.zip";s:3:"iso";a:2:{i:1;s:2:"sv";i:2;s:3:"swe";}s:7:"strings";a:1:{s:8:"continue";s:9:"Fortsätt";}}s:2:"th";a:8:{s:8:"language";s:2:"th";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-22 14:05:41";s:12:"english_name";s:4:"Thai";s:11:"native_name";s:9:"ไทย";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/th.zip";s:3:"iso";a:2:{i:1;s:2:"th";i:2;s:3:"tha";}s:7:"strings";a:1:{s:8:"continue";s:15:"ต่อไป";}}s:2:"tl";a:8:{s:8:"language";s:2:"tl";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-11-27 15:51:36";s:12:"english_name";s:7:"Tagalog";s:11:"native_name";s:7:"Tagalog";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/tl.zip";s:3:"iso";a:2:{i:1;s:2:"tl";i:2;s:3:"tgl";}s:7:"strings";a:1:{s:8:"continue";s:10:"Magpatuloy";}}s:5:"tr_TR";a:8:{s:8:"language";s:5:"tr_TR";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-21 01:31:12";s:12:"english_name";s:7:"Turkish";s:11:"native_name";s:8:"Türkçe";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/tr_TR.zip";s:3:"iso";a:2:{i:1;s:2:"tr";i:2;s:3:"tur";}s:7:"strings";a:1:{s:8:"continue";s:5:"Devam";}}s:5:"ug_CN";a:8:{s:8:"language";s:5:"ug_CN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-31 09:50:18";s:12:"english_name";s:6:"Uighur";s:11:"native_name";s:9:"Uyƣurqə";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/ug_CN.zip";s:3:"iso";a:2:{i:1;s:2:"ug";i:2;s:3:"uig";}s:7:"strings";a:1:{s:8:"continue";s:26:"داۋاملاشتۇرۇش";}}s:2:"uk";a:8:{s:8:"language";s:2:"uk";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-05-23 09:33:59";s:12:"english_name";s:9:"Ukrainian";s:11:"native_name";s:20:"Українська";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.5.2/uk.zip";s:3:"iso";a:2:{i:1;s:2:"uk";i:2;s:3:"ukr";}s:7:"strings";a:1:{s:8:"continue";s:20:"Продовжити";}}s:2:"vi";a:8:{s:8:"language";s:2:"vi";s:7:"version";s:5:"4.4.2";s:7:"updated";s:19:"2015-12-09 01:01:25";s:12:"english_name";s:10:"Vietnamese";s:11:"native_name";s:14:"Tiếng Việt";s:7:"package";s:60:"http://downloads.wordpress.org/translation/core/4.4.2/vi.zip";s:3:"iso";a:2:{i:1;s:2:"vi";i:2;s:3:"vie";}s:7:"strings";a:1:{s:8:"continue";s:12:"Tiếp tục";}}s:5:"zh_CN";a:8:{s:8:"language";s:5:"zh_CN";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-17 03:29:01";s:12:"english_name";s:15:"Chinese (China)";s:11:"native_name";s:12:"简体中文";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/zh_CN.zip";s:3:"iso";a:2:{i:1;s:2:"zh";i:2;s:3:"zho";}s:7:"strings";a:1:{s:8:"continue";s:6:"继续";}}s:5:"zh_TW";a:8:{s:8:"language";s:5:"zh_TW";s:7:"version";s:5:"4.5.2";s:7:"updated";s:19:"2016-04-12 09:08:07";s:12:"english_name";s:16:"Chinese (Taiwan)";s:11:"native_name";s:12:"繁體中文";s:7:"package";s:63:"http://downloads.wordpress.org/translation/core/4.5.2/zh_TW.zip";s:3:"iso";a:2:{i:1;s:2:"zh";i:2;s:3:"zho";}s:7:"strings";a:1:{s:8:"continue";s:6:"繼續";}}}', 'yes'),
+(458, '_icl_cache', 'a:4:{s:25:"language_name_cache_class";a:14:{s:14:"in_language_ru";a:3:{i:0;a:8:{s:2:"id";s:1:"1";s:4:"code";s:2:"en";s:12:"english_name";s:7:"English";s:6:"active";s:1:"1";s:12:"display_name";s:2:"EN";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"en_US";s:3:"tag";s:5:"en-US";}i:1;a:8:{s:2:"id";s:2:"47";s:4:"code";s:2:"ru";s:12:"english_name";s:7:"Russian";s:6:"active";s:1:"1";s:12:"display_name";s:2:"RU";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"ru_RU";s:3:"tag";s:5:"ru-RU";}i:2;a:8:{s:2:"id";s:2:"65";s:4:"code";s:2:"ua";s:12:"english_name";s:22:"Українською";s:6:"active";s:1:"1";s:12:"display_name";s:2:"UA";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"uk_UA";s:3:"tag";s:5:"uk-UA";}}s:9:"languages";a:3:{i:0;O:8:"stdClass":2:{s:13:"language_code";s:2:"en";s:4:"name";s:2:"EN";}i:1;O:8:"stdClass":2:{s:13:"language_code";s:2:"ru";s:4:"name";s:2:"RU";}i:2;O:8:"stdClass":2:{s:13:"language_code";s:2:"ua";s:4:"name";s:2:"UA";}}s:4:"enen";s:2:"EN";s:4:"enru";s:2:"EN";s:4:"enua";s:2:"EN";s:4:"ruen";s:2:"RU";s:4:"ruru";s:2:"RU";s:4:"ruua";s:2:"RU";s:4:"uaen";s:2:"UA";s:4:"uaru";s:2:"UA";s:4:"uaua";s:2:"UA";s:21:"language_details_ruru";a:5:{s:4:"code";s:2:"ru";s:12:"english_name";s:7:"Russian";s:5:"major";s:1:"1";s:6:"active";s:1:"1";s:12:"display_name";s:2:"RU";}s:21:"language_details_enen";a:5:{s:4:"code";s:2:"en";s:12:"english_name";s:7:"English";s:5:"major";s:1:"1";s:6:"active";s:1:"1";s:12:"display_name";s:2:"EN";}s:21:"language_details_uaua";a:5:{s:4:"code";s:2:"ua";s:12:"english_name";s:22:"Українською";s:5:"major";s:1:"0";s:6:"active";s:1:"1";s:12:"display_name";s:2:"UA";}}s:17:"flags_cache_class";a:3:{s:2:"en";O:8:"stdClass":2:{s:4:"flag";s:6:"en.png";s:13:"from_template";s:1:"0";}s:2:"ru";O:8:"stdClass":2:{s:4:"flag";s:6:"ru.png";s:13:"from_template";s:1:"0";}s:2:"ua";O:8:"stdClass":2:{s:4:"flag";s:6:"uk.png";s:13:"from_template";s:1:"0";}}s:18:"pages_per_language";a:2:{s:3:"all";i:1;s:2:"ru";s:1:"1";}s:18:"posts_per_language";a:2:{s:3:"all";i:13;s:2:"ru";s:2:"13";}}', 'yes'),
+(504, '_site_transient_timeout_browser_d69aa478a72ecd3a99c77af6fcf6b917', '1465463236', 'yes'),
+(505, '_site_transient_browser_d69aa478a72ecd3a99c77af6fcf6b917', 'a:9:{s:8:"platform";s:7:"Windows";s:4:"name";s:6:"Chrome";s:7:"version";s:13:"50.0.2661.102";s:10:"update_url";s:28:"http://www.google.com/chrome";s:7:"img_src";s:49:"http://s.wordpress.org/images/browsers/chrome.png";s:11:"img_src_ssl";s:48:"https://wordpress.org/images/browsers/chrome.png";s:15:"current_version";s:2:"18";s:7:"upgrade";b:0;s:8:"insecure";b:0;}', 'yes'),
+(533, '_site_transient_timeout_poptags_40cd750bba9870f18aada2478b24840a', '1464875984', 'yes');
 INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
-(458, '_icl_cache', 'a:3:{s:25:"language_name_cache_class";a:14:{s:14:"in_language_ru";a:3:{i:0;a:8:{s:2:"id";s:1:"1";s:4:"code";s:2:"en";s:12:"english_name";s:7:"English";s:6:"active";s:1:"1";s:12:"display_name";s:2:"EN";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"en_US";s:3:"tag";s:5:"en-US";}i:1;a:8:{s:2:"id";s:2:"47";s:4:"code";s:2:"ru";s:12:"english_name";s:7:"Russian";s:6:"active";s:1:"1";s:12:"display_name";s:2:"RU";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"ru_RU";s:3:"tag";s:5:"ru-RU";}i:2;a:8:{s:2:"id";s:2:"65";s:4:"code";s:2:"ua";s:12:"english_name";s:22:"Українською";s:6:"active";s:1:"1";s:12:"display_name";s:2:"UA";s:10:"encode_url";s:1:"0";s:14:"default_locale";s:5:"uk_UA";s:3:"tag";s:5:"uk-UA";}}s:9:"languages";a:3:{i:0;O:8:"stdClass":2:{s:13:"language_code";s:2:"en";s:4:"name";s:2:"EN";}i:1;O:8:"stdClass":2:{s:13:"language_code";s:2:"ru";s:4:"name";s:2:"RU";}i:2;O:8:"stdClass":2:{s:13:"language_code";s:2:"ua";s:4:"name";s:2:"UA";}}s:4:"enen";s:2:"EN";s:4:"enru";s:2:"EN";s:4:"enua";s:2:"EN";s:4:"ruen";s:2:"RU";s:4:"ruru";s:2:"RU";s:4:"ruua";s:2:"RU";s:4:"uaen";s:2:"UA";s:4:"uaru";s:2:"UA";s:4:"uaua";s:2:"UA";s:21:"language_details_ruru";a:5:{s:4:"code";s:2:"ru";s:12:"english_name";s:7:"Russian";s:5:"major";s:1:"1";s:6:"active";s:1:"1";s:12:"display_name";s:2:"RU";}s:21:"language_details_enen";a:5:{s:4:"code";s:2:"en";s:12:"english_name";s:7:"English";s:5:"major";s:1:"1";s:6:"active";s:1:"1";s:12:"display_name";s:2:"EN";}s:21:"language_details_uaua";a:5:{s:4:"code";s:2:"ua";s:12:"english_name";s:22:"Українською";s:5:"major";s:1:"0";s:6:"active";s:1:"1";s:12:"display_name";s:2:"UA";}}s:17:"flags_cache_class";a:3:{s:2:"en";O:8:"stdClass":2:{s:4:"flag";s:6:"en.png";s:13:"from_template";s:1:"0";}s:2:"ru";O:8:"stdClass":2:{s:4:"flag";s:6:"ru.png";s:13:"from_template";s:1:"0";}s:2:"ua";O:8:"stdClass":2:{s:4:"flag";s:6:"uk.png";s:13:"from_template";s:1:"0";}}s:18:"pages_per_language";a:2:{s:3:"all";i:1;s:2:"ru";s:1:"1";}}', 'yes'),
-(487, 'category_children', 'a:0:{}', 'yes'),
-(493, '_site_transient_timeout_theme_roots', '1464818300', 'yes'),
-(494, '_site_transient_theme_roots', 'a:2:{s:5:"theme";s:7:"/themes";s:12:"vestiukraine";s:7:"/themes";}', 'yes');
+(534, '_site_transient_poptags_40cd750bba9870f18aada2478b24840a', 'a:100:{s:6:"widget";a:3:{s:4:"name";s:6:"widget";s:4:"slug";s:6:"widget";s:5:"count";s:4:"5899";}s:4:"post";a:3:{s:4:"name";s:4:"Post";s:4:"slug";s:4:"post";s:5:"count";s:4:"3655";}s:6:"plugin";a:3:{s:4:"name";s:6:"plugin";s:4:"slug";s:6:"plugin";s:5:"count";s:4:"3598";}s:5:"admin";a:3:{s:4:"name";s:5:"admin";s:4:"slug";s:5:"admin";s:5:"count";s:4:"3121";}s:5:"posts";a:3:{s:4:"name";s:5:"posts";s:4:"slug";s:5:"posts";s:5:"count";s:4:"2789";}s:9:"shortcode";a:3:{s:4:"name";s:9:"shortcode";s:4:"slug";s:9:"shortcode";s:5:"count";s:4:"2370";}s:7:"sidebar";a:3:{s:4:"name";s:7:"sidebar";s:4:"slug";s:7:"sidebar";s:5:"count";s:4:"2216";}s:6:"google";a:3:{s:4:"name";s:6:"google";s:4:"slug";s:6:"google";s:5:"count";s:4:"2097";}s:7:"twitter";a:3:{s:4:"name";s:7:"twitter";s:4:"slug";s:7:"twitter";s:5:"count";s:4:"2046";}s:4:"page";a:3:{s:4:"name";s:4:"page";s:4:"slug";s:4:"page";s:5:"count";s:4:"2025";}s:6:"images";a:3:{s:4:"name";s:6:"images";s:4:"slug";s:6:"images";s:5:"count";s:4:"1988";}s:8:"comments";a:3:{s:4:"name";s:8:"comments";s:4:"slug";s:8:"comments";s:5:"count";s:4:"1934";}s:5:"image";a:3:{s:4:"name";s:5:"image";s:4:"slug";s:5:"image";s:5:"count";s:4:"1868";}s:11:"woocommerce";a:3:{s:4:"name";s:11:"woocommerce";s:4:"slug";s:11:"woocommerce";s:5:"count";s:4:"1705";}s:8:"facebook";a:3:{s:4:"name";s:8:"Facebook";s:4:"slug";s:8:"facebook";s:5:"count";s:4:"1689";}s:3:"seo";a:3:{s:4:"name";s:3:"seo";s:4:"slug";s:3:"seo";s:5:"count";s:4:"1583";}s:9:"wordpress";a:3:{s:4:"name";s:9:"wordpress";s:4:"slug";s:9:"wordpress";s:5:"count";s:4:"1536";}s:6:"social";a:3:{s:4:"name";s:6:"social";s:4:"slug";s:6:"social";s:5:"count";s:4:"1393";}s:7:"gallery";a:3:{s:4:"name";s:7:"gallery";s:4:"slug";s:7:"gallery";s:5:"count";s:4:"1316";}s:5:"links";a:3:{s:4:"name";s:5:"links";s:4:"slug";s:5:"links";s:5:"count";s:4:"1289";}s:5:"email";a:3:{s:4:"name";s:5:"email";s:4:"slug";s:5:"email";s:5:"count";s:4:"1220";}s:7:"widgets";a:3:{s:4:"name";s:7:"widgets";s:4:"slug";s:7:"widgets";s:5:"count";s:4:"1109";}s:5:"pages";a:3:{s:4:"name";s:5:"pages";s:4:"slug";s:5:"pages";s:5:"count";s:4:"1083";}s:6:"jquery";a:3:{s:4:"name";s:6:"jquery";s:4:"slug";s:6:"jquery";s:5:"count";s:4:"1008";}s:5:"media";a:3:{s:4:"name";s:5:"media";s:4:"slug";s:5:"media";s:5:"count";s:3:"986";}s:9:"ecommerce";a:3:{s:4:"name";s:9:"ecommerce";s:4:"slug";s:9:"ecommerce";s:5:"count";s:3:"974";}s:5:"video";a:3:{s:4:"name";s:5:"video";s:4:"slug";s:5:"video";s:5:"count";s:3:"922";}s:4:"ajax";a:3:{s:4:"name";s:4:"AJAX";s:4:"slug";s:4:"ajax";s:5:"count";s:3:"915";}s:3:"rss";a:3:{s:4:"name";s:3:"rss";s:4:"slug";s:3:"rss";s:5:"count";s:3:"911";}s:5:"login";a:3:{s:4:"name";s:5:"login";s:4:"slug";s:5:"login";s:5:"count";s:3:"906";}s:7:"content";a:3:{s:4:"name";s:7:"content";s:4:"slug";s:7:"content";s:5:"count";s:3:"905";}s:10:"javascript";a:3:{s:4:"name";s:10:"javascript";s:4:"slug";s:10:"javascript";s:5:"count";s:3:"840";}s:10:"responsive";a:3:{s:4:"name";s:10:"responsive";s:4:"slug";s:10:"responsive";s:5:"count";s:3:"830";}s:10:"buddypress";a:3:{s:4:"name";s:10:"buddypress";s:4:"slug";s:10:"buddypress";s:5:"count";s:3:"794";}s:8:"security";a:3:{s:4:"name";s:8:"security";s:4:"slug";s:8:"security";s:5:"count";s:3:"776";}s:10:"e-commerce";a:3:{s:4:"name";s:10:"e-commerce";s:4:"slug";s:10:"e-commerce";s:5:"count";s:3:"767";}s:7:"youtube";a:3:{s:4:"name";s:7:"youtube";s:4:"slug";s:7:"youtube";s:5:"count";s:3:"761";}s:5:"photo";a:3:{s:4:"name";s:5:"photo";s:4:"slug";s:5:"photo";s:5:"count";s:3:"758";}s:4:"spam";a:3:{s:4:"name";s:4:"spam";s:4:"slug";s:4:"spam";s:5:"count";s:3:"752";}s:5:"share";a:3:{s:4:"name";s:5:"Share";s:4:"slug";s:5:"share";s:5:"count";s:3:"750";}s:4:"feed";a:3:{s:4:"name";s:4:"feed";s:4:"slug";s:4:"feed";s:5:"count";s:3:"747";}s:4:"link";a:3:{s:4:"name";s:4:"link";s:4:"slug";s:4:"link";s:5:"count";s:3:"743";}s:8:"category";a:3:{s:4:"name";s:8:"category";s:4:"slug";s:8:"category";s:5:"count";s:3:"707";}s:9:"analytics";a:3:{s:4:"name";s:9:"analytics";s:4:"slug";s:9:"analytics";s:5:"count";s:3:"699";}s:6:"photos";a:3:{s:4:"name";s:6:"photos";s:4:"slug";s:6:"photos";s:5:"count";s:3:"692";}s:3:"css";a:3:{s:4:"name";s:3:"CSS";s:4:"slug";s:3:"css";s:5:"count";s:3:"691";}s:5:"embed";a:3:{s:4:"name";s:5:"embed";s:4:"slug";s:5:"embed";s:5:"count";s:3:"688";}s:4:"form";a:3:{s:4:"name";s:4:"form";s:4:"slug";s:4:"form";s:5:"count";s:3:"687";}s:6:"search";a:3:{s:4:"name";s:6:"search";s:4:"slug";s:6:"search";s:5:"count";s:3:"667";}s:6:"slider";a:3:{s:4:"name";s:6:"slider";s:4:"slug";s:6:"slider";s:5:"count";s:3:"661";}s:6:"custom";a:3:{s:4:"name";s:6:"custom";s:4:"slug";s:6:"custom";s:5:"count";s:3:"653";}s:9:"slideshow";a:3:{s:4:"name";s:9:"slideshow";s:4:"slug";s:9:"slideshow";s:5:"count";s:3:"645";}s:5:"stats";a:3:{s:4:"name";s:5:"stats";s:4:"slug";s:5:"stats";s:5:"count";s:3:"614";}s:6:"button";a:3:{s:4:"name";s:6:"button";s:4:"slug";s:6:"button";s:5:"count";s:3:"612";}s:4:"menu";a:3:{s:4:"name";s:4:"menu";s:4:"slug";s:4:"menu";s:5:"count";s:3:"602";}s:5:"theme";a:3:{s:4:"name";s:5:"theme";s:4:"slug";s:5:"theme";s:5:"count";s:3:"599";}s:7:"comment";a:3:{s:4:"name";s:7:"comment";s:4:"slug";s:7:"comment";s:5:"count";s:3:"598";}s:9:"dashboard";a:3:{s:4:"name";s:9:"dashboard";s:4:"slug";s:9:"dashboard";s:5:"count";s:3:"596";}s:4:"tags";a:3:{s:4:"name";s:4:"tags";s:4:"slug";s:4:"tags";s:5:"count";s:3:"586";}s:10:"categories";a:3:{s:4:"name";s:10:"categories";s:4:"slug";s:10:"categories";s:5:"count";s:3:"579";}s:6:"mobile";a:3:{s:4:"name";s:6:"mobile";s:4:"slug";s:6:"mobile";s:5:"count";s:3:"573";}s:10:"statistics";a:3:{s:4:"name";s:10:"statistics";s:4:"slug";s:10:"statistics";s:5:"count";s:3:"568";}s:3:"ads";a:3:{s:4:"name";s:3:"ads";s:4:"slug";s:3:"ads";s:5:"count";s:3:"562";}s:6:"editor";a:3:{s:4:"name";s:6:"editor";s:4:"slug";s:6:"editor";s:5:"count";s:3:"553";}s:4:"user";a:3:{s:4:"name";s:4:"user";s:4:"slug";s:4:"user";s:5:"count";s:3:"553";}s:4:"list";a:3:{s:4:"name";s:4:"list";s:4:"slug";s:4:"list";s:5:"count";s:3:"543";}s:5:"users";a:3:{s:4:"name";s:5:"users";s:4:"slug";s:5:"users";s:5:"count";s:3:"534";}s:7:"plugins";a:3:{s:4:"name";s:7:"plugins";s:4:"slug";s:7:"plugins";s:5:"count";s:3:"523";}s:12:"social-media";a:3:{s:4:"name";s:12:"social media";s:4:"slug";s:12:"social-media";s:5:"count";s:3:"521";}s:9:"affiliate";a:3:{s:4:"name";s:9:"affiliate";s:4:"slug";s:9:"affiliate";s:5:"count";s:3:"516";}s:7:"picture";a:3:{s:4:"name";s:7:"picture";s:4:"slug";s:7:"picture";s:5:"count";s:3:"514";}s:12:"contact-form";a:3:{s:4:"name";s:12:"contact form";s:4:"slug";s:12:"contact-form";s:5:"count";s:3:"512";}s:6:"simple";a:3:{s:4:"name";s:6:"simple";s:4:"slug";s:6:"simple";s:5:"count";s:3:"509";}s:9:"multisite";a:3:{s:4:"name";s:9:"multisite";s:4:"slug";s:9:"multisite";s:5:"count";s:3:"506";}s:7:"contact";a:3:{s:4:"name";s:7:"contact";s:4:"slug";s:7:"contact";s:5:"count";s:3:"482";}s:8:"pictures";a:3:{s:4:"name";s:8:"pictures";s:4:"slug";s:8:"pictures";s:5:"count";s:3:"462";}s:9:"marketing";a:3:{s:4:"name";s:9:"marketing";s:4:"slug";s:9:"marketing";s:5:"count";s:3:"461";}s:4:"shop";a:3:{s:4:"name";s:4:"shop";s:4:"slug";s:4:"shop";s:5:"count";s:3:"457";}s:3:"api";a:3:{s:4:"name";s:3:"api";s:4:"slug";s:3:"api";s:5:"count";s:3:"456";}s:3:"url";a:3:{s:4:"name";s:3:"url";s:4:"slug";s:3:"url";s:5:"count";s:3:"452";}s:4:"html";a:3:{s:4:"name";s:4:"html";s:4:"slug";s:4:"html";s:5:"count";s:3:"443";}s:10:"navigation";a:3:{s:4:"name";s:10:"navigation";s:4:"slug";s:10:"navigation";s:5:"count";s:3:"443";}s:10:"newsletter";a:3:{s:4:"name";s:10:"newsletter";s:4:"slug";s:10:"newsletter";s:5:"count";s:3:"428";}s:6:"events";a:3:{s:4:"name";s:6:"events";s:4:"slug";s:6:"events";s:5:"count";s:3:"423";}s:4:"meta";a:3:{s:4:"name";s:4:"meta";s:4:"slug";s:4:"meta";s:5:"count";s:3:"423";}s:8:"calendar";a:3:{s:4:"name";s:8:"calendar";s:4:"slug";s:8:"calendar";s:5:"count";s:3:"421";}s:5:"flash";a:3:{s:4:"name";s:5:"flash";s:4:"slug";s:5:"flash";s:5:"count";s:3:"421";}s:8:"tracking";a:3:{s:4:"name";s:8:"tracking";s:4:"slug";s:8:"tracking";s:5:"count";s:3:"419";}s:10:"shortcodes";a:3:{s:4:"name";s:10:"shortcodes";s:4:"slug";s:10:"shortcodes";s:5:"count";s:3:"414";}s:4:"news";a:3:{s:4:"name";s:4:"News";s:4:"slug";s:4:"news";s:5:"count";s:3:"412";}s:3:"tag";a:3:{s:4:"name";s:3:"tag";s:4:"slug";s:3:"tag";s:5:"count";s:3:"406";}s:11:"advertising";a:3:{s:4:"name";s:11:"advertising";s:4:"slug";s:11:"advertising";s:5:"count";s:3:"404";}s:6:"upload";a:3:{s:4:"name";s:6:"upload";s:4:"slug";s:6:"upload";s:5:"count";s:3:"404";}s:9:"thumbnail";a:3:{s:4:"name";s:9:"thumbnail";s:4:"slug";s:9:"thumbnail";s:5:"count";s:3:"402";}s:7:"sharing";a:3:{s:4:"name";s:7:"sharing";s:4:"slug";s:7:"sharing";s:5:"count";s:3:"400";}s:6:"paypal";a:3:{s:4:"name";s:6:"paypal";s:4:"slug";s:6:"paypal";s:5:"count";s:3:"400";}s:12:"notification";a:3:{s:4:"name";s:12:"notification";s:4:"slug";s:12:"notification";s:5:"count";s:3:"398";}s:8:"linkedin";a:3:{s:4:"name";s:8:"linkedin";s:4:"slug";s:8:"linkedin";s:5:"count";s:3:"393";}s:8:"lightbox";a:3:{s:4:"name";s:8:"lightbox";s:4:"slug";s:8:"lightbox";s:5:"count";s:3:"393";}s:7:"profile";a:3:{s:4:"name";s:7:"profile";s:4:"slug";s:7:"profile";s:5:"count";s:3:"392";}}', 'yes'),
+(538, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1464867481;s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:3:{s:22:"cyr3lat/cyr-to-lat.php";O:8:"stdClass":6:{s:2:"id";s:5:"23472";s:4:"slug";s:7:"cyr3lat";s:6:"plugin";s:22:"cyr3lat/cyr-to-lat.php";s:11:"new_version";s:3:"3.5";s:3:"url";s:38:"https://wordpress.org/plugins/cyr3lat/";s:7:"package";s:54:"https://downloads.wordpress.org/plugin/cyr3lat.3.5.zip";}s:39:"widget-customizer/widget-customizer.php";O:8:"stdClass":6:{s:2:"id";s:5:"43863";s:4:"slug";s:17:"widget-customizer";s:6:"plugin";s:39:"widget-customizer/widget-customizer.php";s:11:"new_version";s:6:"0.15.1";s:3:"url";s:48:"https://wordpress.org/plugins/widget-customizer/";s:7:"package";s:60:"https://downloads.wordpress.org/plugin/widget-customizer.zip";}s:29:"widget-logic/widget_logic.php";O:8:"stdClass":6:{s:2:"id";s:4:"2545";s:4:"slug";s:12:"widget-logic";s:6:"plugin";s:29:"widget-logic/widget_logic.php";s:11:"new_version";s:4:"0.57";s:3:"url";s:43:"https://wordpress.org/plugins/widget-logic/";s:7:"package";s:60:"https://downloads.wordpress.org/plugin/widget-logic.0.57.zip";}}}', 'yes'),
+(544, '_site_transient_timeout_theme_roots', '1464869278', 'yes'),
+(545, '_site_transient_theme_roots', 'a:2:{s:5:"theme";s:7:"/themes";s:12:"vestiukraine";s:7:"/themes";}', 'yes'),
+(557, 'category_children', 'a:0:{}', 'yes');
 
 -- --------------------------------------------------------
 
@@ -4965,14 +4942,11 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 --
 
 CREATE TABLE IF NOT EXISTS `wp_postmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `meta_id` bigint(20) unsigned NOT NULL,
   `post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`meta_id`),
-  KEY `post_id` (`post_id`),
-  KEY `meta_key` (`meta_key`(191))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1253 ;
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=1493 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_postmeta`
@@ -5168,22 +5142,6 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (1152, 182, '_menu_item_url', ''),
 (1154, 183, '_edit_last', '1'),
 (1155, 183, '_edit_lock', '1464797473:1'),
-(1156, 185, '_menu_item_type', 'taxonomy'),
-(1157, 185, '_menu_item_menu_item_parent', '0'),
-(1158, 185, '_menu_item_object_id', '37'),
-(1159, 185, '_menu_item_object', 'category'),
-(1160, 185, '_menu_item_target', ''),
-(1161, 185, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
-(1162, 185, '_menu_item_xfn', ''),
-(1163, 185, '_menu_item_url', ''),
-(1174, 187, '_menu_item_type', 'taxonomy'),
-(1175, 187, '_menu_item_menu_item_parent', '0'),
-(1176, 187, '_menu_item_object_id', '36'),
-(1177, 187, '_menu_item_object', 'category'),
-(1178, 187, '_menu_item_target', ''),
-(1179, 187, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
-(1180, 187, '_menu_item_xfn', ''),
-(1181, 187, '_menu_item_url', ''),
 (1183, 188, '_menu_item_type', 'taxonomy'),
 (1184, 188, '_menu_item_menu_item_parent', '0'),
 (1185, 188, '_menu_item_object_id', '35'),
@@ -5239,7 +5197,159 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (1248, 203, '_menu_item_target', ''),
 (1249, 203, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
 (1250, 203, '_menu_item_xfn', ''),
-(1251, 203, '_menu_item_url', '');
+(1251, 203, '_menu_item_url', ''),
+(1253, 205, '_edit_last', '1'),
+(1254, 205, '_edit_lock', '1464858403:1'),
+(1261, 209, '_edit_last', '1'),
+(1264, 209, '_edit_lock', '1464858459:1'),
+(1265, 211, '_edit_last', '1'),
+(1266, 211, '_edit_lock', '1464858442:1'),
+(1271, 213, '_edit_last', '1'),
+(1272, 213, '_edit_lock', '1464858494:1'),
+(1275, 215, '_edit_last', '1'),
+(1276, 215, '_edit_lock', '1464858520:1'),
+(1279, 217, '_edit_last', '1'),
+(1280, 217, '_edit_lock', '1464859060:1'),
+(1281, 218, '_wp_attached_file', '2016/06/ubr_site.jpg'),
+(1282, 218, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:20:"2016/06/ubr_site.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:19:"ubr_site-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1283, 218, '_wp_attachment_image_alt', 'ubr'),
+(1284, 219, '_wp_attached_file', '2016/06/gazetaua.jpg'),
+(1285, 219, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:20:"2016/06/gazetaua.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:19:"gazetaua-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1286, 219, '_wp_attachment_image_alt', 'gazetaua'),
+(1287, 220, '_wp_attached_file', '2016/06/vesti.jpg'),
+(1288, 220, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:17:"2016/06/vesti.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:16:"vesti-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1289, 220, '_wp_attachment_image_alt', 'vesti'),
+(1290, 221, '_wp_attached_file', '2016/06/hyser.jpg'),
+(1291, 221, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:17:"2016/06/hyser.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:16:"hyser-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1292, 221, '_wp_attachment_image_alt', 'hyser'),
+(1295, 223, '_wp_attached_file', '2016/06/chanel-24-site.jpg'),
+(1296, 223, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:26:"2016/06/chanel-24-site.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:25:"chanel-24-site-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1297, 223, '_wp_attachment_image_alt', 'chanel-24-site'),
+(1298, 224, '_wp_attached_file', '2016/06/chanel-24-football.jpg'),
+(1299, 224, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:30:"2016/06/chanel-24-football.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:29:"chanel-24-football-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1300, 224, '_wp_attachment_image_alt', 'chanel-24-football'),
+(1301, 225, '_wp_attached_file', '2016/06/chanel-24-radio.jpg'),
+(1302, 225, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:27:"2016/06/chanel-24-radio.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:26:"chanel-24-radio-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1303, 225, '_wp_attachment_image_alt', 'chanel-24-radio'),
+(1304, 226, '_wp_attached_file', '2016/06/zaxid.jpg'),
+(1305, 226, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:164;s:6:"height";i:68;s:4:"file";s:17:"2016/06/zaxid.jpg";s:5:"sizes";a:1:{s:9:"thumbnail";a:4:{s:4:"file";s:16:"zaxid-150x68.jpg";s:5:"width";i:150;s:6:"height";i:68;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1306, 226, '_wp_attachment_image_alt', 'zaxid'),
+(1309, 228, '_menu_item_type', 'post_type'),
+(1310, 228, '_menu_item_menu_item_parent', '0'),
+(1311, 228, '_menu_item_object_id', '205'),
+(1312, 228, '_menu_item_object', 'post'),
+(1313, 228, '_menu_item_target', ''),
+(1314, 228, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1315, 228, '_menu_item_xfn', ''),
+(1316, 228, '_menu_item_url', ''),
+(1318, 229, '_menu_item_type', 'post_type'),
+(1319, 229, '_menu_item_menu_item_parent', '0'),
+(1320, 229, '_menu_item_object_id', '217'),
+(1321, 229, '_menu_item_object', 'post'),
+(1322, 229, '_menu_item_target', ''),
+(1323, 229, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1324, 229, '_menu_item_xfn', ''),
+(1325, 229, '_menu_item_url', ''),
+(1327, 230, '_menu_item_type', 'post_type'),
+(1328, 230, '_menu_item_menu_item_parent', '0'),
+(1329, 230, '_menu_item_object_id', '215'),
+(1330, 230, '_menu_item_object', 'post'),
+(1331, 230, '_menu_item_target', ''),
+(1332, 230, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1333, 230, '_menu_item_xfn', ''),
+(1334, 230, '_menu_item_url', ''),
+(1336, 231, '_menu_item_type', 'post_type'),
+(1337, 231, '_menu_item_menu_item_parent', '0'),
+(1338, 231, '_menu_item_object_id', '213'),
+(1339, 231, '_menu_item_object', 'post'),
+(1340, 231, '_menu_item_target', ''),
+(1341, 231, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1342, 231, '_menu_item_xfn', ''),
+(1343, 231, '_menu_item_url', ''),
+(1345, 232, '_menu_item_type', 'post_type'),
+(1346, 232, '_menu_item_menu_item_parent', '0'),
+(1347, 232, '_menu_item_object_id', '211'),
+(1348, 232, '_menu_item_object', 'post'),
+(1349, 232, '_menu_item_target', ''),
+(1350, 232, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1351, 232, '_menu_item_xfn', ''),
+(1352, 232, '_menu_item_url', ''),
+(1354, 233, '_menu_item_type', 'post_type'),
+(1355, 233, '_menu_item_menu_item_parent', '0'),
+(1356, 233, '_menu_item_object_id', '209'),
+(1357, 233, '_menu_item_object', 'post'),
+(1358, 233, '_menu_item_target', ''),
+(1359, 233, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1360, 233, '_menu_item_xfn', ''),
+(1361, 233, '_menu_item_url', ''),
+(1363, 234, '_menu_item_type', 'post_type'),
+(1364, 234, '_menu_item_menu_item_parent', '0'),
+(1365, 234, '_menu_item_object_id', '205'),
+(1366, 234, '_menu_item_object', 'post'),
+(1367, 234, '_menu_item_target', ''),
+(1368, 234, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1369, 234, '_menu_item_xfn', ''),
+(1370, 234, '_menu_item_url', ''),
+(1372, 235, '_edit_last', '1'),
+(1373, 235, '_edit_lock', '1464880832:1'),
+(1385, 241, '_wp_attached_file', '2016/06/olga-semchenko.jpg'),
+(1386, 241, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:720;s:6:"height";i:440;s:4:"file";s:26:"2016/06/olga-semchenko.jpg";s:5:"sizes";a:2:{s:9:"thumbnail";a:4:{s:4:"file";s:26:"olga-semchenko-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:26:"olga-semchenko-300x183.jpg";s:5:"width";i:300;s:6:"height";i:183;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:2:"11";s:6:"credit";s:0:"";s:6:"camera";s:14:"Canon EOS-1D X";s:7:"caption";s:0:"";s:17:"created_timestamp";s:10:"1459871089";s:9:"copyright";s:0:"";s:12:"focal_length";s:2:"70";s:3:"iso";s:4:"1600";s:13:"shutter_speed";s:7:"0.00625";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1387, 241, '_wp_attachment_image_alt', 'olga-semchenko'),
+(1405, 247, '_menu_item_type', 'taxonomy'),
+(1406, 247, '_menu_item_menu_item_parent', '0'),
+(1407, 247, '_menu_item_object_id', '42'),
+(1408, 247, '_menu_item_object', 'category'),
+(1409, 247, '_menu_item_target', ''),
+(1410, 247, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1411, 247, '_menu_item_xfn', ''),
+(1412, 247, '_menu_item_url', ''),
+(1414, 248, '_menu_item_type', 'taxonomy'),
+(1415, 248, '_menu_item_menu_item_parent', '0'),
+(1416, 248, '_menu_item_object_id', '43'),
+(1417, 248, '_menu_item_object', 'category'),
+(1418, 248, '_menu_item_target', ''),
+(1419, 248, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1420, 248, '_menu_item_xfn', ''),
+(1421, 248, '_menu_item_url', ''),
+(1427, 251, '_menu_item_type', 'taxonomy'),
+(1428, 251, '_menu_item_menu_item_parent', '0'),
+(1429, 251, '_menu_item_object_id', '44'),
+(1430, 251, '_menu_item_object', 'category'),
+(1431, 251, '_menu_item_target', ''),
+(1432, 251, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1433, 251, '_menu_item_xfn', ''),
+(1434, 251, '_menu_item_url', ''),
+(1438, 252, '_menu_item_type', 'taxonomy'),
+(1439, 252, '_menu_item_menu_item_parent', '0'),
+(1440, 252, '_menu_item_object_id', '44'),
+(1441, 252, '_menu_item_object', 'category'),
+(1442, 252, '_menu_item_target', ''),
+(1443, 252, '_menu_item_classes', 'a:1:{i:0;s:0:"";}'),
+(1444, 252, '_menu_item_xfn', ''),
+(1445, 252, '_menu_item_url', ''),
+(1447, 253, '_edit_last', '1'),
+(1448, 253, '_edit_lock', '1464865073:1'),
+(1449, 183, '_wp_old_slug', '%d0%be-%d1%85%d0%be%d0%bb%d0%b4%d0%b8%d0%bd%d0%b3%d0%b5'),
+(1450, 203, '_wp_old_slug', '%d0%be-%d1%85%d0%be%d0%bb%d0%b4%d0%b8%d0%bd%d0%b3%d0%b5'),
+(1451, 209, '_wp_old_slug', '%d1%80%d0%b0%d0%b4%d0%b8%d0%be-%d0%b2%d0%b5%d1%81%d1%82%d0%b8'),
+(1452, 211, '_wp_old_slug', '%d1%82%d0%b5%d0%bb%d0%b5%d0%ba%d0%b0%d0%bd%d0%b0%d0%bb-ubr'),
+(1453, 228, '_wp_old_slug', '%d0%b0%d0%ba%d1%82%d0%b8%d0%b2%d1%8b'),
+(1454, 251, '_wp_old_slug', '%d0%bf%d1%80%d0%b5%d1%81%d1%81-%d1%86%d0%b5%d0%bd%d1%82%d1%80'),
+(1455, 254, '_edit_last', '1'),
+(1456, 254, '_edit_lock', '1464889087:1'),
+(1466, 235, '_thumbnail_id', '241'),
+(1477, 253, '_wp_trash_meta_status', 'draft'),
+(1478, 253, '_wp_trash_meta_time', '1464881530'),
+(1479, 253, '_wp_desired_post_slug', ''),
+(1480, 263, '_wp_attached_file', '2016/06/vedushchim-radio-vesti-vruchili-premiyu.jpg'),
+(1481, 263, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:720;s:6:"height";i:440;s:4:"file";s:51:"2016/06/vedushchim-radio-vesti-vruchili-premiyu.jpg";s:5:"sizes";a:2:{s:9:"thumbnail";a:4:{s:4:"file";s:51:"vedushchim-radio-vesti-vruchili-premiyu-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:51:"vedushchim-radio-vesti-vruchili-premiyu-300x183.jpg";s:5:"width";i:300;s:6:"height";i:183;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1482, 254, '_thumbnail_id', '263'),
+(1485, 264, '_edit_last', '1'),
+(1486, 264, '_edit_lock', '1464889242:1'),
+(1487, 265, '_wp_attached_file', '2016/06/vpechatlyayushchiy-start-proektnogo-ofisa-media-holdinga-vesti-ukraina.jpg'),
+(1488, 265, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:720;s:6:"height";i:440;s:4:"file";s:82:"2016/06/vpechatlyayushchiy-start-proektnogo-ofisa-media-holdinga-vesti-ukraina.jpg";s:5:"sizes";a:2:{s:9:"thumbnail";a:4:{s:4:"file";s:82:"vpechatlyayushchiy-start-proektnogo-ofisa-media-holdinga-vesti-ukraina-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:82:"vpechatlyayushchiy-start-proektnogo-ofisa-media-holdinga-vesti-ukraina-300x183.jpg";s:5:"width";i:300;s:6:"height";i:183;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:16:"logoVesti_finale";s:11:"orientation";s:1:"1";s:8:"keywords";a:0:{}}}'),
+(1489, 265, '_wp_attachment_image_alt', 'Vesti'),
+(1490, 264, '_thumbnail_id', '265');
 
 -- --------------------------------------------------------
 
@@ -5248,7 +5358,7 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `wp_posts` (
-  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `ID` bigint(20) unsigned NOT NULL,
   `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
   `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -5270,13 +5380,8 @@ CREATE TABLE IF NOT EXISTS `wp_posts` (
   `menu_order` int(11) NOT NULL DEFAULT '0',
   `post_type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'post',
   `post_mime_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `comment_count` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `post_name` (`post_name`(191)),
-  KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
-  KEY `post_parent` (`post_parent`),
-  KEY `post_author` (`post_author`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=204 ;
+  `comment_count` bigint(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_posts`
@@ -5284,11 +5389,9 @@ CREATE TABLE IF NOT EXISTS `wp_posts` (
 
 INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
 (173, 1, '2016-06-01 14:55:01', '0000-00-00 00:00:00', '', 'Активы', '', 'draft', 'closed', 'closed', '', '', '', '', '2016-06-01 14:55:01', '2016-06-01 14:55:01', '', 0, 'http://vestiukraine/?page_id=173', 0, 'page', '', 0),
-(183, 1, '2016-06-01 16:13:29', '2016-06-01 16:13:29', '<p>Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг, включающий в себя печатные, телевизионные, радио и Internet-ресурсы. Благодаря качеству и актуальности контента, остроте тем и оперативности подачи информации, медиапродукты Холдинга занимают лидирующие позиции в своих сегментах. Профессиональная, креативная команда и постоянный мониторинг мировых инноваций и медиа-трендов - ключевой принцип успеха Холдинга на рынке.</p> \r\n\r\n<p>В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR, Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua</p>', 'О холдинге', '', 'publish', 'closed', 'closed', '', '%d0%be-%d1%85%d0%be%d0%bb%d0%b4%d0%b8%d0%bd%d0%b3%d0%b5', '', '', '2016-06-01 16:13:29', '2016-06-01 16:13:29', '', 0, 'http://vestiukraine/?page_id=183', 0, 'page', '', 0),
+(183, 1, '2016-06-01 16:13:29', '2016-06-01 16:13:29', '<p>Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг, включающий в себя печатные, телевизионные, радио и Internet-ресурсы. Благодаря качеству и актуальности контента, остроте тем и оперативности подачи информации, медиапродукты Холдинга занимают лидирующие позиции в своих сегментах. Профессиональная, креативная команда и постоянный мониторинг мировых инноваций и медиа-трендов - ключевой принцип успеха Холдинга на рынке.</p> \r\n\r\n<p>В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR, Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua</p>', 'О холдинге', '', 'publish', 'closed', 'closed', '', 'o-holdinge', '', '', '2016-06-01 16:13:29', '2016-06-01 16:13:29', '', 0, 'http://vestiukraine/?page_id=183', 0, 'page', '', 0),
 (184, 1, '2016-06-01 16:13:29', '2016-06-01 16:13:29', '<p>Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг, включающий в себя печатные, телевизионные, радио и Internet-ресурсы. Благодаря качеству и актуальности контента, остроте тем и оперативности подачи информации, медиапродукты Холдинга занимают лидирующие позиции в своих сегментах. Профессиональная, креативная команда и постоянный мониторинг мировых инноваций и медиа-трендов - ключевой принцип успеха Холдинга на рынке.</p> \r\n\r\n<p>В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR, Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua</p>', 'О холдинге', '', 'inherit', 'closed', 'closed', '', '183-revision-v1', '', '', '2016-06-01 16:13:29', '2016-06-01 16:13:29', '', 183, 'http://vestiukraine/183-revision-v1/', 0, 'revision', '', 0),
-(185, 1, '2016-06-01 16:30:50', '2016-06-01 16:30:50', ' ', '', '', 'publish', 'closed', 'closed', '', '185', '', '', '2016-06-01 22:29:54', '2016-06-01 22:29:54', '', 0, 'http://vestiukraine/?p=185', 2, 'nav_menu_item', '', 0),
-(187, 1, '2016-06-01 16:30:50', '2016-06-01 16:30:50', ' ', '', '', 'publish', 'closed', 'closed', '', '187', '', '', '2016-06-01 22:29:54', '2016-06-01 22:29:54', '', 0, 'http://vestiukraine/?p=187', 3, 'nav_menu_item', '', 0),
-(188, 1, '2016-06-01 16:30:50', '2016-06-01 16:30:50', ' ', '', '', 'publish', 'closed', 'closed', '', '188', '', '', '2016-06-01 22:29:54', '2016-06-01 22:29:54', '', 0, 'http://vestiukraine/?p=188', 4, 'nav_menu_item', '', 0),
+(188, 1, '2016-06-01 16:30:50', '2016-06-01 16:30:50', ' ', '', '', 'publish', 'closed', 'closed', '', '188', '', '', '2016-06-02 10:46:54', '2016-06-02 10:46:54', '', 0, 'http://vestiukraine/?p=188', 4, 'nav_menu_item', '', 0),
 (189, 1, '2016-06-01 16:31:47', '0000-00-00 00:00:00', '', 'Черновик', '', 'auto-draft', 'open', 'open', '', '', '', '', '2016-06-01 16:31:47', '0000-00-00 00:00:00', '', 0, 'http://vestiukraine/?p=189', 0, 'post', '', 0),
 (190, 1, '2016-06-01 19:50:31', '0000-00-00 00:00:00', '', 'Черновик', '', 'auto-draft', 'open', 'open', '', '', '', '', '2016-06-01 19:50:31', '0000-00-00 00:00:00', '', 0, 'http://vestiukraine/?p=190', 0, 'post', '', 0),
 (191, 1, '2016-06-02 01:27:05', '2016-06-02 01:27:05', '<p>Медиа Холдинг Вести Украина - динамично развивающийся современный мультимедиа холдинг, включающий в себя печатные, телевизионные, радио и Internet-ресурсы. Благодаря качеству и актуальности контента, остроте тем и оперативности подачи информации, медиапродукты Холдинга занимают лидирующие позиции в своих сегментах. Профессиональная, креативная команда и постоянный мониторинг мировых инноваций и медиа-трендов - ключевой принцип успеха Холдинга на рынке.</p> \r\n\r\n<p>В состав Медиа Холдинга входят: Газета Вести, Радио Вести, телеканал UBR, Internet Sales House Digital Decisions, сайты vesti-ukr.com и ubr.ua</p>', 'О нас', '', 'publish', 'open', 'open', '', 'about-us', '', '', '2016-06-01 19:57:05', '2016-06-01 19:57:05', '', 0, 'http://vestiukraine/?p=191', 0, 'post', '', 0),
@@ -5303,7 +5406,68 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (200, 1, '2016-06-01 22:21:38', '2016-06-01 22:21:38', ' ', '', '', 'publish', 'closed', 'closed', '', '200', '', '', '2016-06-01 22:23:38', '2016-06-01 22:23:38', '', 0, 'http://vestiukraine/?p=200', 3, 'nav_menu_item', '', 0),
 (201, 1, '2016-06-01 22:21:38', '2016-06-01 22:21:38', ' ', '', '', 'publish', 'closed', 'closed', '', '201', '', '', '2016-06-01 22:23:38', '2016-06-01 22:23:38', '', 0, 'http://vestiukraine/?p=201', 2, 'nav_menu_item', '', 0),
 (202, 1, '2016-06-01 22:21:38', '2016-06-01 22:21:38', ' ', '', '', 'publish', 'closed', 'closed', '', '202', '', '', '2016-06-01 22:23:38', '2016-06-01 22:23:38', '', 0, 'http://vestiukraine/?p=202', 1, 'nav_menu_item', '', 0),
-(203, 1, '2016-06-01 22:29:53', '2016-06-01 22:29:53', '', 'О холдинге', '', 'publish', 'closed', 'closed', '', '%d0%be-%d1%85%d0%be%d0%bb%d0%b4%d0%b8%d0%bd%d0%b3%d0%b5', '', '', '2016-06-01 22:29:53', '2016-06-01 22:29:53', '', 0, 'http://vestiukraine/?p=203', 1, 'nav_menu_item', '', 0);
+(203, 1, '2016-06-01 22:29:53', '2016-06-01 22:29:53', '', 'О холдинге', '', 'publish', 'closed', 'closed', '', 'o-holdinge', '', '', '2016-06-02 10:46:54', '2016-06-02 10:46:54', '', 0, 'http://vestiukraine/?p=203', 1, 'nav_menu_item', '', 0),
+(204, 1, '2016-06-02 09:07:50', '0000-00-00 00:00:00', '', 'Черновик', '', 'auto-draft', 'open', 'open', '', '', '', '', '2016-06-02 09:07:50', '0000-00-00 00:00:00', '', 0, 'http://vestiukraine/?p=204', 0, 'post', '', 0),
+(205, 1, '2016-06-02 09:08:33', '2016-06-02 09:08:33', 'Ежедневная бесплатная газета, занимающая лидирующие позиции на рынке печатной прессы. На сегодняшний день Вести - самый популярный утренний печатный канал коммуникации, удовлетворяющий информационные потребности каждого читателя. Контент издания – актуальные и острые темы, яркая и познавательная инфографика, увлекательные фотопроекты и социальные спецпроекты. В крупных городах газета распространяется в местах продажи прессы, а также бесплатно в наиболее оживленных локациях: метро, транспортных развязках, остановках общественного транспорта, торговых и бизнес-центрах.', 'Газета Вести', '', 'publish', 'open', 'open', '', 'gazeta', '', '', '2016-06-02 09:09:05', '2016-06-02 09:09:05', '', 0, 'http://vestiukraine/?p=205', 0, 'post', '', 0),
+(206, 1, '2016-06-02 09:08:33', '2016-06-02 09:08:33', 'Ежедневная бесплатная газета, занимающая лидирующие позиции на рынке печатной прессы. На сегодняшний день Вести - самый популярный утренний печатный канал коммуникации, удовлетворяющий информационные потребности каждого читателя. Контент издания – актуальные и острые темы, яркая и познавательная инфографика, увлекательные фотопроекты и социальные спецпроекты. В крупных городах газета распространяется в местах продажи прессы, а также бесплатно в наиболее оживленных локациях: метро, транспортных развязках, остановках общественного транспорта, торговых и бизнес-центрах.', 'ГАЗЕТА ВЕСТИ', '', 'inherit', 'closed', 'closed', '', '205-revision-v1', '', '', '2016-06-02 09:08:33', '2016-06-02 09:08:33', '', 205, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/205-revision-v1/', 0, 'revision', '', 0),
+(207, 1, '2016-06-02 09:08:52', '0000-00-00 00:00:00', '', 'Черновик', '', 'auto-draft', 'open', 'open', '', '', '', '', '2016-06-02 09:08:52', '0000-00-00 00:00:00', '', 0, 'http://vestiukraine/?p=207', 0, 'post', '', 0),
+(208, 1, '2016-06-02 09:09:05', '2016-06-02 09:09:05', 'Ежедневная бесплатная газета, занимающая лидирующие позиции на рынке печатной прессы. На сегодняшний день Вести - самый популярный утренний печатный канал коммуникации, удовлетворяющий информационные потребности каждого читателя. Контент издания – актуальные и острые темы, яркая и познавательная инфографика, увлекательные фотопроекты и социальные спецпроекты. В крупных городах газета распространяется в местах продажи прессы, а также бесплатно в наиболее оживленных локациях: метро, транспортных развязках, остановках общественного транспорта, торговых и бизнес-центрах.', 'Газета Вести', '', 'inherit', 'closed', 'closed', '', '205-revision-v1', '', '', '2016-06-02 09:09:05', '2016-06-02 09:09:05', '', 205, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/205-revision-v1/', 0, 'revision', '', 0),
+(209, 1, '2016-06-02 09:09:22', '2016-06-02 09:09:22', 'Радиостанция формата News&Talk, сделавшая прорыв на рынке Украины. Стремительно стартовав, Радио Вести заняло позиции лидера среди радиостанций всех форматов. Сегодня Радио Вести вещает на частотах в Киеве, Харькове и Днепропетровске. Радио не только говорит, но и показывает – все программы доступны в online-трансляции на сайте. Лидеры мнений, авторитетные эксперты, деятели культуры и спорта - Радио Вести предлагает различные точки зрения обо всем, что происходит в Украине и мире, являясь площадкой для коммуникации, звонков в студию и мнений слушателей. ', 'Радио Вести', '', 'publish', 'open', 'open', '', 'radio-vesti', '', '', '2016-06-02 09:10:00', '2016-06-02 09:10:00', '', 0, 'http://vestiukraine/?p=209', 0, 'post', '', 0),
+(210, 1, '2016-06-02 09:09:22', '2016-06-02 09:09:22', 'Радиостанция формата News&Talk, сделавшая прорыв на рынке Украины. Стремительно стартовав, Радио Вести заняло позиции лидера среди радиостанций всех форматов. Сегодня Радио Вести вещает на частотах в Киеве, Харькове и Днепропетровске. Радио не только говорит, но и показывает – все программы доступны в online-трансляции на сайте. Лидеры мнений, авторитетные эксперты, деятели культуры и спорта - Радио Вести предлагает различные точки зрения обо всем, что происходит в Украине и мире, являясь площадкой для коммуникации, звонков в студию и мнений слушателей. ', 'Радио Вести', '', 'inherit', 'closed', 'closed', '', '209-revision-v1', '', '', '2016-06-02 09:09:22', '2016-06-02 09:09:22', '', 209, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/209-revision-v1/', 0, 'revision', '', 0),
+(211, 1, '2016-06-02 09:09:43', '2016-06-02 09:09:43', 'Современный новостной канал: online-трансляции с места событий, динамичные аналитические и разговорные форматы, видео "no comments", спортивные новости. Телеканал охватывает широкий спектр тем и событий, максимально освещая зрителю все ключевые новости Украины и мира. Основная часть телевизионного продукта - собственного производства. Съёмочные группы UBR присутствуют в местах наиболее резонансных событий, подавая информацию оперативно, качественно и доступно. ', 'Телеканал UBR', '', 'publish', 'open', 'open', '', 'telekanal-ubr', '', '', '2016-06-02 09:09:43', '2016-06-02 09:09:43', '', 0, 'http://vestiukraine/?p=211', 0, 'post', '', 0),
+(212, 1, '2016-06-02 09:09:43', '2016-06-02 09:09:43', 'Современный новостной канал: online-трансляции с места событий, динамичные аналитические и разговорные форматы, видео "no comments", спортивные новости. Телеканал охватывает широкий спектр тем и событий, максимально освещая зрителю все ключевые новости Украины и мира. Основная часть телевизионного продукта - собственного производства. Съёмочные группы UBR присутствуют в местах наиболее резонансных событий, подавая информацию оперативно, качественно и доступно. ', 'Телеканал UBR', '', 'inherit', 'closed', 'closed', '', '211-revision-v1', '', '', '2016-06-02 09:09:43', '2016-06-02 09:09:43', '', 211, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/211-revision-v1/', 0, 'revision', '', 0),
+(213, 1, '2016-06-02 09:10:31', '2016-06-02 09:10:31', 'Новостной мультимедийный ресурс, который в режиме 24/7 дает оперативную информацию по всем важнейшим событиям страны и мира. Сайт акцентирует внимание на объемной красочной мультимедийной площадке — фото, видео и инфографике. Это позволяет аудитории не только читать, но и смотреть, а также слушать. На сайте в отдельном разделе разместилась online-версия журнала "Вести. Репортер", где представлены эксклюзивные статьи, репортажи и материалы в жанре longread. ', 'Vesti-ukr.com', '', 'publish', 'open', 'open', '', 'vesti-ukr-com', '', '', '2016-06-02 09:10:31', '2016-06-02 09:10:31', '', 0, 'http://vestiukraine/?p=213', 0, 'post', '', 0),
+(214, 1, '2016-06-02 09:10:31', '2016-06-02 09:10:31', 'Новостной мультимедийный ресурс, который в режиме 24/7 дает оперативную информацию по всем важнейшим событиям страны и мира. Сайт акцентирует внимание на объемной красочной мультимедийной площадке — фото, видео и инфографике. Это позволяет аудитории не только читать, но и смотреть, а также слушать. На сайте в отдельном разделе разместилась online-версия журнала "Вести. Репортер", где представлены эксклюзивные статьи, репортажи и материалы в жанре longread. ', 'Vesti-ukr.com', '', 'inherit', 'closed', 'closed', '', '213-revision-v1', '', '', '2016-06-02 09:10:31', '2016-06-02 09:10:31', '', 213, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/213-revision-v1/', 0, 'revision', '', 0),
+(215, 1, '2016-06-02 09:11:00', '2016-06-02 09:11:00', 'Информационный online-ресурс, освещающий деловые новости, информацию о текущем состоянии финансовых рынков, курса валют, индексов и ставок. Сайт является агрегатором важной бизнес-информации: как украинской, так и международной. Здесь есть все — от макроэкономики и частных финансов до товарных рынков и новостей IТ. Оперативная и доступная подача новостей не только для экономически подкованного потребителя, но и для широкого круга читателей. Пользователю достаточно пролистывать ленту ubr.ua, чтобы в полной мере быть в курсе всех ключевых и актуальных событий мира экономики. ', 'UBR.ua', '', 'publish', 'open', 'open', '', 'ubr-ua', '', '', '2016-06-02 09:11:00', '2016-06-02 09:11:00', '', 0, 'http://vestiukraine/?p=215', 0, 'post', '', 0),
+(216, 1, '2016-06-02 09:11:00', '2016-06-02 09:11:00', 'Информационный online-ресурс, освещающий деловые новости, информацию о текущем состоянии финансовых рынков, курса валют, индексов и ставок. Сайт является агрегатором важной бизнес-информации: как украинской, так и международной. Здесь есть все — от макроэкономики и частных финансов до товарных рынков и новостей IТ. Оперативная и доступная подача новостей не только для экономически подкованного потребителя, но и для широкого круга читателей. Пользователю достаточно пролистывать ленту ubr.ua, чтобы в полной мере быть в курсе всех ключевых и актуальных событий мира экономики. ', 'UBR.ua', '', 'inherit', 'closed', 'closed', '', '215-revision-v1', '', '', '2016-06-02 09:11:00', '2016-06-02 09:11:00', '', 215, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/215-revision-v1/', 0, 'revision', '', 0),
+(217, 1, '2016-06-02 09:20:01', '2016-06-02 09:20:01', 'Один из крупнейших Sales House на рынке Internet-рекламы, который обеспечивает качественный buying для крупнейших рекламных агентств и клиентов Украины. Рекламные активы Digital Decisions включают:\r\n\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/ubr_site.jpg" alt="ubr" width="164" height="68" class="alignnone size-full wp-image-218" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/gazetaua.jpg" alt="gazetaua" width="164" height="68" class="alignnone size-full wp-image-219" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/vesti.jpg" alt="vesti" width="164" height="68" class="alignnone size-full wp-image-220" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/hyser.jpg" alt="hyser" width="164" height="68" class="alignnone size-full wp-image-221" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-site.jpg" alt="chanel-24-site" width="164" height="68" class="alignnone size-full wp-image-223" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-football.jpg" alt="chanel-24-football" width="164" height="68" class="alignnone size-full wp-image-224" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-radio.jpg" alt="chanel-24-radio" width="164" height="68" class="alignnone size-full wp-image-225" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/zaxid.jpg" alt="zaxid" width="164" height="68" class="alignnone size-full wp-image-226" />\r\n\r\nВозможности Digital Decisions позволяют охватить более 30% интернет-пользователей Украины и осуществлять эффективные рекламные кампании. Рекламно-медийные возможности Sales House позволяют размещать: баннерную рекламу, PR-материалы, тизерную рекламу, видео, а также брендирование сайтов.', 'Digital Decisions', '', 'publish', 'open', 'open', '', 'digital-decisions', '', '', '2016-06-02 09:20:01', '2016-06-02 09:20:01', '', 0, 'http://vestiukraine/?p=217', 0, 'post', '', 0),
+(218, 1, '2016-06-02 09:15:58', '2016-06-02 09:15:58', '', 'ubr_site', '', 'inherit', 'open', 'closed', '', 'ubr_site', '', '', '2016-06-02 09:16:13', '2016-06-02 09:16:13', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/ubr_site.jpg', 0, 'attachment', 'image/jpeg', 0),
+(219, 1, '2016-06-02 09:17:02', '2016-06-02 09:17:02', '', 'gazetaua', '', 'inherit', 'open', 'closed', '', 'gazetaua', '', '', '2016-06-02 09:17:10', '2016-06-02 09:17:10', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/gazetaua.jpg', 0, 'attachment', 'image/jpeg', 0),
+(220, 1, '2016-06-02 09:17:25', '2016-06-02 09:17:25', '', 'vesti', '', 'inherit', 'open', 'closed', '', 'vesti', '', '', '2016-06-02 09:17:31', '2016-06-02 09:17:31', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/vesti.jpg', 0, 'attachment', 'image/jpeg', 0),
+(221, 1, '2016-06-02 09:17:43', '2016-06-02 09:17:43', '', 'hyser', '', 'inherit', 'open', 'closed', '', 'hyser', '', '', '2016-06-02 09:17:50', '2016-06-02 09:17:50', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/hyser.jpg', 0, 'attachment', 'image/jpeg', 0),
+(223, 1, '2016-06-02 09:18:33', '2016-06-02 09:18:33', '', 'chanel-24-site', '', 'inherit', 'open', 'closed', '', 'chanel-24-site', '', '', '2016-06-02 09:18:40', '2016-06-02 09:18:40', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/chanel-24-site.jpg', 0, 'attachment', 'image/jpeg', 0),
+(224, 1, '2016-06-02 09:19:06', '2016-06-02 09:19:06', '', 'chanel-24-football', '', 'inherit', 'open', 'closed', '', 'chanel-24-football', '', '', '2016-06-02 09:19:13', '2016-06-02 09:19:13', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/chanel-24-football.jpg', 0, 'attachment', 'image/jpeg', 0),
+(225, 1, '2016-06-02 09:19:27', '2016-06-02 09:19:27', '', 'chanel-24-radio', '', 'inherit', 'open', 'closed', '', 'chanel-24-radio', '', '', '2016-06-02 09:19:34', '2016-06-02 09:19:34', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/chanel-24-radio.jpg', 0, 'attachment', 'image/jpeg', 0),
+(226, 1, '2016-06-02 09:19:47', '2016-06-02 09:19:47', '', 'zaxid', '', 'inherit', 'open', 'closed', '', 'zaxid', '', '', '2016-06-02 09:19:53', '2016-06-02 09:19:53', '', 217, 'http://vestiukraine/wp-content/uploads/2016/06/zaxid.jpg', 0, 'attachment', 'image/jpeg', 0),
+(227, 1, '2016-06-02 09:20:01', '2016-06-02 09:20:01', 'Один из крупнейших Sales House на рынке Internet-рекламы, который обеспечивает качественный buying для крупнейших рекламных агентств и клиентов Украины. Рекламные активы Digital Decisions включают:\r\n\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/ubr_site.jpg" alt="ubr" width="164" height="68" class="alignnone size-full wp-image-218" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/gazetaua.jpg" alt="gazetaua" width="164" height="68" class="alignnone size-full wp-image-219" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/vesti.jpg" alt="vesti" width="164" height="68" class="alignnone size-full wp-image-220" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/hyser.jpg" alt="hyser" width="164" height="68" class="alignnone size-full wp-image-221" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-site.jpg" alt="chanel-24-site" width="164" height="68" class="alignnone size-full wp-image-223" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-football.jpg" alt="chanel-24-football" width="164" height="68" class="alignnone size-full wp-image-224" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/chanel-24-radio.jpg" alt="chanel-24-radio" width="164" height="68" class="alignnone size-full wp-image-225" />\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/zaxid.jpg" alt="zaxid" width="164" height="68" class="alignnone size-full wp-image-226" />\r\n\r\nВозможности Digital Decisions позволяют охватить более 30% интернет-пользователей Украины и осуществлять эффективные рекламные кампании. Рекламно-медийные возможности Sales House позволяют размещать: баннерную рекламу, PR-материалы, тизерную рекламу, видео, а также брендирование сайтов.', 'Digital Decisions', '', 'inherit', 'closed', 'closed', '', '217-revision-v1', '', '', '2016-06-02 09:20:01', '2016-06-02 09:20:01', '', 217, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/217-revision-v1/', 0, 'revision', '', 0),
+(228, 1, '2016-06-02 09:27:43', '2016-06-02 09:27:43', '', 'Активы', '', 'publish', 'closed', 'closed', '', 'aktivy', '', '', '2016-06-02 10:46:54', '2016-06-02 10:46:54', '', 0, 'http://vestiukraine/?p=228', 2, 'nav_menu_item', '', 0),
+(229, 1, '2016-06-02 09:33:42', '2016-06-02 09:33:42', ' ', '', '', 'publish', 'closed', 'closed', '', '229', '', '', '2016-06-02 09:33:42', '2016-06-02 09:33:42', '', 0, 'http://vestiukraine/?p=229', 6, 'nav_menu_item', '', 0),
+(230, 1, '2016-06-02 09:33:42', '2016-06-02 09:33:42', ' ', '', '', 'publish', 'closed', 'closed', '', '230', '', '', '2016-06-02 09:33:42', '2016-06-02 09:33:42', '', 0, 'http://vestiukraine/?p=230', 5, 'nav_menu_item', '', 0),
+(231, 1, '2016-06-02 09:33:42', '2016-06-02 09:33:42', ' ', '', '', 'publish', 'closed', 'closed', '', '231', '', '', '2016-06-02 09:33:42', '2016-06-02 09:33:42', '', 0, 'http://vestiukraine/?p=231', 4, 'nav_menu_item', '', 0),
+(232, 1, '2016-06-02 09:33:42', '2016-06-02 09:33:42', ' ', '', '', 'publish', 'closed', 'closed', '', '232', '', '', '2016-06-02 09:33:42', '2016-06-02 09:33:42', '', 0, 'http://vestiukraine/?p=232', 3, 'nav_menu_item', '', 0),
+(233, 1, '2016-06-02 09:33:42', '2016-06-02 09:33:42', ' ', '', '', 'publish', 'closed', 'closed', '', '233', '', '', '2016-06-02 09:33:42', '2016-06-02 09:33:42', '', 0, 'http://vestiukraine/?p=233', 2, 'nav_menu_item', '', 0),
+(234, 1, '2016-06-02 09:33:41', '2016-06-02 09:33:41', ' ', '', '', 'publish', 'closed', 'closed', '', '234', '', '', '2016-06-02 09:33:41', '2016-06-02 09:33:41', '', 0, 'http://vestiukraine/?p=234', 1, 'nav_menu_item', '', 0),
+(235, 1, '2016-06-02 09:48:17', '2016-06-02 09:48:17', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины.\r\n<!--more--> \r\nМы дали возможность говорить с нами. \r\nМы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'publish', 'open', 'open', '', 'olga-semchenko', '', '', '2016-06-02 15:22:51', '2016-06-02 15:22:51', '', 0, 'http://vestiukraine/?p=235', 0, 'post', '', 0),
+(237, 1, '2016-06-02 09:48:17', '2016-06-02 09:48:17', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko-300x183.jpg" alt="olga-semchenko" width="300" height="183" class="alignleft size-medium wp-image-236" />\r\n<h1>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h1>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:48:17', '2016-06-02 09:48:17', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(238, 1, '2016-06-02 09:48:57', '2016-06-02 09:48:57', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko-300x183.jpg" alt="olga-semchenko" class="alignnone wp-image-236" />\r\n<h1>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h1>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:48:57', '2016-06-02 09:48:57', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(239, 1, '2016-06-02 09:49:46', '2016-06-02 09:49:46', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko-300x183.jpg" alt="olga-semchenko" class="alignnone wp-image-236" style="float:left;" />\r\n<h1>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h1>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:49:46', '2016-06-02 09:49:46', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(240, 1, '2016-06-02 09:50:18', '2016-06-02 09:50:18', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko-300x183.jpg" alt="olga-semchenko" class="alignnone wp-image-236" style="float:left;" />\r\nОльга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:50:18', '2016-06-02 09:50:18', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(241, 1, '2016-06-02 09:50:54', '2016-06-02 09:50:54', '', 'olga-semchenko', '', 'inherit', 'open', 'closed', '', 'olga-semchenko', '', '', '2016-06-02 09:51:01', '2016-06-02 09:51:01', '', 235, 'http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg', 0, 'attachment', 'image/jpeg', 0),
+(242, 1, '2016-06-02 09:51:18', '2016-06-02 09:51:18', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" width="720" height="440" class="alignleft size-full wp-image-241" />\r\nОльга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:51:18', '2016-06-02 09:51:18', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(243, 1, '2016-06-02 09:51:51', '2016-06-02 09:51:51', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" width="720" height="440" class="alignleft size-full wp-image-241" />\r\n\r\n<h2>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h2>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:51:51', '2016-06-02 09:51:51', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0);
+INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
+(244, 1, '2016-06-02 09:53:48', '2016-06-02 09:53:48', '<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" style="float:left;" class="alignleft size-full wp-image-241" />\r\n\r\n<h2>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h2>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:53:48', '2016-06-02 09:53:48', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(245, 1, '2016-06-02 09:54:16', '2016-06-02 09:54:16', '<h2>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h2>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" style="float:left;" class="alignleft size-full wp-image-241" />\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 09:54:16', '2016-06-02 09:54:16', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(247, 1, '2016-06-02 10:12:49', '2016-06-02 10:12:49', ' ', '', '', 'publish', 'closed', 'closed', '', '247', '', '', '2016-06-02 10:50:15', '2016-06-02 10:50:15', '', 0, 'http://vestiukraine/?p=247', 2, 'nav_menu_item', '', 0),
+(248, 1, '2016-06-02 10:14:13', '2016-06-02 10:14:13', ' ', '', '', 'publish', 'closed', 'closed', '', '248', '', '', '2016-06-02 10:50:15', '2016-06-02 10:50:15', '', 0, 'http://vestiukraine/?p=248', 3, 'nav_menu_item', '', 0),
+(249, 1, '2016-06-02 10:40:28', '2016-06-02 10:40:28', '<h2>Ольга Семченко: "Самые творческие идеи на постсоветском пространстве идут из Украины".</h2>\r\n\r\nГлава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" class="alignleft size-full wp-image-241 big" />\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Новости', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 10:40:28', '2016-06-02 10:40:28', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(250, 1, '2016-06-02 10:41:06', '2016-06-02 10:41:06', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\n04-03-2016\r\n<img src="http://vestiukraine/wp-content/uploads/2016/06/olga-semchenko.jpg" alt="olga-semchenko" class="alignleft size-full wp-image-241 big" />\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 10:41:06', '2016-06-02 10:41:06', '', 235, 'http://vestiukraine/%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8/235-revision-v1/', 0, 'revision', '', 0),
+(251, 1, '2016-06-02 10:46:54', '2016-06-02 10:46:54', '', 'Пресс-центр', '', 'publish', 'closed', 'closed', '', 'press-tsentr', '', '', '2016-06-02 10:46:54', '2016-06-02 10:46:54', '', 0, 'http://vestiukraine/?p=251', 3, 'nav_menu_item', '', 0),
+(252, 1, '2016-06-02 10:50:15', '2016-06-02 10:50:15', ' ', '', '', 'publish', 'closed', 'closed', '', '252', '', '', '2016-06-02 10:50:15', '2016-06-02 10:50:15', '', 0, 'http://vestiukraine/?p=252', 1, 'nav_menu_item', '', 0),
+(253, 1, '2016-06-02 10:57:53', '2016-06-02 10:57:53', '', 'Ведущие Радио Вести - лауреаты Novomedia Awards', '', 'trash', 'open', 'open', '', '__trashed', '', '', '2016-06-02 15:32:10', '2016-06-02 15:32:10', '', 0, 'http://vestiukraine/?p=253', 0, 'post', '', 0),
+(254, 1, '2016-06-02 11:02:20', '2016-06-02 11:02:20', 'Материал радиостанции победил в номинации "Ответственная журналистика"\r\n\r\n7 ноября состоялась церемония награждения "Novomedia Awards", на которой отметили достижения работников СМИ в номинациях "Ответственная журналистика" и "Систематическое освещение вечных ценностей". По результатам конкурсного отбора премию в номинации "Ответственная журналистика" получили ведущие Радио Вести Константин Дорошенко и Алексей Зарахович за материал в программе "Вне контекста" под названием "<a href="http://radio.vesti-ukr.com/broadcasts/vne-konteksta/13099.html" target="_blank">Дар прощения</a>" от 21.02.15.\r\n\r\nНа протяжении года члени Мониторинговой международной общественной организации "Новомедиа" проводили мониторинг телеканалов, радио, газет и журналов, сети Интернет с целью выявления материалов, которые способствуют популяризации вечных ценностей в масс-медиа. "Эта награда не только нашей программы, но и Радио Вести в целом. "Вне контекста" – это уникальный концептуальный продукт, аналогов которому нет. Концепция программы была рождена именно на Радио Вести и подобное признание очень приятно, интересно и почетно для нас всех" - комментирует ведущий программы "Вне контекста" Константин Дорошенко.\r\n\r\nСлушайте программу "Вне контекста" с Константином Дорошенко и Алексеем Зараховичем в эфире Радио Вести по субботам в 19:00 в Киеве (104,6 FM), Харькове (100,5 FM) и Днепропетровске (107,7 FM), а также онлайн на сайте <a href="http://radio.vesti-ukr.com/" target="_blank">radio.vesti-ukr.com</a>', 'Ведущие Радио Вести - лауреаты Novomedia Awards', '', 'publish', 'open', 'open', '', 'vedushhie-radio-vesti-laureaty-novomedia-awards', '', '', '2016-06-02 15:32:32', '2016-06-02 15:32:32', '', 0, 'http://vestiukraine/?p=254', 0, 'post', '', 0),
+(255, 1, '2016-06-02 11:02:20', '2016-06-02 11:02:20', 'Материал радиостанции победил в номинации "Ответственная журналистика"\r\n\r\n7 ноября состоялась церемония награждения "Novomedia Awards", на которой отметили достижения работников СМИ в номинациях "Ответственная журналистика" и "Систематическое освещение вечных ценностей". По результатам конкурсного отбора премию в номинации "Ответственная журналистика" получили ведущие Радио Вести Константин Дорошенко и Алексей Зарахович за материал в программе "Вне контекста" под названием "<a href="http://radio.vesti-ukr.com/broadcasts/vne-konteksta/13099.html" target="_blank">Дар прощения</a>" от 21.02.15.\r\n\r\nНа протяжении года члени Мониторинговой международной общественной организации "Новомедиа" проводили мониторинг телеканалов, радио, газет и журналов, сети Интернет с целью выявления материалов, которые способствуют популяризации вечных ценностей в масс-медиа. "Эта награда не только нашей программы, но и Радио Вести в целом. "Вне контекста" – это уникальный концептуальный продукт, аналогов которому нет. Концепция программы была рождена именно на Радио Вести и подобное признание очень приятно, интересно и почетно для нас всех" - комментирует ведущий программы "Вне контекста" Константин Дорошенко.\r\n\r\nСлушайте программу "Вне контекста" с Константином Дорошенко и Алексеем Зараховичем в эфире Радио Вести по субботам в 19:00 в Киеве (104,6 FM), Харькове (100,5 FM) и Днепропетровске (107,7 FM), а также онлайн на сайте <a href="http://radio.vesti-ukr.com/" target="_blank">radio.vesti-ukr.com</a>', 'Ведущие Радио Вести - лауреаты Novomedia Awards', '', 'inherit', 'closed', 'closed', '', '254-revision-v1', '', '', '2016-06-02 11:02:20', '2016-06-02 11:02:20', '', 254, 'http://vestiukraine/bez-kategorii/254-revision-v1/', 0, 'revision', '', 0),
+(256, 1, '2016-06-02 12:02:03', '2016-06-02 12:02:03', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\n\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\n<strong>\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\n\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины.\n<!--more--> \nМы дали возможность говорить с нами. \nМы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\n\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\n\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-autosave-v1', '', '', '2016-06-02 12:02:03', '2016-06-02 12:02:03', '', 235, 'http://vestiukraine/uncategorized/235-autosave-v1/', 0, 'revision', '', 0),
+(257, 1, '2016-06-02 11:37:59', '2016-06-02 11:37:59', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 11:37:59', '2016-06-02 11:37:59', '', 235, 'http://vestiukraine/bez-kategorii/235-revision-v1/', 0, 'revision', '', 0),
+(258, 1, '2016-06-02 12:01:23', '2016-06-02 12:01:23', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<!--more-->\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. Мы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 12:01:23', '2016-06-02 12:01:23', '', 235, 'http://vestiukraine/bez-kategorii/235-revision-v1/', 0, 'revision', '', 0),
+(259, 1, '2016-06-02 12:01:41', '2016-06-02 12:01:41', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины. Мы дали возможность говорить с нами. \r\n<!--more-->\r\nМы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 12:01:41', '2016-06-02 12:01:41', '', 235, 'http://vestiukraine/bez-kategorii/235-revision-v1/', 0, 'revision', '', 0),
+(260, 1, '2016-06-02 12:02:05', '2016-06-02 12:02:05', 'Глава Медиа Холдинга в программе "Диалоги" на Радио Вести\r\n\r\nРуководитель крупной медиа-компании - о развитии СМИ в Украине, ситуации в стране, модернизации фискальной службы, о людях на Донбассе и о многом другом.\r\n<strong>\r\nО профессиональном росте:</strong> "Я старалась людей растить. Мне безумно приятно, когда приходит мальчик или девочка, которые только пытаются что-то совершать, а ты уже в глазах видишь огонь и пытаешься дать возможности попробовать себя, а в результате получаешь сложившегося гармоничного человека. Но дети вырастают, поэтому надо растить и отпускать, как птенцов из гнезда".\r\n\r\n<strong>О Радио Вести и творчестве:</strong> "В Украине раньше не было истории разговорных радиостанций. Мы первые принесли ту практику для Украины.\r\n<!--more--> \r\nМы дали возможность говорить с нами. \r\nМы видим уровень недоверия к власти и по сути перебираем на себя момент ответственности – разговариваем с людьми. Действительно, в организации радиостанции нам помогли коллеги из Москвы, но быстро к этому темпу привыкли и на определенные традиции наложили свои особенности. Самые классные творческие идеи на постсоветстком пространстве – это Украина. Украинцы всегда видны в моментах творчества и индивидуального подхода. Одно я точно понимаю – что нашим творческим порывам нужна очень серьезная организованность и сильное государство".\r\n\r\n<strong>О вещании Радио Вести в Украине:</strong> "Мы сегодня готовы разговаривать с жителями всей страны. Мы приобрели частоты для того, чтобы Радио Вести могло разговаривать со всеми. Но, к сожалению, есть противодействие системы свободной журналистской работе для людей. При том, что у нас есть частоты, и судебные споры выиграны, нам не разрешают включиться в тех городах, где мы по праву владеем лицензиями.\r\n\r\n<strong>О законах и реформах:</strong> "Система в первую очередь предполагает уважение к закону и его соблюдение. Я могу сказать по опыту работы внутри одного министерства – 100% можно организовать нормальное взаимодействие внутри этой системы". "Когда в коллективе несколько человек начинают думать в разные стороны, это не будет движение вперед. Пока между собой не договорятся, не уберут некоторые амбиции и не начнут смотреть в одну сторону, результата не будет. Нужна общая стратегическая цель или задача, и она должна разделяться на уровне управления и дальше спускаться по вертикали власти". ', 'Ольга Семченко: «Самые творческие идеи на постсоветском пространстве идут из Украины»', '', 'inherit', 'closed', 'closed', '', '235-revision-v1', '', '', '2016-06-02 12:02:05', '2016-06-02 12:02:05', '', 235, 'http://vestiukraine/bez-kategorii/235-revision-v1/', 0, 'revision', '', 0),
+(261, 1, '2016-06-02 15:23:25', '0000-00-00 00:00:00', '', 'Черновик', '', 'auto-draft', 'open', 'open', '', '', '', '', '2016-06-02 15:23:25', '0000-00-00 00:00:00', '', 0, 'http://vestiukraine/?p=261', 0, 'post', '', 0),
+(262, 1, '2016-06-02 15:32:10', '2016-06-02 15:32:10', '', 'Ведущие Радио Вести - лауреаты Novomedia Awards', '', 'inherit', 'closed', 'closed', '', '253-revision-v1', '', '', '2016-06-02 15:32:10', '2016-06-02 15:32:10', '', 253, 'http://vestiukraine/uncategorized/253-revision-v1/', 0, 'revision', '', 0),
+(263, 1, '2016-06-02 15:32:20', '2016-06-02 15:32:20', '', 'vedushchim-radio-vesti-vruchili-premiyu', '', 'inherit', 'open', 'closed', '', 'vedushchim-radio-vesti-vruchili-premiyu', '', '', '2016-06-02 15:32:20', '2016-06-02 15:32:20', '', 254, 'http://vestiukraine/wp-content/uploads/2016/06/vedushchim-radio-vesti-vruchili-premiyu.jpg', 0, 'attachment', 'image/jpeg', 0),
+(264, 1, '2016-06-02 17:09:08', '2016-06-02 17:09:08', 'МХВУ вошел в ТОП-лист "Впечатляющий старт" Рейтинга проектного менеджмента-2015\r\n\r\nВ список вошли 15 компаний, которые значительно увеличили свой уровень развития системы проектного управления и успешно используют инструменты проектного менеджмента для достижения бизнес-целей. "Для нас очень значимо войти в ТОП- лист компаний Украины, которые демонстрируют высокие темпы развития и используют проектный менеджмент для достижения больших бизнес-результатов. Звание "Впечатляющий старт" - это еще один шаг к построению модели успешной компании согласно современным мировым стандартам" - комментирует Глава Совета директоров Медиа Холдинга Вести Украина Ольга Семченко. Исследование проводится раз в два года компанией PMI Kyiv Chapter при поддержке Всемирной Ассоциации по управлению проектами PMI и компании Spider Ukraine, определяя самые успешные компании в области управления проектами. Всего в рейтинге в этом году приняло участие 654 компании страны.', 'Успех проектного офиса Медиа Холдинга Вести Украина', '', 'publish', 'open', 'open', '', 'uspeh-proektnogo-ofisa-media-holdinga-vesti-ukraina', '', '', '2016-06-02 17:09:08', '2016-06-02 17:09:08', '', 0, 'http://vestiukraine/?p=264', 0, 'post', '', 0),
+(265, 1, '2016-06-02 17:08:40', '2016-06-02 17:08:40', '', 'logoVesti', '', 'inherit', 'open', 'closed', '', 'logovesti_finale', '', '', '2016-06-02 17:09:04', '2016-06-02 17:09:04', '', 264, 'http://vestiukraine/wp-content/uploads/2016/06/vpechatlyayushchiy-start-proektnogo-ofisa-media-holdinga-vesti-ukraina.jpg', 0, 'attachment', 'image/jpeg', 0),
+(266, 1, '2016-06-02 17:09:08', '2016-06-02 17:09:08', 'МХВУ вошел в ТОП-лист "Впечатляющий старт" Рейтинга проектного менеджмента-2015\r\n\r\nВ список вошли 15 компаний, которые значительно увеличили свой уровень развития системы проектного управления и успешно используют инструменты проектного менеджмента для достижения бизнес-целей. "Для нас очень значимо войти в ТОП- лист компаний Украины, которые демонстрируют высокие темпы развития и используют проектный менеджмент для достижения больших бизнес-результатов. Звание "Впечатляющий старт" - это еще один шаг к построению модели успешной компании согласно современным мировым стандартам" - комментирует Глава Совета директоров Медиа Холдинга Вести Украина Ольга Семченко. Исследование проводится раз в два года компанией PMI Kyiv Chapter при поддержке Всемирной Ассоциации по управлению проектами PMI и компании Spider Ukraine, определяя самые успешные компании в области управления проектами. Всего в рейтинге в этом году приняло участие 654 компании страны.', 'Успех проектного офиса Медиа Холдинга Вести Украина', '', 'inherit', 'closed', 'closed', '', '264-revision-v1', '', '', '2016-06-02 17:09:08', '2016-06-02 17:09:08', '', 264, 'http://vestiukraine/bez-kategorii/264-revision-v1/', 0, 'revision', '', 0);
 
 -- --------------------------------------------------------
 
@@ -5312,14 +5476,11 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 --
 
 CREATE TABLE IF NOT EXISTS `wp_termmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `meta_id` bigint(20) unsigned NOT NULL,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`meta_id`),
-  KEY `term_id` (`term_id`),
-  KEY `meta_key` (`meta_key`(191))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -5328,14 +5489,11 @@ CREATE TABLE IF NOT EXISTS `wp_termmeta` (
 --
 
 CREATE TABLE IF NOT EXISTS `wp_terms` (
-  `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `term_id` bigint(20) unsigned NOT NULL,
   `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `slug` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `term_group` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_id`),
-  KEY `slug` (`slug`(191)),
-  KEY `name` (`name`(191))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=40 ;
+  `term_group` bigint(10) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_terms`
@@ -5346,15 +5504,20 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (2, 'Без категорії', 'uncategorized-uk', 0),
 (3, 'Uncategorized @ua', 'uncategorized-ua', 0),
 (26, 'Menu 1', 'menu-1', 0),
-(27, 'Menu 1 - Українською0', 'menu-1-%d1%83%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%81%d1%8c%d0%ba%d0%be%d1%8e0', 0),
-(28, 'Без категории', '%d0%b1%d0%b5%d0%b7-%d0%ba%d0%b0%d1%82%d0%b5%d0%b3%d0%be%d1%80%d0%b8%d0%b8', 0),
+(27, 'Menu 1 - Українською0', 'menu-1-ukrayinskoyu0', 0),
+(28, 'Без категории', 'bez-kategorii', 0),
 (32, 'Пресс-центр', 'press-room', 0),
-(34, 'Главное меню', '%d0%b3%d0%bb%d0%b0%d0%b2%d0%bd%d0%be%d0%b5-%d0%bc%d0%b5%d0%bd%d1%8e', 0),
+(34, 'Главное меню', 'glavnoe-menyu', 0),
 (35, 'Сотрудничество', 'partnership', 0),
 (36, 'Пресс-центр', 'press-center', 0),
 (37, 'Активы', 'assets', 0),
 (38, 'О холдинге', 'about-holding', 0),
-(39, 'About holding', 'about-holding', 0);
+(39, 'About holding', 'about-holding', 0),
+(40, 'Assets', 'assets', 0),
+(41, 'Press center', 'press-center', 0),
+(42, 'СМИ о холдинге', 'media-about-holding', 0),
+(43, 'Медиатека', 'mediateka', 0),
+(44, 'Новости', 'news', 0);
 
 -- --------------------------------------------------------
 
@@ -5365,9 +5528,7 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
   `object_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `term_order` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`object_id`,`term_taxonomy_id`),
-  KEY `term_taxonomy_id` (`term_taxonomy_id`)
+  `term_order` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -5393,8 +5554,6 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (180, 26, 0),
 (181, 26, 0),
 (182, 26, 0),
-(185, 26, 0),
-(187, 26, 0),
 (188, 26, 0),
 (191, 38, 0),
 (193, 38, 0),
@@ -5404,7 +5563,27 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (200, 39, 0),
 (201, 39, 0),
 (202, 39, 0),
-(203, 26, 0);
+(203, 26, 0),
+(205, 37, 0),
+(209, 37, 0),
+(211, 37, 0),
+(213, 37, 0),
+(215, 37, 0),
+(217, 37, 0),
+(228, 26, 0),
+(229, 40, 0),
+(230, 40, 0),
+(231, 40, 0),
+(232, 40, 0),
+(233, 40, 0),
+(234, 40, 0),
+(235, 44, 0),
+(247, 41, 0),
+(248, 41, 0),
+(251, 26, 0),
+(252, 41, 0),
+(254, 44, 0),
+(264, 44, 0);
 
 -- --------------------------------------------------------
 
@@ -5413,16 +5592,13 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 --
 
 CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
-  `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `term_taxonomy_id` bigint(20) unsigned NOT NULL,
   `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `taxonomy` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `count` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_taxonomy_id`),
-  UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
-  KEY `taxonomy` (`taxonomy`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=40 ;
+  `count` bigint(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_term_taxonomy`
@@ -5441,9 +5617,14 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 (34, 34, 'nav_menu', '', 0, 3),
 (35, 35, 'category', '', 0, 0),
 (36, 36, 'category', '', 0, 0),
-(37, 37, 'category', '', 0, 0),
+(37, 37, 'category', '', 0, 6),
 (38, 38, 'category', '', 0, 4),
-(39, 39, 'nav_menu', '', 0, 4);
+(39, 39, 'nav_menu', '', 0, 4),
+(40, 40, 'nav_menu', '', 0, 6),
+(41, 41, 'nav_menu', '', 0, 3),
+(42, 42, 'category', '', 0, 0),
+(43, 43, 'category', '', 0, 0),
+(44, 44, 'category', '', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -5452,14 +5633,11 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 --
 
 CREATE TABLE IF NOT EXISTS `wp_usermeta` (
-  `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `umeta_id` bigint(20) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `meta_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_value` longtext COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`umeta_id`),
-  KEY `user_id` (`user_id`),
-  KEY `meta_key` (`meta_key`(191))
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=33 ;
+  `meta_value` longtext COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_usermeta`
@@ -5480,17 +5658,17 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (12, 1, 'dismissed_wp_pointers', ''),
 (13, 1, 'default_password_nag', ''),
 (14, 1, 'show_welcome_panel', '1'),
-(15, 1, 'session_tokens', 'a:1:{s:64:"df151b23c6b94a6cd7425be464dedacfb1326a0020eef4cd6952ea1073038f5b";a:4:{s:10:"expiration";i:1465989327;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:110:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";s:5:"login";i:1464779727;}}'),
-(16, 1, 'wp_user-settings', 'libraryContent=browse&editor=html&mfold=o'),
-(17, 1, 'wp_user-settings-time', '1441613755'),
+(15, 1, 'session_tokens', 'a:2:{s:64:"df151b23c6b94a6cd7425be464dedacfb1326a0020eef4cd6952ea1073038f5b";a:4:{s:10:"expiration";i:1465989327;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:110:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";s:5:"login";i:1464779727;}s:64:"8128401095fd49e2937cd31912e9ad7483325046b60ab7b0ab7a30cd659f6604";a:4:{s:10:"expiration";i:1466068035;s:2:"ip";s:9:"127.0.0.1";s:2:"ua";s:109:"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";s:5:"login";i:1464858435;}}'),
+(16, 1, 'wp_user-settings', 'libraryContent=browse&editor=html&mfold=o&urlbutton=none&imgsize=full&align=left'),
+(17, 1, 'wp_user-settings-time', '1464861075'),
 (18, 1, 'wp_dashboard_quick_press_last_post_id', '189'),
 (20, 1, 'closedpostboxes_post', 'a:0:{}'),
-(21, 1, 'metaboxhidden_post', 'a:7:{i:0;s:11:"postexcerpt";i:1;s:13:"trackbacksdiv";i:2;s:10:"postcustom";i:3;s:16:"commentstatusdiv";i:4;s:11:"commentsdiv";i:5;s:7:"slugdiv";i:6;s:9:"authordiv";}'),
+(21, 1, 'metaboxhidden_post', 'a:8:{i:0;s:16:"tagsdiv-post_tag";i:1;s:11:"postexcerpt";i:2;s:13:"trackbacksdiv";i:3;s:10:"postcustom";i:4;s:16:"commentstatusdiv";i:5;s:11:"commentsdiv";i:6;s:7:"slugdiv";i:7;s:9:"authordiv";}'),
 (22, 1, 'wp_nav_menu_recently_edited', '26'),
 (23, 1, 'meta-box-order_dashboard', 'a:4:{s:6:"normal";s:38:"dashboard_right_now,dashboard_activity";s:4:"side";s:60:"icl_dashboard_widget,dashboard_quick_press,dashboard_primary";s:7:"column3";s:0:"";s:7:"column4";s:0:"";}'),
 (24, 1, 'managenav-menuscolumnshidden', 'a:0:{}'),
 (25, 1, 'metaboxhidden_nav-menus', 'a:4:{i:0;s:13:"add-vacancies";i:1;s:15:"add-testimonial";i:2;s:12:"add-post_tag";i:3;s:15:"add-post_format";}'),
-(26, 1, 'nav_menu_recently_edited', '39'),
+(26, 1, 'nav_menu_recently_edited', '41'),
 (27, 1, 'wp_language_pairs', 'a:1:{s:2:"en";a:2:{s:2:"ua";i:1;s:0:"";i:1;}}'),
 (28, 1, 'closedpostboxes_dashboard', 'a:1:{i:0;s:17:"dashboard_primary";}'),
 (29, 1, 'metaboxhidden_dashboard', 'a:0:{}'),
@@ -5505,7 +5683,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 --
 
 CREATE TABLE IF NOT EXISTS `wp_users` (
-  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `ID` bigint(20) unsigned NOT NULL,
   `user_login` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_pass` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_nicename` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -5514,12 +5692,8 @@ CREATE TABLE IF NOT EXISTS `wp_users` (
   `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `user_activation_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `user_status` int(11) NOT NULL DEFAULT '0',
-  `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`),
-  KEY `user_login_key` (`user_login`),
-  KEY `user_nicename` (`user_nicename`),
-  KEY `user_email` (`user_email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=2 ;
+  `display_name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `wp_users`
@@ -5528,6 +5702,366 @@ CREATE TABLE IF NOT EXISTS `wp_users` (
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
 (1, 'admin', '$P$B0.lg/P3VXAk2XwG2lQ/DABx1QCNeo0', 'developex', 'vlasenkoj@gmail.com', '', '2015-09-02 11:37:48', '', 0, 'Администратор');
 
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `sib_model_contact`
+--
+ALTER TABLE `sib_model_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wp_commentmeta`
+--
+ALTER TABLE `wp_commentmeta`
+  ADD PRIMARY KEY (`meta_id`),
+  ADD KEY `comment_id` (`comment_id`),
+  ADD KEY `meta_key` (`meta_key`(191));
+
+--
+-- Индексы таблицы `wp_comments`
+--
+ALTER TABLE `wp_comments`
+  ADD PRIMARY KEY (`comment_ID`),
+  ADD KEY `comment_post_ID` (`comment_post_ID`),
+  ADD KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),
+  ADD KEY `comment_date_gmt` (`comment_date_gmt`),
+  ADD KEY `comment_parent` (`comment_parent`),
+  ADD KEY `comment_author_email` (`comment_author_email`(10));
+
+--
+-- Индексы таблицы `wp_icl_content_status`
+--
+ALTER TABLE `wp_icl_content_status`
+  ADD PRIMARY KEY (`rid`),
+  ADD KEY `nid` (`nid`);
+
+--
+-- Индексы таблицы `wp_icl_core_status`
+--
+ALTER TABLE `wp_icl_core_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rid` (`rid`);
+
+--
+-- Индексы таблицы `wp_icl_flags`
+--
+ALTER TABLE `wp_icl_flags`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lang_code` (`lang_code`);
+
+--
+-- Индексы таблицы `wp_icl_languages`
+--
+ALTER TABLE `wp_icl_languages`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`),
+  ADD UNIQUE KEY `english_name` (`english_name`);
+
+--
+-- Индексы таблицы `wp_icl_languages_translations`
+--
+ALTER TABLE `wp_icl_languages_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `language_code` (`language_code`,`display_language_code`);
+
+--
+-- Индексы таблицы `wp_icl_locale_map`
+--
+ALTER TABLE `wp_icl_locale_map`
+  ADD UNIQUE KEY `code` (`code`,`locale`);
+
+--
+-- Индексы таблицы `wp_icl_message_status`
+--
+ALTER TABLE `wp_icl_message_status`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `rid` (`rid`),
+  ADD KEY `object_id` (`object_id`);
+
+--
+-- Индексы таблицы `wp_icl_node`
+--
+ALTER TABLE `wp_icl_node`
+  ADD PRIMARY KEY (`nid`);
+
+--
+-- Индексы таблицы `wp_icl_reminders`
+--
+ALTER TABLE `wp_icl_reminders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `wp_icl_strings`
+--
+ALTER TABLE `wp_icl_strings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `context_name` (`context`,`name`),
+  ADD KEY `language_context` (`language`,`context`);
+
+--
+-- Индексы таблицы `wp_icl_string_positions`
+--
+ALTER TABLE `wp_icl_string_positions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `string_id` (`string_id`);
+
+--
+-- Индексы таблицы `wp_icl_string_status`
+--
+ALTER TABLE `wp_icl_string_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `string_translation_id` (`string_translation_id`);
+
+--
+-- Индексы таблицы `wp_icl_string_translations`
+--
+ALTER TABLE `wp_icl_string_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `string_language` (`string_id`,`language`);
+
+--
+-- Индексы таблицы `wp_icl_translate`
+--
+ALTER TABLE `wp_icl_translate`
+  ADD PRIMARY KEY (`tid`),
+  ADD KEY `job_id` (`job_id`);
+
+--
+-- Индексы таблицы `wp_icl_translate_job`
+--
+ALTER TABLE `wp_icl_translate_job`
+  ADD PRIMARY KEY (`job_id`),
+  ADD KEY `rid` (`rid`,`translator_id`);
+
+--
+-- Индексы таблицы `wp_icl_translations`
+--
+ALTER TABLE `wp_icl_translations`
+  ADD PRIMARY KEY (`translation_id`),
+  ADD UNIQUE KEY `trid_lang` (`trid`,`language_code`),
+  ADD UNIQUE KEY `el_type_id` (`element_type`,`element_id`),
+  ADD KEY `trid` (`trid`),
+  ADD KEY `id_type_language` (`element_id`,`element_type`,`language_code`);
+
+--
+-- Индексы таблицы `wp_icl_translation_status`
+--
+ALTER TABLE `wp_icl_translation_status`
+  ADD PRIMARY KEY (`rid`),
+  ADD UNIQUE KEY `translation_id` (`translation_id`);
+
+--
+-- Индексы таблицы `wp_links`
+--
+ALTER TABLE `wp_links`
+  ADD PRIMARY KEY (`link_id`),
+  ADD KEY `link_visible` (`link_visible`);
+
+--
+-- Индексы таблицы `wp_options`
+--
+ALTER TABLE `wp_options`
+  ADD PRIMARY KEY (`option_id`),
+  ADD UNIQUE KEY `option_name` (`option_name`);
+
+--
+-- Индексы таблицы `wp_postmeta`
+--
+ALTER TABLE `wp_postmeta`
+  ADD PRIMARY KEY (`meta_id`),
+  ADD KEY `post_id` (`post_id`),
+  ADD KEY `meta_key` (`meta_key`(191));
+
+--
+-- Индексы таблицы `wp_posts`
+--
+ALTER TABLE `wp_posts`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `post_name` (`post_name`(191)),
+  ADD KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
+  ADD KEY `post_parent` (`post_parent`),
+  ADD KEY `post_author` (`post_author`);
+
+--
+-- Индексы таблицы `wp_termmeta`
+--
+ALTER TABLE `wp_termmeta`
+  ADD PRIMARY KEY (`meta_id`),
+  ADD KEY `term_id` (`term_id`),
+  ADD KEY `meta_key` (`meta_key`(191));
+
+--
+-- Индексы таблицы `wp_terms`
+--
+ALTER TABLE `wp_terms`
+  ADD PRIMARY KEY (`term_id`),
+  ADD KEY `slug` (`slug`(191)),
+  ADD KEY `name` (`name`(191));
+
+--
+-- Индексы таблицы `wp_term_relationships`
+--
+ALTER TABLE `wp_term_relationships`
+  ADD PRIMARY KEY (`object_id`,`term_taxonomy_id`),
+  ADD KEY `term_taxonomy_id` (`term_taxonomy_id`);
+
+--
+-- Индексы таблицы `wp_term_taxonomy`
+--
+ALTER TABLE `wp_term_taxonomy`
+  ADD PRIMARY KEY (`term_taxonomy_id`),
+  ADD UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
+  ADD KEY `taxonomy` (`taxonomy`);
+
+--
+-- Индексы таблицы `wp_usermeta`
+--
+ALTER TABLE `wp_usermeta`
+  ADD PRIMARY KEY (`umeta_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `meta_key` (`meta_key`(191));
+
+--
+-- Индексы таблицы `wp_users`
+--
+ALTER TABLE `wp_users`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `user_login_key` (`user_login`),
+  ADD KEY `user_nicename` (`user_nicename`),
+  ADD KEY `user_email` (`user_email`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `sib_model_contact`
+--
+ALTER TABLE `sib_model_contact`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_commentmeta`
+--
+ALTER TABLE `wp_commentmeta`
+  MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_comments`
+--
+ALTER TABLE `wp_comments`
+  MODIFY `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_core_status`
+--
+ALTER TABLE `wp_icl_core_status`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_flags`
+--
+ALTER TABLE `wp_icl_flags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_languages`
+--
+ALTER TABLE `wp_icl_languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_languages_translations`
+--
+ALTER TABLE `wp_icl_languages_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4165;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_message_status`
+--
+ALTER TABLE `wp_icl_message_status`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_strings`
+--
+ALTER TABLE `wp_icl_strings`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_string_positions`
+--
+ALTER TABLE `wp_icl_string_positions`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_string_status`
+--
+ALTER TABLE `wp_icl_string_status`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_string_translations`
+--
+ALTER TABLE `wp_icl_string_translations`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_translate`
+--
+ALTER TABLE `wp_icl_translate`
+  MODIFY `tid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_translate_job`
+--
+ALTER TABLE `wp_icl_translate_job`
+  MODIFY `job_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_translations`
+--
+ALTER TABLE `wp_icl_translations`
+  MODIFY `translation_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=257;
+--
+-- AUTO_INCREMENT для таблицы `wp_icl_translation_status`
+--
+ALTER TABLE `wp_icl_translation_status`
+  MODIFY `rid` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT для таблицы `wp_links`
+--
+ALTER TABLE `wp_links`
+  MODIFY `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_options`
+--
+ALTER TABLE `wp_options`
+  MODIFY `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=565;
+--
+-- AUTO_INCREMENT для таблицы `wp_postmeta`
+--
+ALTER TABLE `wp_postmeta`
+  MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1493;
+--
+-- AUTO_INCREMENT для таблицы `wp_posts`
+--
+ALTER TABLE `wp_posts`
+  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=267;
+--
+-- AUTO_INCREMENT для таблицы `wp_termmeta`
+--
+ALTER TABLE `wp_termmeta`
+  MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `wp_terms`
+--
+ALTER TABLE `wp_terms`
+  MODIFY `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT для таблицы `wp_term_taxonomy`
+--
+ALTER TABLE `wp_term_taxonomy`
+  MODIFY `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+--
+-- AUTO_INCREMENT для таблицы `wp_usermeta`
+--
+ALTER TABLE `wp_usermeta`
+  MODIFY `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT для таблицы `wp_users`
+--
+ALTER TABLE `wp_users`
+  MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
