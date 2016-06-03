@@ -1,40 +1,1 @@
-<?php
-/**
- * The template for displaying 404 pages (Not Found).
- *
- * @package zerif
- */
-
-get_header(); ?>
-<div class="clear"></div>
-</header> <!-- / END HOME SECTION  -->
-
-<div id="content" class="site-content">
-<div class="container">
-
-<div class="content-left-wrap col-md-9">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-		<article>
-			<header class="entry-header">
-				<h1 class="entry-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'zerif' ); ?></h1>
-			</header><!-- .entry-header -->
-
-			<div class="entry-content">
-				<p><?php _e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'zerif' ); ?></p>
-				
-			</div><!-- .entry-content -->
-		</article><!-- #post-## -->
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-</div>
-
-<div class="sidebar-wrap col-md-3 content-left-wrap">
-	<?php get_sidebar(); ?>
-</div><!-- .sidebar-wrap -->
-
-</div>
-
-<?php get_footer(); ?>
+<?php get_header(); ?>	<div id="wrapper" class="wrapper">		<?php get_sidebar(); ?>		<?php		if (in_category( '38' )):			wp_nav_menu( array('theme_location' => 'about-holding', 'container' => false, 'menu_class' => 'top-nav' ,'fallback_cb'   => 'vlasinfo'));		elseif (in_category( '37' )):			wp_nav_menu( array('theme_location' => 'assets', 'container' => false, 'menu_class' => 'top-nav' ,'fallback_cb'   => 'vlasinfo'));		elseif (in_category( '44' )):			wp_nav_menu( array('theme_location' => 'press-center', 'container' => false, 'menu_class' => 'top-nav' ,'fallback_cb'   => 'vlasinfo'));		endif;		?>		<!-- Page Content -->		<main class="main" class="animated fadeInUp go" <?php if (in_category(array('38', '37', '44'))): ?>style="padding-top: 125px;padding-bottom: 70px;"<?php endif; ?>>			<h1 class="entry-title">Страница не найдена.</h1>		</main>	</div><!-- wrapper -->	</div>	</div>	</div></div><?php get_footer(); ?>

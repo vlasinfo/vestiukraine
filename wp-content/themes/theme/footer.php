@@ -35,6 +35,8 @@
 <?php endif;?>
 <script src="<?php echo get_template_directory_uri(); ?>/js/slick.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/css3-animate-it.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/salvattore.min.js"></script>
+<!-- Salvattore -->
 
 
 <!--  Hamburger -->
