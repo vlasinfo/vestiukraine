@@ -38,34 +38,40 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/salvattore.min.js"></script>
 <!-- Salvattore -->
 
-
-<!--  Hamburger -->
 <script>
-	(function() {
+	"use strict";
+	$(window).ready(function() {
 
-		'use strict';
+		(function($) {
+			var  screens = $('.ms-screens div')
+				,wrapper = $('.ms-wrapper')
+				,object = $('.ms-object')
+				;
 
-		document.querySelector('.vlas-hamburger__icon').addEventListener(
-				'click',
-				function() {
-					var child;
-
-					document.body.classList.toggle('background--blur');
-					this.parentNode.nextElementSibling.classList.toggle('menu--on');
-
-					child = this.childNodes[1].classList;
-
-					if (child.contains('vlas-hamburger__icon--to-arrow')) {
-						child.remove('vlas-hamburger__icon--to-arrow');
-						child.add('vlas-hamburger__icon--from-arrow');
-					} else {
-						child.remove('vlas-hamburger__icon--from-arrow');
-						child.add('vlas-hamburger__icon--to-arrow');
-					}
-
-				});
-
-	})();
+			screens.bind("click", function(event) {
+				event.stopPropagation();
+				// console.log('asdadasd');
+				wrapper.toggleClass('ms-view-layers');
+			});
+			object.bind("click", function(event) {
+				// event.stopPropagation();
+				// console.log('asdadasd');
+				wrapper.toggleClass('ms-view-layers');
+			});
+			window.setTimeout(function (){
+					wrapper.toggleClass('ms-view-layers');
+					// wrapper.animate({
+					// 	"opacity" : 1
+					// }
+					// , 600
+					// ,function () {
+					// 	wrapper.toggleClass('ms-view-layers');
+					// 	}
+					// );
+				}
+				,1000);
+		})($);
+	});
 </script>
 
 <!-- Slider -->
