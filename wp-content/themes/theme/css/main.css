@@ -1614,6 +1614,15 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     .main section {
         padding: 0;
     }
+    .vesti-years-tabs .tab-content {
+        display: block;
+    }
+
+    .vesti-years-tabs .tab-content .vc-h {
+        display: block;
+        float: left;
+        padding-top: 15px;
+    }
 }
 @media screen and (max-width: 782px) {
     html {
