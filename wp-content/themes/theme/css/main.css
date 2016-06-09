@@ -80,9 +80,8 @@ a {
 }
 
 .top-nav {
-    padding-left: 80px;
+    padding-left: 65px;
     border-bottom: 1px solid #ebebeb;
-    height: 100px;
     position: fixed;
     z-index: 1;
     background: #ffffff;
@@ -105,6 +104,10 @@ a {
     margin-right: 40px;
 }
 
+.top-nav li:hover {
+    background-color: transparent !important;
+}
+
 .top-nav li a,
 .sidebar-nav li a {
     font-size: 16px;
@@ -117,6 +120,7 @@ a {
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
     position: relative;
+    padding: 0;
 }
 .sidebar-nav li a {
     padding-left: 38px;
@@ -134,12 +138,13 @@ a {
 
 .top-nav li.current-cat a,
 .top-nav li.current-menu-item a,
-.top-nav li a:hover
+.top-nav li a:hover,
 .sidebar-nav li.current-menu-item a,
 .sidebar-nav li a:hover {
     color: #009090;
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
+    background: transparent;
 }
 
 .top-nav li.current-cat a:before,
@@ -178,6 +183,10 @@ a {
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
     text-decoration: none;
+}
+
+.collapse.in .top-nav {
+    height: auto;
 }
 
 .sidebar-brand.logo {
@@ -298,7 +307,12 @@ a {
 /*1*/
 
 .main.is-page {
-    padding-top: 100px !important;
+    padding-top: 100px;
+}
+
+.main.ptpb {
+    padding-top: 125px;
+    padding-bottom: 70px;
 }
 
 .main.is-page .post-holder {
@@ -946,22 +960,23 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     transition: all 300ms;
 }
 
-.vlas-hamburger {
-
+.vlas-hamburger.second-nav button {
+    right: -15px;
 }
 
 .vlas-hamburger button {
     background: rgba(0,0,0,.30);
-    display: block;
     border: none;
     outline: 0;
     position: fixed;
     z-index: 9;
+    margin-top: 31px;
 }
 
 .vlas-hamburger-icon {
     padding: 15px 7px;
     cursor: pointer;
+    border-radius: 0;
 }
 
 .vlas-hamburger-layer {
@@ -1307,15 +1322,11 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     top: 50%; }
 
 .ms-screens > div:hover .ms-label::before {
-    border-right-color: #474775; }
-
-.ms-view-layers .ms-screens > div {
-
+    border-right-color: #474775;
 }
 
 .ms-view-layers .ms-screens .ms-screen-1:hover {
     background-color: rgba(9, 19, 120, 0.6);
-
 }
 
 .ms-view-layers .ms-screens .ms-screen-2:hover {
@@ -1391,62 +1402,112 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     opacity: 1;
     -webkit-transform: rotateX(-90deg);
     transform: rotateX(-90deg);
-
     -ms-transform: skewX(29.2deg) scale(1,4);
 }
 
 .ms-view-layers .ms-screen-1 .ms-label {
-
-
     -webkit-transition-delay: 1.1s;
     transition-delay: 1.1s;
 }
 
 .ms-view-layers .ms-screen-2 .ms-label {
-
     -webkit-transition-delay: 1s;
-    transition-delay: 1s; }
+    transition-delay: 1s;
+}
 
 .ms-view-layers .ms-screen-3 .ms-label {
-
     -webkit-transition-delay: 0.9s;
-    transition-delay: 0.9s; }
+    transition-delay: 0.9s;
+}
 
 .ms-view-layers .ms-screen-4 .ms-label {
-
     -webkit-transition-delay: 0.8s;
-    transition-delay: 0.8s; }
+    transition-delay: 0.8s;
+}
 
 .ms-view-layers .ms-screen-5 .ms-label {
-
     -webkit-transition-delay: 0.7s;
-    transition-delay: 0.7s; }
-.ms-view-layers .ms-screen-6 .ms-label {
-
+    transition-delay: 0.7s;
 }
 
 .ms-view-layers .ms-device {
     -webkit-transform: rotateY(-30deg) rotateX(80deg) translateZ(-15px) translateZ(-97px);
     transform: rotateY(-30deg) rotateX(80deg) translateZ(-15px) translateZ(-97px);
-    -ms-transform: none; }
+    -ms-transform: none;
+}
 
 .ms-screens .ms-screen-1 {
-    background: rgba(9, 19, 120, 0.2) no-repeat scroll center center/100% 80%; }
+    background: rgba(9, 19, 120, 0.2) no-repeat scroll center center/100% 80%;
+}
 
 .ms-screens .ms-screen-2 {
-    background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%; }
+    background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%;
+}
 
 .ms-screens .ms-screen-3 {
-    background: rgba(9, 19, 120, 0.2)  no-repeat scroll center center/100% 80%; }
+    background: rgba(9, 19, 120, 0.2)  no-repeat scroll center center/100% 80%;
+}
 
 .ms-screens .ms-screen-4 {
-    background: rgba(210, 35, 42, 0.25)  no-repeat scroll center center/100% 80%; }
+    background: rgba(210, 35, 42, 0.25)  no-repeat scroll center center/100% 80%;
+}
 
 .ms-screens .ms-screen-5 {
-    background: rgba(0, 153, 153, 0.15)  no-repeat scroll center center/100% 80%; }
+    background: rgba(0, 153, 153, 0.15)  no-repeat scroll center center/100% 80%;
+}
 
 .ms-screens .ms-screen-6 {
-    background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%; }
+    background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%;
+}
+
+
+/* Content styles */
+.vesti-years-tabs {
+    padding-top: 15px;
+}
+.vesti-years-tabs .nav-tabs > li {
+    float:none;
+    display:inline-block;
+    *display:inline;
+    zoom:1;
+}
+
+.vesti-years-tabs .nav-tabs > li a {
+    color: #FF6600;
+    font-size: 18px;
+    border: 0;
+}
+
+.vesti-years-tabs .nav-tabs > li.active a {
+    color: #555;
+}
+
+.vesti-years-tabs .nav-tabs > li.active {
+    border-bottom: 1px solid #555;
+}
+.vesti-years-tabs .nav-tabs > li a:hover,
+.vesti-years-tabs .nav-tabs > li a:focus {
+    border: 0;
+    background: transparent;
+}
+
+.vesti-years-tabs .nav-tabs {
+    text-align:center;
+}
+
+.vesti-years-tabs .tab-content {
+    display: table;
+    width: 100%;
+}
+
+.vesti-years-tabs .tab-content .vc-h {
+    font-size: 16px;
+    line-height: 22px;
+    display:table-cell;
+    vertical-align:middle;
+    float: none;
+
+}
 
 
 /* Media queries */
@@ -1484,6 +1545,15 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
 
 
 @media(max-width:1200px) {
+    .top-nav {
+        padding-left: 43px;
+    }
+    .top-nav .holding-assets li {
+        margin-right: 15px;
+    }
+    .top-nav .holding-assets li a {
+        font-size: 14px;
+    }
     .t-table .t-row {
         padding: 90px;
     }
@@ -1501,7 +1571,33 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     }
 }
 @media(max-width:768px) {
-    .ms-label {display: none}
+    .main.ptpb {
+        padding-top: 15px;
+    }
+    .vlas-hamburger button {
+        margin-top: 0;
+    }
+    .top-nav {
+        min-height: 34px;
+        padding-left: 0;
+        position: relative;
+    }
+    .top-nav li {
+        float: none;
+        height: auto;
+        margin: 0;
+    }
+    .top-nav li a {
+        line-height: 22px;
+        padding: 15px 0;
+        text-align: center;
+    }
+    .ms-perspective {
+        width: 50%;
+    }
+    .ms-label {
+        display: none;
+    }
     .vlas-slider .item .img-fill .info div {
         padding: 8px;
     }
