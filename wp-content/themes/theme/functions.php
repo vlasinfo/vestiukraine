@@ -10,16 +10,17 @@ add_theme_support( 'post-thumbnails' );
 
 // This theme uses wp_nav_menu() in one location.
 register_nav_menus( array(
-    'primary' => __( 'Primary Menu', 'vlas' ),
-    'about-holding' => __( 'About Holding', 'vlas' ),
-    'press-center' => __( 'Press center', 'vlas' ),
-    'assets' => __( 'Assets', 'vlas' ),
+    'primary' => __( 'Главное меню', 'vlas' ),
+    'about-holding' => __( 'О Холдинге', 'vlas' ),
+    'press-center' => __( 'Пресс центр', 'vlas' ),
+    'assets' => __( 'Активы', 'vlas' ),
+    'cooperation' => __( 'Сотрудничество', 'vlas' )
 ) );
 
 function register_my_menus() {
     register_nav_menus(
         array(
-            'new-menu' => __( 'New Menu' ),
+            'new-menu' => __( 'Новое меню' ),
             'another-menu' => __( 'Another Menu' ),
             'an-extra-menu' => __( 'An Extra Menu' )
         )

@@ -319,6 +319,13 @@ a {
     padding: 0 0 0 15px;
 }
 
+.post-content.page {
+    padding: 30px 0 0 50px;
+}
+
+.post-holder .post-content.page img {
+    width: auto;
+}
 .main.is-page .post-holder .post-content .paged-post-body {
     padding: 0 25px;
 }
@@ -1460,8 +1467,75 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%;
 }
 
+/* Hover Effects */
+.hover-holder {
+    position: relative;
+}
+
+.hover-holder>a>img {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.hover-holder .hover-mask {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    padding: 10px;
+    text-decoration: none;
+    /*background: rgba(0, 144, 144, 0.9);*/
+}
+
+.hover-holder .hover-mask>h2,
+.hover-holder .hover-mask>div {
+    color: #ffffff;
+}
+
+/* Forms */
+.wpcf7 input,
+.wpcf7 textarea {
+    width: 80%;
+    border: 0;
+    border-bottom: 1px solid #ededed;
+    outline: none;
+    resize: none;
+    max-height: 205px;
+    margin: 10px 0 0 0;
+}
+.wpcf7 input[type="submit"] {
+    width: 100px;
+    background: transparent;
+    border: 1px solid #FF6600;
+    color: #FF6600;
+}
+.wpcf7 span.wpcf7-not-valid-tip {
+    color: #FF6600;
+    font-size: 12px;
+}
+.wpcf7-validation-errors {
+    display: none !important;
+}
+::-webkit-input-placeholder {
+    color: #555555;
+}
+
+:-moz-placeholder {
+    color: #555555;
+}
+
+::-moz-placeholder {
+    color: #555555;
+}
+
+:-ms-input-placeholder {
+    color: #555555;
+}
+
 
 /* Content styles */
+
 .vesti-years-tabs {
     padding-top: 15px;
 }
@@ -1509,6 +1583,9 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
 
 }
 
+.map-holder {
+    padding-top: 15px;
+}
 
 /* Media queries */
 @media screen and (min-width: 1px) and (max-width: 480px){
