@@ -311,7 +311,7 @@ a {
 }
 
 .main.ptpb {
-    padding-top: 125px;
+    padding-top: 100px;
     padding-bottom: 70px;
 }
 
@@ -323,6 +323,7 @@ a {
     padding: 30px 0 0 50px;
 }
 
+.vacancies-holder .modal-dialog img,
 .post-holder .post-content.page img {
     width: auto;
 }
@@ -377,6 +378,10 @@ a {
 .post-holder .post-link {
     text-decoration: none;
     color: #333333;
+}
+
+.post-holder {
+    padding-top: 25px;
 }
 
 .post-holder .post-content.main-article .post-title {
@@ -1467,31 +1472,152 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     background: rgba(252, 146, 56, 0.3)  no-repeat scroll center center/100% 80%;
 }
 
+.post-holder .post-content.vacancies ul li {
+    position: relative;
+    margin-left: 17px;
+}
+.post-holder .post-content.vacancies ul li:before {
+    content: "";
+    position: absolute;
+    background:#FF6600;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    top: 8px;
+    left: -12px;
+}
+.post-holder .post-content.vacancies ul {
+    list-style: none;
+    margin: 0 10px 0 0;
+    padding: 0 0 0 0;
+}
+
+.btn-orange {
+    border: 1px solid #FF6600;
+    color: #FF6600;
+    padding: 5px 7px;
+    outline: none;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-orange:hover,
+.btn-orange:focus {
+    background: #FF6600;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Vacancies */
+.vacancies-holder {
+    padding-top: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.post-holder .post-content.vacancies h3 {
+    color: #333366;
+}
+.post-holder .post-content.vacancies:nth-child(2n-1) {
+    background: #ededed;
+}
+.post-holder .post-content.vacancies {
+    padding: 20px;
+}
+
 /* Hover Effects */
-.hover-holder {
+.grid-vlas {
+    padding: 20px 20px 100px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+    list-style: none;
+    text-align: center;
+}
+
+.grid-vlas .hover-holder {
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    text-align: left;
     position: relative;
 }
 
-.hover-holder>a>img {
-    padding: 20px;
-    margin: 0 auto;
+.grid-vlas figure {
+    margin: 0;
+    position: relative;
 }
 
-.hover-holder .hover-mask {
+.grid-vlas figure img {
+    max-width: 100%;
+    display: block;
+    position: relative;
+    padding: 50px;
+    background: #ededed;
+}
+
+.grid-vlas figcaption {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    padding: 10px;
-    text-decoration: none;
-    /*background: rgba(0, 144, 144, 0.9);*/
+    top: 0;
+    left: 0;
+    padding: 20px;
+    background-color:rgba(0, 144, 144, 0.9);
+    color: #fff;
+    cursor: default;
+    font-size: 14px;
 }
 
-.hover-holder .hover-mask>h2,
-.hover-holder .hover-mask>div {
-    color: #ffffff;
+.grid-vlas figcaption h3 {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
 }
+
+.grid-vlas figcaption a {
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 2px;
+    display: inline-block;
+    color: #fff;
+}
+
+/* project style */
+.project-holder figcaption {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.no-touch .project-holder figure:hover figcaption,
+.project-holder figure.cs-hover figcaption {
+    opacity: 1;
+    -webkit-transform: translate(15px, 15px);
+    -moz-transform: translate(15px, 15px);
+    -ms-transform: translate(15px, 15px);
+    transform: translate(15px, 15px);
+}
+
+.project-holder figcaption h3 {
+    margin-top: 70px;
+}
+
+.project-holder figcaption span {
+    display: block;
+    text-align: left;
+}
+
+.project-holder figcaption a {
+    margin-top: 10px;
+}
+
+
 
 /* Forms */
 .wpcf7 input,
@@ -1533,8 +1659,40 @@ body.disabled-onepage-scroll .main section.page3 .page_container {
     color: #555555;
 }
 
+.vacancies-holder .modal-dialog {
+    margin: 5% auto;
+}
+.vacancies-holder .modal-header {
+    padding: 15px 15px 0;
+    border: 0;
+}
 
-/* Content styles */
+.vacancies-holder .modal-dialog form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.vacancies-holder .modal-dialog input,
+.vacancies-holder .modal-dialog textarea {
+    width: 100%;
+    padding: 5px 7px;
+    border: 1px solid #ededed;
+}
+
+.vacancies-holder .modal-dialog form .file-title {
+
+}
+.vacancies-holder .modal-dialog input[type="submit"]{
+    width: 100px;
+    border-color: #FF6600;
+}
+
+.vacancies-holder .modal-dialog input[type="submit"]:hover {
+    background: #FF6600;
+    color: #fff;
+}
+
+    /* Content styles */
 
 .vesti-years-tabs {
     padding-top: 15px;
